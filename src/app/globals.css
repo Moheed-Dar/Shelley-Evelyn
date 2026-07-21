@@ -4,19 +4,19 @@
   --font-poppins: "Poppins", system-ui, sans-serif;
 
   /* ============================================
-   * CUSTOM SCROLLBAR COLORS — SKY BLUE THEME
+   * CUSTOM SCROLLBAR COLORS — DEEP PURPLE THEME (#301143)
    * ============================================ */
   --scrollbar-size: 8px;
-  --scrollbar-track: #0a0f1a;
-  --scrollbar-thumb: #2B7FFF;
-  --scrollbar-thumb-hover: #5A9AFF;
-  --scrollbar-thumb-active: #1A5FCC;
+  --scrollbar-track: #1a0a2a;        /* Deep purple track (darker) */
+  --scrollbar-thumb: #301143;         /* Base purple — main color */
+  --scrollbar-thumb-hover: #4d1f6b;   /* Lighter purple on hover */
+  --scrollbar-thumb-active: #6a3a8a;  /* Even lighter on active/click */
   --scrollbar-corner: transparent;
 
   /* Thin variant (for smaller elements) */
   --scrollbar-thin-size: 5px;
-  --scrollbar-thin-thumb: rgba(43, 127, 255, 0.45);
-  --scrollbar-thin-thumb-hover: rgba(43, 127, 255, 0.8);
+  --scrollbar-thin-thumb: rgba(48, 17, 67, 0.7);      /* #301143 with transparency */
+  --scrollbar-thin-thumb-hover: rgba(77, 31, 107, 0.95); /* #4d1f6b with transparency */
 }
 
 body {
@@ -31,76 +31,74 @@ body {
 
 /* ---- MAIN SCROLLBAR (body / html) ---- */
 ::-webkit-scrollbar {
-  width: var(--scrollbar-size);
-  height: var(--scrollbar-size);
+  width: var(--scrollbar-size) !important;
+  height: var(--scrollbar-size) !important;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-  border-radius: 100px;
+  background: var(--scrollbar-track) !important;
+  border-radius: 100px !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border-radius: 100px;
-  border: 2px solid var(--scrollbar-track);
-  background-clip: padding-box;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  background: var(--scrollbar-thumb) !important;
+  border-radius: 100px !important;
+  border: 2px solid var(--scrollbar-track) !important;
+  background-clip: padding-box !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
-  border: 1.5px solid var(--scrollbar-track);
-  background-clip: padding-box;
+  background: var(--scrollbar-thumb-hover) !important;
+  border: 1.5px solid var(--scrollbar-track) !important;
+  background-clip: padding-box !important;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background: var(--scrollbar-thumb-active);
-  border: 1px solid var(--scrollbar-track);
-  background-clip: padding-box;
+  background: var(--scrollbar-thumb-active) !important;
+  border: 1px solid var(--scrollbar-track) !important;
+  background-clip: padding-box !important;
 }
 
 /* ---- Corner ---- */
 ::-webkit-scrollbar-corner {
-  background: var(--scrollbar-corner);
+  background: var(--scrollbar-corner) !important;
 }
 
 /* ---- Thin scrollbar (div overflow areas) ---- */
 .thin-scroll::-webkit-scrollbar,
 .custom-scroll::-webkit-scrollbar {
-  width: var(--scrollbar-thin-size);
-  height: var(--scrollbar-thin-size);
+  width: var(--scrollbar-thin-size) !important;
+  height: var(--scrollbar-thin-size) !important;
 }
 
 .thin-scroll::-webkit-scrollbar-track,
 .custom-scroll::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent !important;
 }
 
 .thin-scroll::-webkit-scrollbar-thumb,
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thin-thumb);
-  border-radius: 100px;
-  border: 1.5px solid transparent;
-  background-clip: padding-box;
-  transition: background 0.2s ease;
+  background: var(--scrollbar-thin-thumb) !important;
+  border-radius: 100px !important;
+  border: 1.5px solid transparent !important;
+  background-clip: padding-box !important;
 }
 
 .thin-scroll::-webkit-scrollbar-thumb:hover,
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thin-thumb-hover);
-  border: 1px solid transparent;
-  background-clip: padding-box;
+  background: var(--scrollbar-thin-thumb-hover) !important;
+  border: 1px solid transparent !important;
+  background-clip: padding-box !important;
 }
 
 /* ---- Hidden scrollbar (when needed) ---- */
 .no-scroll::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
 .no-scroll {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 /* ============================================
@@ -109,15 +107,15 @@ body {
 
 /* ---- MAIN SCROLLBAR ---- */
 html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin !important;
+  scrollbar-color: #301143 #1a0a2a !important; /* Deep Purple theme for Firefox */
 }
 
 /* ---- Thin scrollbar ---- */
 .thin-scroll,
 .custom-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thin-thumb) transparent;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(48, 17, 67, 0.7) transparent !important;
 }
 
 /* ============================================
@@ -142,12 +140,12 @@ html {
 
 .scroll-glow::before {
   top: 0;
-  background: linear-gradient(to bottom, rgba(43, 127, 255, 0.08), transparent);
+  background: linear-gradient(to bottom, rgba(48, 17, 67, 0.1), transparent);
 }
 
 .scroll-glow::after {
   bottom: 0;
-  background: linear-gradient(to top, rgba(43, 127, 255, 0.08), transparent);
+  background: linear-gradient(to top, rgba(48, 17, 67, 0.1), transparent);
 }
 
 .scroll-glow:not(:first-child)::before {
@@ -171,12 +169,12 @@ html {
   }
 
   ::-webkit-scrollbar-thumb {
-    transition: none;
+    transition: none !important;
   }
 
   .thin-scroll::-webkit-scrollbar-thumb,
   .custom-scroll::-webkit-scrollbar-thumb {
-    transition: none;
+    transition: none !important;
   }
 }
 
@@ -184,35 +182,35 @@ html {
  * SCROLLBAR HOVER SHOW (auto-hide style)
  * ============================================ */
 .scroll-hide-hover::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-color: transparent;
+  background: transparent !important;
+  border-color: transparent !important;
 }
 
 .scroll-hide-hover:hover::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thin-thumb);
-  border-color: transparent;
-  background-clip: padding-box;
+  background: var(--scrollbar-thin-thumb) !important;
+  border-color: transparent !important;
+  background-clip: padding-box !important;
 }
 
 .scroll-hide-hover:hover::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thin-thumb-hover);
+  background: var(--scrollbar-thin-thumb-hover) !important;
 }
 
 /* ============================================
  * HORIZONTAL SCROLLBAR ONLY
  * ============================================ */
 .scroll-x-only::-webkit-scrollbar {
-  height: var(--scrollbar-thin-size);
-  width: 0;
+  height: var(--scrollbar-thin-size) !important;
+  width: 0 !important;
 }
 
 .scroll-x-only {
-  scrollbar-width: none;
+  scrollbar-width: none !important;
   overflow-x: auto;
 }
 
 .scroll-x-only::-webkit-scrollbar {
-  display: block;
-  width: unset;
-  height: var(--scrollbar-thin-size);
+  display: block !important;
+  width: unset !important;
+  height: var(--scrollbar-thin-size) !important;
 }

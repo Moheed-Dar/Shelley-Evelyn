@@ -26,9 +26,9 @@ const YoutubeIcon = ({ size = 20 }) => (
   </svg>
 );
 
-const TiktokIcon = ({ size = 20 }) => (
+const PinterestIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+    <path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
   </svg>
 );
 
@@ -38,20 +38,20 @@ export default function About() {
   const imagesRef = useRef(null);
   const bioRef = useRef(null);
 
-  const brandBlue = "#012169";
+  const brandPurple = "#301143";
 
   const images = [
-    { src: "/images/img1.jpg", alt: "Modern Home 1" },
-    { src: "/images/img2.jpg", alt: "Modern Home 2" },
-    { src: "/images/img3.jpg", alt: "Modern Home 3" },
-    { src: "/images/img4.png", alt: "Modern Home 4" },
+    { src: "/images/img1.png", alt: "Ottawa Real Estate 1" },
+    { src: "/images/img2.png", alt: "Ottawa Real Estate 2" },
+    { src: "/images/img3.png", alt: "Ottawa Real Estate 3" },
+    { src: "/images/img5.png", alt: "Ottawa Real Estate 4" },
   ];
 
   const socialLinks = [
-    { icon: InstagramIcon, href: "https://www.instagram.com/marlenafew.cbsw/", label: "Instagram", color: "#E4405F" },
-    { icon: FacebookIcon, href: "https://www.facebook.com/profile.php?id=61565034290975", label: "Facebook", color: "#1877F2" },
-    { icon: YoutubeIcon, href: "https://www.youtube.com/@MarlenaFew", label: "YouTube", color: "#FF0000" },
-    { icon: TiktokIcon, href: "https://www.tiktok.com/@marlenafew.cbsw", label: "TikTok", color: "#000000" },
+    { icon: FacebookIcon, href: "https://www.facebook.com/shelleyevelyn.homes", label: "Facebook", color: "#1877F2" },
+    { icon: InstagramIcon, href: "https://www.instagram.com/shelleyevelynhomes/", label: "Instagram", color: "#E4405F" },
+    { icon: YoutubeIcon, href: "https://www.youtube.com/@shelleyevelyn", label: "YouTube", color: "#FF0000" },
+    { icon: PinterestIcon, href: "https://www.pinterest.com/shelley_evelyn/", label: "Pinterest", color: "#E60023" },
   ];
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export default function About() {
         <div 
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(180deg, #012069c7 0%, #1a3a7adc 25%, #4a6fa5 45%, #8fa8d0 60%, #86a9d8 75%, #9cc5ee 90%, #c7e0f8 100%)"
+            background: "linear-gradient(180deg, #301143 0%, #4a1d60 20%, #6d3a87 40%, #9b6aad 60%, #c9a3d4 80%, #f3eaf8 100%)"
           }}
         />
         <div 
@@ -144,21 +144,17 @@ export default function About() {
           className="text-center mb-4"
         >
           <span className="text-xs sm:text-sm text-white/70 uppercase tracking-[0.3em] font-medium">
-            Who We Are
+            Who I Am
           </span>
         </motion.div>
 
         <div ref={headingRef} className="text-center mb-16 sm:mb-20">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white/80 leading-tight max-w-4xl mx-auto">
-            We craft modern homes that blend{" "}
-            <span className="text-white font-medium">elegance</span>,{" "}
-            <span className="text-white font-medium">comfort</span>, and{" "}
-            <span className="text-white font-medium">functionality</span>,
+            Helping you find a place to{" "}
+            <span className="text-white font-medium">Love Where You Live</span>,{" "}
+            with a smart, fun & seamless{" "}
+            <span className="text-white font-medium">real estate experience.</span>
           </h2>
-          <p className="mt-4 text-xl sm:text-2xl md:text-3xl text-white/60 font-light max-w-3xl mx-auto">
-            creating refined spaces that inspire better living and deliver lasting value{" "}
-            <span className="text-white font-medium">every day.</span>
-          </p>
         </div>
 
         <div ref={imagesRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-20 sm:mb-28">
@@ -191,15 +187,15 @@ export default function About() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-[#012169]/0 group-hover:bg-[#012169]/20 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-[#301143]/0 group-hover:bg-[#301143]/20 transition-all duration-500" />
                   <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <div className="mt-3 text-center">
-                  <div className="w-8 h-1 bg-gray-200 rounded-full mx-auto group-hover:bg-[#012169]/30 transition-colors duration-500" />
+                  <div className="w-8 h-1 bg-gray-200 rounded-full mx-auto group-hover:bg-[#301143]/30 transition-colors duration-500" />
                 </div>
               </div>
               <motion.div 
-                className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#012169]/30 group-hover:bg-[#012169]/50 transition-colors duration-300"
+                className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#301143]/30 group-hover:bg-[#301143]/50 transition-colors duration-300"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -224,35 +220,52 @@ export default function About() {
 
             <motion.h3 
               variants={itemVariants}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#012169] mb-8 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#301143] mb-8 leading-tight"
             >
-              Hi, I&apos;m{" "}
+              Hey, Ottawa! I&apos;m{" "}
               <span className="relative">
-                Marlena
+                Shelley
                 <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8" fill="none">
-                  <path d="M2 6C50 2 150 2 198 6" stroke="#012169" strokeWidth="3" strokeLinecap="round" opacity="0.3"/>
+                  <path d="M2 6C50 2 150 2 198 6" stroke="#301143" strokeWidth="3" strokeLinecap="round" opacity="0.3"/>
                 </svg>
               </span>
             </motion.h3>
 
-            <motion.div variants={itemVariants} className="space-y-5 text-gray-200 text-base sm:text-lg leading-relaxed">
+            <motion.div variants={itemVariants} className="space-y-5 text-gray-800 text-base sm:text-lg leading-relaxed">
               <p>
-                If you&apos;re looking for a Realtor who believes in{" "}
-                <span className="text-[#012169] font-medium">honesty</span>,{" "}
-                <span className="text-[#012169] font-medium">communication</span>, and making the process feel a little less stressful, you&apos;re in the right place.
+                I work with buyers, sellers & investors in the Ottawa area who want a smart, fun & seamless method for dealing with real estate. I have been a REALTOR® since 2015 and I&apos;ve helped lots of families find their dream home! Helping people makes me so proud and drives everything I do!
+              </p>
+              
+              <blockquote className="border-l-4 border-[#301143]/50 pl-4 py-2 bg-white/60 rounded-r-lg italic text-[#301143]/90">
+                &ldquo;Amazing experience! She was easily able to understand my needs. She is one of the most reliable people I have met! She was my rock. Very accommodating! I always look for an agent that is on the ball so I can get the best deal and Shelley definitely exceeded my expectations. Highly, highly recommend!&rdquo;
+              </blockquote>
+
+              <p>
+                I was a social worker for over 20 years. I have also completed the following certifications as a real estate agent: Accredited Buyer’s Representatives (ABR®), Seller Representative Specialist designation (SRS), and Lifestyle55+ Affiliate (former ASA™).
               </p>
               <p>
-                My background is in <span className="text-[#012169] font-medium">healthcare</span>, where I learned the importance of patience, compassion, and showing up for people when they need support. Those same values guide the way I work with my clients today.
+                When I am not helping people Love Where They Live, I can be found playing with my fur babies, hanging with my young adult children or hiking around the Ottawa area. I’m also passionate about serving the Ottawa community, and look forward to connecting with you!
               </p>
-              <p>
-                I know buying or selling a home can feel overwhelming at times, but you don&apos;t have to navigate it alone. Whether you&apos;re just starting to explore your options or ready to make a move, I&apos;m here to help every step of the way.
-              </p>
-              <p className="text-[#012169] font-medium text-lg">
-                I believe real estate should feel personal, and I look forward to getting to know your story.
+              
+              <p className="font-semibold text-[#301143]">
+                See you around town! <br /> Shelley Evelyn
               </p>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="mt-10">
+            <motion.div variants={itemVariants} className="mt-8 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-gray-700 font-medium">
+                <a href="mailto:Shelley@ShelleyEvelyn.ca" className="hover:text-[#301143] transition-colors flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  Shelley@ShelleyEvelyn.ca
+                </a>
+                <a href="tel:16132914323" className="hover:text-[#301143] transition-colors flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                  613-291-4323
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="mt-8">
               <p className="text-xs text-gray-500 uppercase tracking-[0.2em] font-medium mb-4">
                 Connect With Me
               </p>
@@ -263,7 +276,7 @@ export default function About() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-xl border border-gray-300 flex items-center justify-center text-gray-500 transition-all duration-300"
+                    className="w-11 h-11 rounded-xl border border-gray-300/50 bg-white/50 backdrop-blur-sm flex items-center justify-center text-gray-600 transition-all duration-300"
                     whileHover={{ 
                       scale: 1.1, 
                       y: -3,
@@ -290,13 +303,13 @@ export default function About() {
           >
             <div className="relative aspect-3/4 rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/img1.jpg"
-                alt="Marlena Few"
+                src="/images/img1.png"
+                alt="Shelley Evelyn"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#012169]/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#301143]/30 via-transparent to-transparent" />
             </div>
             <motion.div
               className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 bg-white rounded-2xl shadow-xl p-4 sm:p-6"
@@ -305,11 +318,11 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <p className="text-3xl sm:text-4xl font-bold text-[#012169]">12+</p>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">Years Experience</p>
+              <p className="text-3xl sm:text-4xl font-bold text-[#301143]">2015</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">Realtor Since</p>
             </motion.div>
-            <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full border-2 border-[#012169]/10" />
-            <div className="absolute -top-2 -right-2 w-16 h-16 rounded-full bg-[#012169]/5" />
+            <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full border-2 border-[#301143]/10" />
+            <div className="absolute -top-2 -right-2 w-16 h-16 rounded-full bg-[#301143]/5" />
           </motion.div>
         </div>
 

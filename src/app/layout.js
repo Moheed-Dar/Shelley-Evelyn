@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "CB Southwest Realty",
-  description: "Southwest Realty - Find your dream home",
+  title: "Solid Rock Realty",
+  description: "Solid Rock Realty - Find your dream home",
 };
 
 export default function RootLayout({ children }) {

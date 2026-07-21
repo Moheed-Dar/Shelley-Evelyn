@@ -203,13 +203,13 @@ export default function FullscreenMenu({ isOpen, onClose }) {
         ref={menuRef}
         className="hidden md:flex fixed top-25 left-0 right-0 z-999 justify-center px-4 lg:px-8"
       >
-        <div className="w-full max-w-3xl bg-white rounded-2xl overflow-hidden shadow-2xl">
+        <div className="w-full max-w-3xl bg-[#f5f1f8] rounded-2xl overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Left: Hero Preview Image */}
             <div className="relative h-44 lg:h-auto lg:min-h-70">
               <Image
                 src="/banner/banner2.jpg"
-                alt="Marlena Properties Preview"
+                alt="Shelley Evelyn Properties Preview"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 1024px) 128px, 160px"
@@ -221,7 +221,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                   <div className="relative z-10 mt-10 w-50 h-20">
                     <Image
                       src="/images/logo1.png"
-                      alt="Marlena"
+                      alt="Shelley Evelyn"
                       fill
                       className="object-contain"
                       sizes="80px"
@@ -232,13 +232,13 @@ export default function FullscreenMenu({ isOpen, onClose }) {
 
               <div className="absolute bottom-3 left-3">
                 <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
-                  Marlena Few
+                  Shelley Evelyn
                 </h2>
               </div>
             </div>
 
             {/* Right: Navigation Links */}
-            <div className="p-5 lg:p-6 bg-white">
+            <div className="p-5 lg:p-6 bg-[#f5f1f8]">
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <div className="flex flex-col gap-1.5">
@@ -247,11 +247,11 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                         key={index}
                         href={link.href}
                         onClick={handleLinkClick}
-                        className="group relative py-1.5 text-gray-600 hover:text-[#012169] transition-colors text-sm font-medium"
+                        className="group relative py-1.5 text-gray-600 hover:text-[#301143] transition-colors text-sm font-medium"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#012169] transition-all duration-300 group-hover:w-full" />
+                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#301143] transition-all duration-300 group-hover:w-full" />
                         </span>
                       </Link>
                     ))}
@@ -265,11 +265,11 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                         key={index}
                         href={link.href}
                         onClick={handleLinkClick}
-                        className="group relative py-1.5 text-gray-600 hover:text-[#012169] transition-colors text-sm font-medium"
+                        className="group relative py-1.5 text-gray-600 hover:text-[#301143] transition-colors text-sm font-medium"
                       >
                         <span className="relative">
                           {link.label}
-                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#012169] transition-all duration-300 group-hover:w-full" />
+                          <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-[#301143] transition-all duration-300 group-hover:w-full" />
                         </span>
                       </Link>
                     ))}
@@ -280,14 +280,14 @@ export default function FullscreenMenu({ isOpen, onClose }) {
           </div>
 
           {/* Bottom Section */}
-          <div className="border-t border-gray-100 p-4 flex items-center justify-between gap-3">
+          <div className="border-t border-[#e9e0f0] p-4 flex items-center justify-between gap-3 bg-[#f5f1f8]">
             <a
-              href="mailto:marlena-few@coldwellbanker.ca"
-              className="flex items-center gap-2 text-gray-500 hover:text-[#012169] transition-colors"
+              href="mailto:shelley@shelleyevelyn.ca"
+              className="flex items-center gap-2 text-gray-500 hover:text-[#301143] transition-colors"
             >
               <Mail size={15} />
               <span className="text-sm font-medium">
-                marlena-few@coldwellbanker.ca
+                shelley@shelleyevelyn.ca
               </span>
             </a>
 
@@ -299,7 +299,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-lg transition-colors ${
                   isLoggedIn
                     ? "bg-emerald-50 border border-emerald-200 text-emerald-700 hover:bg-emerald-100 hover:border-emerald-300"
-                    : "bg-amber-50 border border-amber-200 text-amber-700 hover:bg-amber-100 hover:border-amber-300"
+                    : "bg-purple-50 border border-purple-200 text-purple-700 hover:bg-purple-100 hover:border-purple-300"
                 }`}
               >
                 {(() => {
@@ -311,13 +311,13 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <Link
                 href="/properties"
                 onClick={handleLinkClick}
-                className="px-4 py-2 bg-[#0a1628] text-white text-sm font-semibold rounded-lg hover:bg-[#012169] transition-colors"
+                className="px-4 py-2 bg-[#1a0b24] text-white text-sm font-semibold rounded-lg hover:bg-[#301143] transition-colors"
               >
                 All Properties
               </Link>
               <button
                 onClick={handleClose}
-                className="w-9 h-9 flex items-center justify-center bg-[#0a1628] text-white rounded-lg hover:bg-[#012169] transition-colors"
+                className="w-9 h-9 flex items-center justify-center bg-[#1a0b24] text-white rounded-lg hover:bg-[#301143] transition-colors"
               >
                 <ArrowRight size={16} />
               </button>
@@ -350,7 +350,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 stiffness: 300,
                 damping: 30,
               }}
-              className="md:hidden fixed top-0 right-0 bottom-0 z-999 w-80 bg-white shadow-2xl flex flex-col"
+              className="md:hidden fixed top-0 right-0 bottom-0 z-999 w-80 bg-[#f5f1f8] shadow-2xl flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -359,7 +359,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
                 onClick={handleClose}
-                className="absolute top-3 right-3 z-50 w-9 h-9 flex items-center justify-center rounded-full bg-[#012169] text-white hover:bg-[#0a1628] transition-colors shadow-lg"
+                className="absolute top-3 right-3 z-50 w-9 h-9 flex items-center justify-center rounded-full bg-[#301143] text-white hover:bg-[#1a0b24] transition-colors shadow-lg"
               >
                 <X size={18} />
               </motion.button>
@@ -368,7 +368,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               <div className="relative h-40 shrink-0">
                 <Image
                   src="/banner/banner2.jpg"
-                  alt="Marlena"
+                  alt="Shelley Evelyn"
                   fill
                   className="object-cover"
                   sizes="320px"
@@ -378,11 +378,11 @@ export default function FullscreenMenu({ isOpen, onClose }) {
 
                 <div className="absolute top-3 left-3">
                   <div className="flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-3 py-1.5 border border-white/30">
-                    <div className="w-6 h-6 rounded-full bg-[#012169] flex items-center justify-center">
-                      <span className="text-white text-[10px] font-bold">M</span>
+                    <div className="w-6 h-6 rounded-full bg-[#301143] flex items-center justify-center">
+                      <span className="text-white text-[10px] font-bold">S</span>
                     </div>
                     <span className="text-white font-semibold text-xs">
-                      Marlena Few
+                      Shelley Evelyn
                     </span>
                   </div>
                 </div>
@@ -412,15 +412,15 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                           key={index}
                           href={link.href}
                           onClick={handleLinkClick}
-                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#f0f4ff] active:bg-[#e0e8ff] transition-all duration-200"
+                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#ebe3f2] active:bg-[#e0d4ec] transition-all duration-200"
                         >
-                          <div className="w-9 h-9 rounded-lg bg-[#f0f4ff] group-hover:bg-[#012169] flex items-center justify-center transition-all duration-200">
+                          <div className="w-9 h-9 rounded-lg bg-[#ebe3f2] group-hover:bg-[#301143] flex items-center justify-center transition-all duration-200">
                             <Icon
                               size={16}
-                              className="text-[#012169] group-hover:text-white transition-colors duration-200"
+                              className="text-[#301143] group-hover:text-white transition-colors duration-200"
                             />
                           </div>
-                          <span className="text-gray-700 group-hover:text-[#012169] font-medium text-sm transition-colors duration-200">
+                          <span className="text-gray-700 group-hover:text-[#301143] font-medium text-sm transition-colors duration-200">
                             {link.label}
                           </span>
                         </Link>
@@ -429,7 +429,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <div className="h-px bg-gray-100 my-3" />
+                <div className="h-px bg-[#e0d4ec] my-3" />
 
                 {/* CMS Pages */}
                 <div>
@@ -444,15 +444,15 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                           key={index}
                           href={link.href}
                           onClick={handleLinkClick}
-                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#f0f4ff] active:bg-[#e0e8ff] transition-all duration-200"
+                          className="group flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[#ebe3f2] active:bg-[#e0d4ec] transition-all duration-200"
                         >
-                          <div className="w-9 h-9 rounded-lg bg-gray-50 group-hover:bg-[#012169] flex items-center justify-center transition-all duration-200">
+                          <div className="w-9 h-9 rounded-lg bg-[#ebe3f2] group-hover:bg-[#301143] flex items-center justify-center transition-all duration-200">
                             <Icon
                               size={16}
-                              className="text-[#012169] group-hover:text-white transition-colors duration-200"
+                              className="text-[#301143] group-hover:text-white transition-colors duration-200"
                             />
                           </div>
-                          <span className="text-gray-700 group-hover:text-[#012169] font-medium text-sm transition-colors duration-200">
+                          <span className="text-gray-700 group-hover:text-[#301143] font-medium text-sm transition-colors duration-200">
                             {link.label}
                           </span>
                         </Link>
@@ -463,16 +463,16 @@ export default function FullscreenMenu({ isOpen, onClose }) {
               </div>
 
               {/* Bottom Section */}
-              <div className="border-t border-gray-100 px-4 py-4 shrink-0 bg-gray-50/50">
+              <div className="border-t border-[#e0d4ec] px-4 py-4 shrink-0 bg-[#ebe3f2]">
                 {/* Email */}
                 <a
-                  href="mailto:marlena-few@coldwellbanker.ca"
+                  href="mailto:shelley@shelleyevelyn.ca"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center justify-center gap-1.5 text-gray-400 hover:text-[#012169] transition-colors mb-3"
+                  className="flex items-center justify-center gap-1.5 text-gray-500 hover:text-[#301143] transition-colors mb-3"
                 >
                   <Mail size={12} />
                   <span className="text-[11px] font-medium">
-                    marlena-few@coldwellbanker.ca
+                    shelley@shelleyevelyn.ca
                   </span>
                 </a>
 
@@ -484,7 +484,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                     className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 ${
                       isLoggedIn
                         ? "bg-emerald-50 border border-emerald-200 text-emerald-700 hover:bg-emerald-100 active:bg-emerald-200"
-                        : "bg-amber-50 border border-amber-200 text-amber-700 hover:bg-amber-100 active:bg-amber-200"
+                        : "bg-purple-50 border border-purple-200 text-purple-700 hover:bg-purple-100 active:bg-purple-200"
                     }`}
                   >
                     {(() => {
@@ -499,7 +499,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                   <Link
                     href="/properties"
                     onClick={handleLinkClick}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#012169] text-white text-sm font-semibold rounded-xl hover:bg-[#0a1628] active:bg-[0d1f3c] transition-all duration-200"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#301143] text-white text-sm font-semibold rounded-xl hover:bg-[#1a0b24] active:bg-[#240d35] transition-all duration-200"
                   >
                     <FileText size={16} />
                     <span>All Properties</span>

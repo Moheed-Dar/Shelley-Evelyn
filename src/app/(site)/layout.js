@@ -2,7 +2,7 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
 export const metadata = {
-  title: "CB Southwest Realty",
+  title: "Solid Rock Realty",
   description: "Premium Real Estate Services",
 };
 
