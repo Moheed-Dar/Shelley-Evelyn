@@ -4,19 +4,19 @@
   --font-poppins: "Poppins", system-ui, sans-serif;
 
   /* ============================================
-   * CUSTOM SCROLLBAR COLORS — DEEP PURPLE THEME (#301143)
+   * CUSTOM SCROLLBAR COLORS — GOLDEN ACCENT THEME (#FAAE62)
    * ============================================ */
   --scrollbar-size: 8px;
-  --scrollbar-track: #1a0a2a;        /* Deep purple track (darker) */
-  --scrollbar-thumb: #301143;         /* Base purple — main color */
-  --scrollbar-thumb-hover: #4d1f6b;   /* Lighter purple on hover */
-  --scrollbar-thumb-active: #6a3a8a;  /* Even lighter on active/click */
+  --scrollbar-track: #1a0a2a;          /* Deep dark track (stays dark for contrast) */
+  --scrollbar-thumb: #FAAE62;           /* Golden accent — main color */
+  --scrollbar-thumb-hover: #ffc87a;     /* Lighter golden on hover */
+  --scrollbar-thumb-active: #ffd4a0;    /* Even lighter on active/click */
   --scrollbar-corner: transparent;
 
   /* Thin variant (for smaller elements) */
   --scrollbar-thin-size: 5px;
-  --scrollbar-thin-thumb: rgba(48, 17, 67, 0.7);      /* #301143 with transparency */
-  --scrollbar-thin-thumb-hover: rgba(77, 31, 107, 0.95); /* #4d1f6b with transparency */
+  --scrollbar-thin-thumb: rgba(250, 174, 98, 0.7);        /* #FAAE62 with transparency */
+  --scrollbar-thin-thumb-hover: rgba(255, 200, 122, 0.95); /* #ffc87a with transparency */
 }
 
 body {
@@ -108,14 +108,14 @@ body {
 /* ---- MAIN SCROLLBAR ---- */
 html {
   scrollbar-width: thin !important;
-  scrollbar-color: #301143 #1a0a2a !important; /* Deep Purple theme for Firefox */
+  scrollbar-color: #FAAE62 #1a0a2a !important; /* Golden accent theme for Firefox */
 }
 
 /* ---- Thin scrollbar ---- */
 .thin-scroll,
 .custom-scroll {
   scrollbar-width: thin !important;
-  scrollbar-color: rgba(48, 17, 67, 0.7) transparent !important;
+  scrollbar-color: rgba(250, 174, 98, 0.7) transparent !important;
 }
 
 /* ============================================
@@ -140,12 +140,12 @@ html {
 
 .scroll-glow::before {
   top: 0;
-  background: linear-gradient(to bottom, rgba(48, 17, 67, 0.1), transparent);
+  background: linear-gradient(to bottom, rgba(250, 174, 98, 0.397), transparent);
 }
 
 .scroll-glow::after {
   bottom: 0;
-  background: linear-gradient(to top, rgba(48, 17, 67, 0.1), transparent);
+  background: linear-gradient(to top, rgba(250, 174, 98, 0.1), transparent);
 }
 
 .scroll-glow:not(:first-child)::before {
