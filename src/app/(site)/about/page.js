@@ -231,7 +231,7 @@ export default function About() {
               </span>
             </motion.h3>
 
-            <motion.div variants={itemVariants} className="space-y-5 text-gray-800 text-base sm:text-lg leading-relaxed">
+            <motion.div variants={itemVariants} className="space-y-5 text-gray-100 text-base sm:text-lg leading-relaxed">
               <p>
                 I work with buyers, sellers & investors in the Ottawa area who want a smart, fun & seamless method for dealing with real estate. I have been a REALTOR® since 2015 and I&apos;ve helped lots of families find their dream home! Helping people makes me so proud and drives everything I do!
               </p>
