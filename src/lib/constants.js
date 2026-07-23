@@ -14,13 +14,13 @@ export const NAV_LINKS = {
 };
 
 export const CONTACT_INFO = {
-   phone: "12269325002",
-  phoneHref: "tel:+12269325002",
-  email: "info@havana.com",
-  emailHref: "marlena-few@coldwellbanker.ca",
+   phone: "613-291-4323",
+  phoneHref: "tel:+16132914323",
+  email: "shelley@ShelleyEvelyn.ca",
+  emailHref: "shelley@ShelleyEvelyn.ca",
 };
 
 export const BRAND = {
-  name: "Havana",
+  name: "Solid Rock",
   nameLight: "Properties",
 };

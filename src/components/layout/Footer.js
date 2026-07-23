@@ -78,7 +78,7 @@ export default function Footer() {
   ];
 
   const linkClass =
-    "group relative text-gray-400 hover:text-[#7c3aed] transition-colors duration-300 flex items-center gap-2 text-sm py-1 w-fit";
+    "group relative text-gray-400 hover:text-[#FAAE62] transition-colors duration-300 flex items-center gap-2 text-sm py-1 w-fit";
 
   return (
     <footer
@@ -104,7 +104,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-5">
               <Image
-                src="/images/logo2.png"
+                src="/images/logo3.png"
                 alt="Shelley Evelyn Logo"
                 width={120}
                 height={40}
@@ -151,7 +151,7 @@ export default function Footer() {
           {/* Column 2: Quick Links */}
           <div>
             <h3 className="text-white font-bold text-lg mb-5 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[#301143]" />
+              <div className="w-2 h-2 rounded-full bg-[#FAAE62]" />
               Quick Links
             </h3>
             <ul className="space-y-2">
@@ -160,12 +160,12 @@ export default function Footer() {
                   <a href={link.href} className={linkClass}>
                     <ArrowUpRight
                       size={14}
-                      className="text-gray-600 group-hover:text-[#7c3aed] transition-all duration-300 -rotate-45 group-hover:rotate-0 group-hover:scale-110"
+                      className="text-gray-600 group-hover:text-[#FAAE62] transition-all duration-300 -rotate-45 group-hover:rotate-0 group-hover:scale-110"
                     />
                     <span className="group-hover:translate-x-1 transition-transform duration-300">
                       {link.name}
                     </span>
-                    <span className="absolute bottom-0 left-3 w-0 h-px bg-[#7c3aed] group-hover:w-full transition-all duration-300"></span>
+                    <span className="absolute bottom-0 left-3 w-0 h-px bg-[#FAAE62] group-hover:w-full transition-all duration-300"></span>
                   </a>
                 </li>
               ))}
@@ -175,16 +175,16 @@ export default function Footer() {
           {/* Column 3: Contact & Newsletter */}
           <div>
             <h3 className="text-white font-bold text-lg mb-5 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[#301143]" />
+              <div className="w-2 h-2 rounded-full bg-[#FAAE62]" />
               Contact Us
             </h3>
 
             <div className="space-y-4 mb-6">
               <a
                 href="#"
-                className="group flex items-start gap-3 text-gray-400 hover:text-white transition-colors text-sm"
+                className="group flex items-start gap-3 text-gray-400 hover:text-[#FAAE62] transition-colors text-sm"
               >
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#301143] group-hover:border-transparent transition-all duration-300 shrink-0">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#FAAE62] group-hover:border-transparent transition-all duration-300 shrink-0">
                   <Building2
                     size={14}
                     className="text-[#301143] group-hover:text-white transition-colors"
@@ -197,9 +197,9 @@ export default function Footer() {
 
               <a
                 href="tel:+16132914323"
-                className="group flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm"
+                className="group flex items-center gap-3 text-gray-400 hover:text-[#FAAE62] transition-colors text-sm"
               >
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#301143] group-hover:border-transparent transition-all duration-300 shrink-0">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#FAAE62] group-hover:border-transparent transition-all duration-300 shrink-0">
                   <Phone
                     size={14}
                     className="text-[#301143] group-hover:text-white transition-colors"
@@ -212,9 +212,9 @@ export default function Footer() {
 
               <a
                 href="mailto:shelley@shelleyevelyn.ca"
-                className="group flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm"
+                className="group flex items-center gap-3 text-gray-400 hover:text-[#FAAE62] transition-colors text-sm"
               >
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#301143] group-hover:border-transparent transition-all duration-300 shrink-0">
+                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#FAAE62] group-hover:border-transparent transition-all duration-300 shrink-0">
                   <Mail
                     size={14}
                     className="text-[#301143] group-hover:text-white transition-colors"
@@ -259,7 +259,7 @@ export default function Footer() {
               {/* Tooltip Arrow */}
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rotate-45 bg-[#1a0b24] border-r border-b border-white/10"></div>
               
-              <div className="text-[11px] text-gray-400 leading-relaxed text-left space-y-3">
+              <div className="text-[11px] text-[#FAAE62] leading-relaxed text-left space-y-3">
                 <p>
                   Copyright {currentYear} All rights reserved. Canadian Real Estate Association assumes no responsibility for the accuracy of any information shown. The information provided herein must only be used by consumers that have a bona fide interest in the purchase, sale or lease of real estate and may not be used for any commercial purpose or any other purpose.
                 </p>
@@ -292,7 +292,7 @@ export default function Footer() {
       {/* SCROLL TO TOP BUTTON */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-6 cursor-pointer right-6 z-50 w-11 h-11 rounded-full bg-[#7c3aed] text-white flex items-center justify-center shadow-lg shadow-[#7c3aed]/30 hover:bg-[#a78bfa] hover:scale-110 transition-all duration-300 ${
+        className={`fixed bottom-6 cursor-pointer right-6 z-50 w-11 h-11 rounded-full bg-[#7c3aed] text-white flex items-center justify-center shadow-lg shadow-[#7c3aed]/30 hover:bg-[#FAAE62] hover:scale-110 transition-all duration-300 ${
           isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"

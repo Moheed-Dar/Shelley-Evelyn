@@ -35,19 +35,19 @@ export default function Navbar() {
             {/* Desktop Logo (md and up) */}
             <div className="relative w-55 h-20 hidden md:block">
               <Image
-                src="/images/logo2.png"
-                alt="Marlena Properties"
+                src="/images/logo1.png"
+                alt="Shelley Properties"
                 fill
                 className="object-contain"
                 sizes="288px"
-                priority
+                priority 
               />
             </div>
             {/* Mobile Logo (below md) */}
             <div className="relative w-35 h-12 md:hidden">
               <Image
-                src="/images/logo2.png"
-                alt="Marlena Properties"
+                src="/images/logo.png"
+                alt="Shelley Properties"
                 fill
                 className="object-contain"
                 sizes="160px"

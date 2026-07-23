@@ -139,7 +139,7 @@ const HighlightText = ({ text, query }) => {
     <>
       {parts.map((part, i) =>
         regex.test(part) ? (
-          <span key={i} className="text-[#2B7FFF] font-semibold">
+          <span key={i} className="text-[#FAAE62] font-semibold">
             {part}
           </span>
         ) : (
@@ -158,7 +158,7 @@ const DarkSelect = ({ value, onChange, options, className = "" }) => (
     <select
       value={value}
       onChange={onChange}
-      className="appearance-none w-full pl-4 pr-8 py-2.5 bg-[#1b3454]/80 backdrop-blur-sm border border-white/15 text-white/90 text-xs font-medium rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2B7FFF]/40 focus:border-[#2B7FFF]/40 transition-all duration-200 hover:bg-[#1b3454] cursor-pointer shadow-lg shadow-black/10"
+      className="appearance-none w-full pl-4 pr-8 py-2.5 bg-[#3d1660]/80 backdrop-blur-sm border border-white/15 text-white/90 text-xs font-medium rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FAAE62]/40 focus:border-[#FAAE62]/40 transition-all duration-200 hover:bg-[#3d1660] cursor-pointer shadow-lg shadow-black/10"
       style={{ colorScheme: "dark" }}
     >
       {options}
@@ -330,7 +330,7 @@ export default function PropertiesPage() {
   // SKELETONS
   // ============================================
   const SkeletonCard = () => (
-    <div className="bg-[#1b3454] rounded-2xl overflow-hidden border border-white/5 animate-pulse">
+    <div className="bg-[#3d1660] rounded-2xl overflow-hidden border border-white/5 animate-pulse">
       <div className="h-72 bg-white/5" />
       <div className="p-5 space-y-3">
         <div className="h-5 bg-white/5 rounded w-3/4" />
@@ -340,7 +340,7 @@ export default function PropertiesPage() {
   );
 
   const SkeletonList = () => (
-    <div className="bg-[#1b3454] rounded-2xl overflow-hidden border border-white/5 animate-pulse flex h-48">
+    <div className="bg-[#3d1660] rounded-2xl overflow-hidden border border-white/5 animate-pulse flex h-48">
       <div className="w-56 bg-white/5 shrink-0" />
       <div className="p-5 flex-1 space-y-3">
         <div className="h-5 bg-white/5 rounded w-2/3" />
@@ -365,7 +365,7 @@ export default function PropertiesPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative h-105 sm:h-110px rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-black/30 bg-[#1b3454] cursor-pointer hover:shadow-2xl hover:shadow-[#2B7FFF]/15 hover:border-[#2B7FFF]/30 transition-all duration-500"
+          className="relative h-105 sm:h-110px rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-black/30 bg-[#3d1660] cursor-pointer hover:shadow-2xl hover:shadow-[#FAAE62]/15 hover:border-[#FAAE62]/30 transition-all duration-500"
         >
           <Image
             src={img}
@@ -383,8 +383,8 @@ export default function PropertiesPage() {
           <div className="absolute top-4 left-4 right-4 flex items-start justify-between z-10">
             <div className="flex flex-wrap gap-2">
               {property.isFeatured && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#2B7FFF]/90 backdrop-blur-md text-white text-[10px] font-bold rounded-full uppercase tracking-wider">
-                  <Crown size={9} className="fill-white" />
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FAAE62]/90 backdrop-blur-md text-[#301143] text-[10px] font-bold rounded-full uppercase tracking-wider">
+                  <Crown size={9} className="fill-[#301143]" />
                   Featured
                 </span>
               )}
@@ -409,7 +409,7 @@ export default function PropertiesPage() {
             <div className="flex items-center gap-3 mb-3">
               {property.bedrooms > 0 && (
                 <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-black/40 backdrop-blur-md rounded-lg border border-white/10">
-                  <Bed size={12} className="text-[#2B7FFF]/80" />
+                  <Bed size={12} className="text-[#FAAE62]/80" />
                   <span className="text-white text-xs font-semibold">
                     {property.bedrooms}
                   </span>
@@ -417,7 +417,7 @@ export default function PropertiesPage() {
               )}
               {property.bathrooms > 0 && (
                 <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-black/40 backdrop-blur-md rounded-lg border border-white/10">
-                  <Bath size={12} className="text-[#2B7FFF]/80" />
+                  <Bath size={12} className="text-[#FAAE62]/80" />
                   <span className="text-white text-xs font-semibold">
                     {property.bathrooms}
                   </span>
@@ -425,7 +425,7 @@ export default function PropertiesPage() {
               )}
               {(property.areaSize || property.area) > 0 && (
                 <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-black/40 backdrop-blur-md rounded-lg border border-white/10">
-                  <Maximize size={12} className="text-[#2B7FFF]/80" />
+                  <Maximize size={12} className="text-[#FAAE62]/80" />
                   <span className="text-white text-xs font-semibold">
                     {property.areaSize || property.area}{" "}
                     {property.areaUnit || "sqft"}
@@ -440,14 +440,14 @@ export default function PropertiesPage() {
 
             {property.propertyCode && (
               <div className="mb-3">
-                <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-mono font-bold rounded-md bg-[#2B7FFF]/15 text-[#2B7FFF] border border-[#2B7FFF]/25">
+                <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-mono font-bold rounded-md bg-[#FAAE62]/15 text-[#FAAE62] border border-[#FAAE62]/25">
                   {property.propertyCode}
                 </span>
               </div>
             )}
 
             <div className="flex items-center gap-1.5 text-white/70 text-sm mb-4">
-              <MapPin size={13} className="text-[#2B7FFF]/70 shrink-0" />
+              <MapPin size={13} className="text-[#FAAE62]/70 shrink-0" />
               <span className="truncate">
                 {property.location || property.city}
               </span>
@@ -455,7 +455,7 @@ export default function PropertiesPage() {
 
             <div className="flex items-end justify-between">
               <div>
-                <p className="text-2xl text-transparent bg-clip-text bg-linear-to-r from-[#8DC5FF] via-[#5AA8FF] to-[#2B7FFF] leading-none font-inter">
+                <p className="text-2xl text-transparent bg-clip-text bg-linear-to-r from-[#FFD9AE] via-[#FFC188] to-[#FAAE62] leading-none font-inter">
                   {property.currency === "PKR" ? "Rs" : "$"}{" "}
                   {Number(property.price)?.toLocaleString()}
                 </p>
@@ -474,7 +474,7 @@ export default function PropertiesPage() {
                   )}
                 </div>
               </div>
-              <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#2B7FFF] text-white opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg shadow-[#2B7FFF]/30">
+              <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#FAAE62] text-[#301143] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-lg shadow-[#FAAE62]/30">
                 <ArrowUpRight size={16} />
               </div>
             </div>
@@ -500,7 +500,7 @@ export default function PropertiesPage() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
-          className="relative h-52 sm:h-56 rounded-2xl overflow-hidden border border-white/10 shadow-lg shadow-black/30 bg-[#1b3454] cursor-pointer hover:shadow-2xl hover:shadow-[#2B7FFF]/15 hover:border-[#2B7FFF]/30 transition-all duration-500"
+          className="relative h-52 sm:h-56 rounded-2xl overflow-hidden border border-white/10 shadow-lg shadow-black/30 bg-[#3d1660] cursor-pointer hover:shadow-2xl hover:shadow-[#FAAE62]/15 hover:border-[#FAAE62]/30 transition-all duration-500"
         >
           <Image
             src={img}
@@ -515,8 +515,8 @@ export default function PropertiesPage() {
           <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-10">
             <div className="flex gap-1.5">
               {property.isFeatured && (
-                <span className="px-2 py-0.5 bg-[#2B7FFF]/90 text-white text-[9px] font-bold rounded-full uppercase tracking-wider">
-                  <Crown size={8} className="fill-white inline mr-0.5" />
+                <span className="px-2 py-0.5 bg-[#FAAE62]/90 text-[#301143] text-[9px] font-bold rounded-full uppercase tracking-wider">
+                  <Crown size={8} className="fill-[#301143] inline mr-0.5" />
                   Featured
                 </span>
               )}
@@ -552,11 +552,11 @@ export default function PropertiesPage() {
                 </h3>
                 <div className="flex items-center gap-1.5 text-white/60 text-xs">
                   {property.propertyCode && (
-                    <span className="inline-block font-mono text-[10px] font-bold text-[#2B7FFF]/80 bg-[#2B7FFF]/10 px-1.5 py-0.5 rounded mr-2">
+                    <span className="inline-block font-mono text-[10px] font-bold text-[#FAAE62]/80 bg-[#FAAE62]/10 px-1.5 py-0.5 rounded mr-2">
                       {property.propertyCode}
                     </span>
                   )}
-                  <MapPin size={11} className="text-[#2B7FFF]/70" />
+                  <MapPin size={11} className="text-[#FAAE62]/70" />
                   <span className="truncate">
                     {property.location || property.city}
                   </span>
@@ -577,7 +577,7 @@ export default function PropertiesPage() {
                   </div>
                 </div>
               </div>
-              <p className="text-xl text-transparent bg-clip-text bg-linear-to-r from-[#8DC5FF] to-[#2B7FFF] leading-none font-inter">
+              <p className="text-xl text-transparent bg-clip-text bg-linear-to-r from-[#FFD9AE] to-[#FAAE62] leading-none font-inter">
                 {property.currency === "PKR" ? "Rs" : "$"}{" "}
                 {Number(property.price)?.toLocaleString()}
               </p>
@@ -592,8 +592,8 @@ export default function PropertiesPage() {
   // DARK OPTION STYLE
   // ============================================
   const darkOptionStyle = {
-    backgroundColor: "#1b3454",
-    color: "#c8d6e5",
+    backgroundColor: "#3d1660",
+    color: "#e3cdf0",
     padding: "8px 12px",
   };
 
@@ -601,7 +601,7 @@ export default function PropertiesPage() {
   // RENDER
   // ============================================
   return (
-    <div className={`min-h-screen bg-[#39518A] font-inter`}>
+    <div className={`min-h-screen bg-[#301143] font-inter`}>
       {/* Background Texture + Watermark */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div
@@ -614,7 +614,7 @@ export default function PropertiesPage() {
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.06]">
           <div className="relative w-75 h-75 sm:w-100 sm:h-100">
             <Image
-              src="/images/logo1.png"
+              src="/images/logo3.png"
               alt="Watermark"
               fill
               className="object-contain"
@@ -622,8 +622,8 @@ export default function PropertiesPage() {
             />
           </div>
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(43,127,255,0.12)_0%,transparent_40%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(43,127,255,0.08)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(250,174,98,0.12)_0%,transparent_40%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(250,174,98,0.08)_0%,transparent_50%)]" />
       </div>
 
       {/* ===== HERO — z-50 ===== */}
@@ -631,8 +631,8 @@ export default function PropertiesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-12 sm:pb-16">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-px bg-linear-to-r from-[#2B7FFF] to-transparent" />
-              <p className="text-[#2B7FFF] text-sm font-semibold uppercase tracking-[0.2em] flex items-center gap-2">
+              <div className="w-8 h-px bg-linear-to-r from-[#FAAE62] to-transparent" />
+              <p className="text-[#FAAE62] text-sm font-semibold uppercase tracking-[0.2em] flex items-center gap-2">
                 <Building2 size={14} />
                 Explore Listings
               </p>
@@ -651,7 +651,7 @@ export default function PropertiesPage() {
             <div className="flex flex-wrap items-center gap-3">
               <div className="relative flex-1 min-w-45">
                 <form onSubmit={handleSearch}>
-                  <div className="relative flex items-center bg-white/10 border border-white/15 rounded-2xl focus-within:border-[#2B7FFF]/50 focus-within:ring-2 focus-within:ring-[#2B7FFF]/20 transition-all">
+                  <div className="relative flex items-center bg-white/10 border border-white/15 rounded-2xl focus-within:border-[#FAAE62]/50 focus-within:ring-2 focus-within:ring-[#FAAE62]/20 transition-all">
                     <Search
                       size={16}
                       className="absolute left-3.5 text-white/40"
@@ -686,7 +686,7 @@ export default function PropertiesPage() {
                     )}
                     <button
                       type="submit"
-                      className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-[#2B7FFF] text-white rounded-xl hover:bg-[#4D94FF] transition-colors shadow-lg shadow-[#2B7FFF]/25"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-[#FAAE62] text-[#301143] rounded-xl hover:bg-[#FFC188] transition-colors shadow-lg shadow-[#FAAE62]/25"
                       title="Search"
                     >
                       <Search size={16} />
@@ -702,7 +702,7 @@ export default function PropertiesPage() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 right-0 mt-2 bg-[#1b3454]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50"
+                      className="absolute top-full left-0 right-0 mt-2 bg-[#3d1660]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50"
                     >
                       <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/5">
                         <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.15em]">
@@ -720,7 +720,7 @@ export default function PropertiesPage() {
                         className="max-h-80 overflow-y-auto"
                         style={{
                           scrollbarWidth: "thin",
-                          scrollbarColor: "rgba(43,127,255,0.3) transparent",
+                          scrollbarColor: "rgba(250,174,98,0.3) transparent",
                         }}
                       >
                         {suggestions.map((property) => {
@@ -755,7 +755,7 @@ export default function PropertiesPage() {
                                 <div className="flex items-center gap-1.5 mt-1">
                                   <MapPin
                                     size={10}
-                                    className="text-[#2B7FFF]/70 shrink-0"
+                                    className="text-[#FAAE62]/70 shrink-0"
                                   />
                                   <span className="text-[11px] text-white/50 truncate">
                                     <HighlightText
@@ -768,7 +768,7 @@ export default function PropertiesPage() {
                                     />
                                   </span>
                                   {property.propertyCode && (
-                                    <span className="ml-2 text-[10px] font-mono font-bold text-[#2B7FFF]/70 bg-[#2B7FFF]/10 px-1.5 py-0.5 rounded">
+                                    <span className="ml-2 text-[10px] font-mono font-bold text-[#FAAE62]/70 bg-[#FAAE62]/10 px-1.5 py-0.5 rounded">
                                       {property.propertyCode}
                                     </span>
                                   )}
@@ -780,10 +780,10 @@ export default function PropertiesPage() {
                                   {Number(property.price)?.toLocaleString()}
                                 </span>
                                 <span className={`inline-block w-2 h-2 rounded-full ${getStatusDotColor(property.status)}`} title={property.status} />
-                                <div className="w-6 h-6 rounded-md bg-[#2B7FFF]/10 flex items-center justify-center">
+                                <div className="w-6 h-6 rounded-md bg-[#FAAE62]/10 flex items-center justify-center">
                                   <ArrowUpRight
                                     size={11}
-                                    className="text-[#2B7FFF]/60"
+                                    className="text-[#FAAE62]/60"
                                   />
                                 </div>
                               </div>
@@ -797,7 +797,7 @@ export default function PropertiesPage() {
                             setSearch(searchInput);
                             setShowSuggestions(false);
                           }}
-                          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#2B7FFF] hover:bg-[#2B7FFF]/10 transition-colors"
+                          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#FAAE62] hover:bg-[#FAAE62]/10 transition-colors"
                         >
                           <Search size={12} />
                           View all results for &quot;{searchInput.slice(0, 30)}
@@ -819,11 +819,11 @@ export default function PropertiesPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 mt-2 bg-[#1b3454]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50"
+                        className="absolute top-full left-0 right-0 mt-2 bg-[#3d1660]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50"
                       >
                         <div className="flex flex-col items-center justify-center py-8 px-4">
-                          <div className="w-10 h-10 rounded-full bg-[#2B7FFF]/5 flex items-center justify-center mb-3 border border-[#2B7FFF]/10">
-                            <Search size={16} className="text-[#2B7FFF]/40" />
+                          <div className="w-10 h-10 rounded-full bg-[#FAAE62]/5 flex items-center justify-center mb-3 border border-[#FAAE62]/10">
+                            <Search size={16} className="text-[#FAAE62]/40" />
                           </div>
                           <p className="text-sm text-white/50 font-medium">
                             No matches found
@@ -858,14 +858,14 @@ export default function PropertiesPage() {
                 onClick={() => setShowFilters(!showFilters)}
                 className={`flex items-center gap-2 px-3 py-2.5 text-xs font-semibold rounded-xl transition-colors shrink-0 ${
                   showFilters || hasActiveFilters
-                    ? "bg-[#2B7FFF] text-white shadow-lg shadow-[#2B7FFF]/25"
+                    ? "bg-[#FAAE62] text-[#301143] shadow-lg shadow-[#FAAE62]/25"
                     : "bg-white/10 text-white/70 hover:bg-white/20 border border-white/15"
                 }`}
               >
                 <SlidersHorizontal size={15} />
                 <span>Filters</span>
                 {hasActiveFilters && (
-                  <span className="w-4 h-4 flex items-center justify-center bg-white text-[#2B7FFF] text-[10px] font-black rounded-full">
+                  <span className="w-4 h-4 flex items-center justify-center bg-[#301143] text-[#FAAE62] text-[10px] font-black rounded-full">
                     !
                   </span>
                 )}
@@ -874,13 +874,13 @@ export default function PropertiesPage() {
               <div className="flex items-center bg-white/10 rounded-xl p-1 border border-white/10 shrink-0">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 rounded-lg transition-colors ${viewMode === "grid" ? "bg-[#2B7FFF] text-white shadow-lg shadow-[#2B7FFF]/25" : "text-white/40 hover:text-white/70"}`}
+                  className={`p-1.5 rounded-lg transition-colors ${viewMode === "grid" ? "bg-[#FAAE62] text-[#301143] shadow-lg shadow-[#FAAE62]/25" : "text-white/40 hover:text-white/70"}`}
                 >
                   <Grid3X3 size={15} />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 rounded-lg transition-colors ${viewMode === "list" ? "bg-[#2B7FFF] text-white shadow-lg shadow-[#2B7FFF]/25" : "text-white/40 hover:text-white/70"}`}
+                  className={`p-1.5 rounded-lg transition-colors ${viewMode === "list" ? "bg-[#FAAE62] text-[#301143] shadow-lg shadow-[#FAAE62]/25" : "text-white/40 hover:text-white/70"}`}
                 >
                   <List size={15} />
                 </button>
@@ -909,7 +909,7 @@ export default function PropertiesPage() {
             {hasActiveFilters && (
               <div className="flex flex-wrap items-center gap-2 mt-1">
                 {propertyType !== "all" && (
-                  <span className="flex items-center gap-1 px-2.5 py-1 bg-[#2B7FFF]/20 text-[#6BABFF] text-[11px] font-semibold rounded-full capitalize border border-[#2B7FFF]/25">
+                  <span className="flex items-center gap-1 px-2.5 py-1 bg-[#FAAE62]/20 text-[#FFC188] text-[11px] font-semibold rounded-full capitalize border border-[#FAAE62]/25">
                     {propertyType}
                     <button onClick={() => setPropertyType("all")}>
                       <X size={9} />
@@ -917,7 +917,7 @@ export default function PropertiesPage() {
                   </span>
                 )}
                 {priceType && (
-                  <span className="flex items-center gap-1 px-2.5 py-1 bg-[#2B7FFF]/20 text-[#6BABFF] text-[11px] font-semibold rounded-full capitalize border border-[#2B7FFF]/25">
+                  <span className="flex items-center gap-1 px-2.5 py-1 bg-[#FAAE62]/20 text-[#FFC188] text-[11px] font-semibold rounded-full capitalize border border-[#FAAE62]/25">
                     {priceType}
                     <button onClick={() => setPriceType("")}>
                       <X size={9} />
@@ -925,7 +925,7 @@ export default function PropertiesPage() {
                   </span>
                 )}
                 {search && (
-                  <span className="flex items-center gap-1 px-2.5 py-1 bg-[#2B7FFF]/20 text-[#6BABFF] text-[11px] font-semibold rounded-full border border-[#2B7FFF]/25">
+                  <span className="flex items-center gap-1 px-2.5 py-1 bg-[#FAAE62]/20 text-[#FFC188] text-[11px] font-semibold rounded-full border border-[#FAAE62]/25">
                     &quot;{search.slice(0, 15)}&quot;
                     <button onClick={handleClearSearch}>
                       <X size={9} />
@@ -952,7 +952,7 @@ export default function PropertiesPage() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="relative z-40 overflow-hidden bg-[#2a4a7a]/95 backdrop-blur-xl border-b border-white/10 shadow-lg"
+            className="relative z-40 overflow-hidden bg-[#42165f]/95 backdrop-blur-xl border-b border-white/10 shadow-lg"
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1050,8 +1050,8 @@ export default function PropertiesPage() {
           )
         ) : filteredProperties.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="w-20 h-20 rounded-full bg-[#2B7FFF]/10 flex items-center justify-center mb-4 border border-[#2B7FFF]/15">
-              <Search size={28} className="text-[#2B7FFF]/40" />
+            <div className="w-20 h-20 rounded-full bg-[#FAAE62]/10 flex items-center justify-center mb-4 border border-[#FAAE62]/15">
+              <Search size={28} className="text-[#FAAE62]/40" />
             </div>
             <h3 className="text-lg text-white mb-1 font-inter">
               No Properties Found
@@ -1064,7 +1064,7 @@ export default function PropertiesPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="px-5 py-2.5 bg-[#2B7FFF] text-white text-sm font-semibold rounded-xl hover:bg-[#4D94FF] transition-colors shadow-lg shadow-[#2B7FFF]/25"
+                className="px-5 py-2.5 bg-[#FAAE62] text-[#301143] text-sm font-semibold rounded-xl hover:bg-[#FFC188] transition-colors shadow-lg shadow-[#FAAE62]/25"
               >
                 Clear All Filters
               </button>
@@ -1090,7 +1090,7 @@ export default function PropertiesPage() {
             <button
               onClick={() => fetchProperties(page - 1)}
               disabled={!pagination.hasPrevPage}
-              className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/15 text-white/40 hover:border-[#2B7FFF]/50 hover:text-[#2B7FFF] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/15 text-white/40 hover:border-[#FAAE62]/50 hover:text-[#FAAE62] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronLeft size={18} />
             </button>
@@ -1118,7 +1118,7 @@ export default function PropertiesPage() {
                   <button
                     key={item}
                     onClick={() => fetchProperties(item)}
-                    className={`w-10 h-10 flex items-center justify-center rounded-xl text-sm font-semibold transition-colors ${page === item ? "bg-[#2B7FFF] text-white shadow-lg shadow-[#2B7FFF]/25" : "border border-white/15 text-white/50 hover:border-[#2B7FFF]/50 hover:text-[#2B7FFF]"}`}
+                    className={`w-10 h-10 flex items-center justify-center rounded-xl text-sm font-semibold transition-colors ${page === item ? "bg-[#FAAE62] text-[#301143] shadow-lg shadow-[#FAAE62]/25" : "border border-white/15 text-white/50 hover:border-[#FAAE62]/50 hover:text-[#FAAE62]"}`}
                   >
                     {item}
                   </button>
@@ -1127,7 +1127,7 @@ export default function PropertiesPage() {
             <button
               onClick={() => fetchProperties(page + 1)}
               disabled={!pagination.hasNextPage}
-              className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/15 text-white/40 hover:border-[#2B7FFF]/50 hover:text-[#2B7FFF] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/15 text-white/40 hover:border-[#FAAE62]/50 hover:text-[#FAAE62] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronRight size={18} />
             </button>

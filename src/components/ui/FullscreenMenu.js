@@ -220,7 +220,7 @@ export default function FullscreenMenu({ isOpen, onClose }) {
                 <div className="relative w-24 h-8 flex items-center justify-center">
                   <div className="relative z-10 mt-10 w-50 h-20">
                     <Image
-                      src="/images/logo1.png"
+                      src="/images/logo.png"
                       alt="Shelley Evelyn"
                       fill
                       className="object-contain"

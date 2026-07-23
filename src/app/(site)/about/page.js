@@ -220,7 +220,7 @@ export default function About() {
 
             <motion.h3 
               variants={itemVariants}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#301143] mb-8 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FAAE62] mb-8 leading-tight"
             >
               Hey, Ottawa! I&apos;m{" "}
               <span className="relative">

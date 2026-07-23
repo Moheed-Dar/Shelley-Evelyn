@@ -212,18 +212,18 @@ transporter.verify((error, success) => {
 export const sendWelcomeEmail = async (user) => {
   try {
     const mailOptions = {
-      from: `"COLDWELL BANKER " <${process.env.SMTP_EMAIL}>`,
+      from: `"Solid Rock Realty " <${process.env.SMTP_EMAIL}>`,
       to: user.email,
-      subject: 'Welcome to COLDWELL BANKER ! 🏠',
+      subject: 'Welcome to Solid Rock Realty ! 🏠',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
-            <h1 style="color: white; margin: 0;">🏠 COLDWELL BANKER</h1>
+            <h1 style="color: white; margin: 0;">🏠 Solid Rock Realty</h1>
           </div>
           <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
             <h2 style="color: #333;">Welcome, ${user.name}!</h2>
             <p style="color: #666; line-height: 1.6;">
-              Thank you for joining COLDWELL BANKER. Your account has been created successfully.
+              Thank you for joining Solid Rock Realty. Your account has been created successfully.
             </p>
             <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <p style="margin: 0; color: #333;"><strong>Email:</strong> ${user.email}</p>
@@ -250,7 +250,7 @@ export const sendWelcomeEmail = async (user) => {
 export const sendLeadNotificationEmail = async (lead, property) => {
   try {
     const mailOptions = {
-      from: `"COLDWELL BANKER" <${process.env.SMTP_EMAIL}>`,
+      from: `"Solid Rock Realty" <${process.env.SMTP_EMAIL}>`,
       to: process.env.ADMIN_EMAIL || process.env.SMTP_EMAIL,
       subject: `🎉 New Lead: ${lead.name} interested in ${property?.title || 'Property'}`,
       html: `
@@ -292,13 +292,13 @@ export const sendLeadNotificationEmail = async (lead, property) => {
 export const sendLeadThankYouEmail = async (lead) => {
   try {
     const mailOptions = {
-      from: `"COLDWELL BANKER - Marlena-Few - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
+      from: `"Solid Rock Realty - Shelley - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
       to: lead.email,
       subject: 'Thank you for your interest! ',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
-            <h1 style="color: white; margin: 0;">🏠 COLDWELL BANKER</h1>
+            <h1 style="color: white; margin: 0;">🏠 Solid Rock Realty</h1>
           </div>
           <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px;">
             <h2 style="color: #333;">Thank You, ${lead.name}!</h2>
@@ -326,7 +326,7 @@ export const sendLeadThankYouEmail = async (lead) => {
 export const sendContactEmail = async (data) => {
   try {
     const mailOptions = {
-      from: `"COLDWELL BANKER - Marlena-Few - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
+      from: `"Solid Rock Realty - Shelley Evelyn - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
       to: process.env.ADMIN_EMAIL || process.env.SMTP_EMAIL,
       subject: `📩 Contact Form: ${data.subject}`,
       html: `
@@ -370,7 +370,7 @@ export const sendGuideDownloadNotificationEmail = async (lead, guideType) => {
     const guideEmoji = guideType === 'buyer' ? '📘' : '📗';
 
     const mailOptions = {
-      from: `"COLDWELL BANKER - Marlena-Few - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
+      from: `"Solid Rock Realty - Shelley Evelyn - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
       to: process.env.ADMIN_EMAIL || process.env.SMTP_EMAIL,
       subject: `${guideEmoji} ${guideLabel} Downloaded by ${lead.name}`,
       html: `
@@ -399,7 +399,7 @@ export const sendGuideDownloadNotificationEmail = async (lead, guideType) => {
               <p style="margin: 0; color: #856404;">💡 <strong>Tip:</strong> User ne ${guideLabel} download kiya hai. Ye ek potential ${guideType} hai. Jaldi follow up karein!</p>
             </div>
 
-            <p style="color: #999; font-size: 12px; text-align: center; margin-top: 20px;">This is an automated notification from COLDWELL BANKER - Marlena-Few - Real Estate Pro</p>
+            <p style="color: #999; font-size: 12px; text-align: center; margin-top: 20px;">This is an automated notification from Solid Rock Realty - Shelley Evelyn - Real Estate Pro</p>
           </div>
         </div>
       `,
@@ -423,7 +423,7 @@ export const sendGuideDownloadThankYouEmail = async (lead, guideType) => {
     const guideEmoji = guideType === 'buyer' ? '📘' : '📗';
 
     const mailOptions = {
-      from: `"COLDWELL BANKER - Marlena-Few - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
+      from: `"Solid Rock Realty - Shelley Evelyn - Real Estate Pro" <${process.env.SMTP_EMAIL}>`,
       to: lead.email,
       subject: `Your ${guideLabel} is Ready! ${guideEmoji}`,
       html: `
