@@ -225,9 +225,8 @@ export default function HeroSection() {
         {heroImages.map((img, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentImageIndex ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"
+              }`}
           >
             <Image
               src={img.url}
@@ -298,151 +297,150 @@ export default function HeroSection() {
               }}
             />
 
-         <h1
-  ref={titleRef}
-  className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black tracking-tighter leading-none select-none text-center relative z-10 bg-linear-to-r from-[#faae62d5] via-purple-300 to-[#faae62ee] bg-clip-text text-transparent"
-  style={{
-    // textShadow gradient text par kaam nahi karta, isliye drop-shadow use kiya hai
-    filter: "drop-shadow(0 8px 40px rgba(0,0,0,0.5)) drop-shadow(0 2px 10px rgba(0,0,0,0.3))",
-  }}
->
-  Shelley Evelyn
-</h1>
+            <h1
+              ref={titleRef}
+              className="text-6xl sm:text-7xl md:text-8xl py-5 lg:text-9xl xl:text-[10rem] font-black tracking-tighter leading-none select-none text-center relative z-10 bg-linear-to-r from-[#faae62d5] via-purple-300 to-[#faae62ee] bg-clip-text text-transparent"
+              style={{
+                // textShadow gradient text par kaam nahi karta, isliye drop-shadow use kiya hai
+                filter: "drop-shadow(0 8px 40px rgba(0,0,0,0.5)) drop-shadow(0 2px 10px rgba(0,0,0,0.3))",
+              }}
+            >
+              Shelley Evelyn
+            </h1>
           </div>
         </div>
 
         {/* ========== ENLARGED ROTATING BADGE WITH ANIMATIONS ========== */}
         <Link href="/properties" passHref>
-        <div
-          ref={rotatingBadgeRef}
-          onMouseEnter={() => setIsRingHovered(true)}
-          onMouseLeave={() => setIsRingHovered(false)}
-          className="relative w-28 h-28 mt-15 md:mt-0 top-10 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 cursor-pointer"
-          style={{ perspective: "1000px" }}
-        >
-          {/* Outer Pulse Ring */}
           <div
-            ref={ringPulseRef}
-            className="absolute inset-0 rounded-full border-2 border-white/20"
-            style={{
-              boxShadow:
-                "0 0 30px rgba(151, 180, 248, 0.3), inset 0 0 30px rgba(151, 180, 248, 0.1)",
-            }}
-          />
-
-          {/* Second outer ring */}
-          <div
-            className="absolute inset-2 rounded-full border border-white/10"
-            style={{
-              animation: "spin-slow 25s linear infinite",
-            }}
-          />
-
-          {/* Rotating SVG Text Ring */}
-          <div ref={ringTextRef} className="absolute inset-0 w-full h-full">
-            <svg
-              className="w-full h-full"
-              viewBox="0 0 100 100"
-              style={{ transformOrigin: "center" }}
-            >
-              <defs>
-                <path
-                  id="circlePath"
-                  d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
-                />
-                <linearGradient
-                  id="textGradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stopColor="#97b4f8" />
-                  <stop offset="50%" stopColor="#ffffff" />
-                  <stop offset="100%" stopColor="#97b4f8" />
-                </linearGradient>
-              </defs>
-              <text
-                fill="url(#textGradient)"
-                className="font-semibold tracking-[0.25em] uppercase"
-                style={{ fontSize: "7.5px" }}
-              >
-                <textPath href="#circlePath">
-                  New Concepts • Explore • New Concepts • Explore •
-                </textPath>
-              </text>
-            </svg>
-          </div>
-
-          {/* Decorative dots around the ring */}
-          <div
-            className="absolute inset-0 w-full h-full animate-spin"
-            style={{ animationDuration: "30s" }}
+            ref={rotatingBadgeRef}
+            onMouseEnter={() => setIsRingHovered(true)}
+            onMouseLeave={() => setIsRingHovered(false)}
+            className="relative w-28 h-28 mt-15 md:mt-0 top-10 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 xl:w-44 xl:h-44 cursor-pointer"
+            style={{ perspective: "1000px" }}
           >
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
-              <div
-                key={deg}
-                className="absolute w-1.5 h-1.5 rounded-full"
-                style={{
-                  backgroundColor: brandBlue,
-                  top: "50%",
-                  left: "50%",
-                  transform: `rotate(${deg}deg) translate(0, -${
-                    isRingHovered ? "110px" : "95px"
-                  })`,
-                  opacity: 0.7,
-                  transition: "transform 0.5s ease, opacity 0.3s ease",
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Center Circle with enhanced effects */}
-          <div
-            ref={arrowRef}
-            className="absolute inset-0 flex items-center justify-center"
-          >
+            {/* Outer Pulse Ring */}
             <div
-              className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-16 lg:h-16 bg-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-500"
+              ref={ringPulseRef}
+              className="absolute inset-0 rounded-full border-2 border-white/20"
               style={{
-                boxShadow: isRingHovered
-                  ? "0 0 40px rgba(151, 180, 248, 0.6), 0 0 80px rgba(151, 180, 248, 0.3)"
-                  : "0 10px 40px rgba(0,0,0,0.3)",
+                boxShadow:
+                  "0 0 30px rgba(151, 180, 248, 0.3), inset 0 0 30px rgba(151, 180, 248, 0.1)",
               }}
-            >
-              {/* Inner glow ring */}
-              <div
-                className="absolute inset-0 rounded-full border-2 transition-all duration-500"
-                style={{
-                  borderColor: isRingHovered ? brandBlue : "transparent",
-                  transform: isRingHovered ? "scale(1.2)" : "scale(1)",
-                  opacity: isRingHovered ? 0.5 : 0,
-                }}
-              />
+            />
 
-              <ArrowUpRight
-                size={20}
-                className="text-gray-900 transition-all duration-300"
-                style={{
-                  color: isRingHovered ? brandBlue : "#1a1a1a",
-                  transform: isRingHovered
-                    ? "rotate(45deg) scale(1.2)"
-                    : "rotate(0deg) scale(1)",
-                }}
-              />
+            {/* Second outer ring */}
+            <div
+              className="absolute inset-2 rounded-full border border-white/10"
+              style={{
+                animation: "spin-slow 25s linear infinite",
+              }}
+            />
+
+            {/* Rotating SVG Text Ring */}
+            <div ref={ringTextRef} className="absolute inset-0 w-full h-full">
+              <svg
+                className="w-full h-full"
+                viewBox="0 0 100 100"
+                style={{ transformOrigin: "center" }}
+              >
+                <defs>
+                  <path
+                    id="circlePath"
+                    d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
+                  />
+                  <linearGradient
+                    id="textGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stopColor="#97b4f8" />
+                    <stop offset="50%" stopColor="#ffffff" />
+                    <stop offset="100%" stopColor="#97b4f8" />
+                  </linearGradient>
+                </defs>
+                <text
+                  fill="url(#textGradient)"
+                  className="font-semibold tracking-[0.25em] uppercase"
+                  style={{ fontSize: "7.5px" }}
+                >
+                  <textPath href="#circlePath">
+                    New Concepts • Explore • New Concepts • Explore •
+                  </textPath>
+                </text>
+              </svg>
             </div>
-          </div>
 
-          {/* Hover glow effect */}
-          <div
-            className="absolute inset-0 rounded-full transition-all duration-500 pointer-events-none"
-            style={{
-              background: isRingHovered
-                ? "radial-gradient(circle, rgba(151,180,248,0.15) 0%, transparent 70%)"
-                : "transparent",
-            }}
-          />
-        </div>
+            {/* Decorative dots around the ring */}
+            <div
+              className="absolute inset-0 w-full h-full animate-spin"
+              style={{ animationDuration: "30s" }}
+            >
+              {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+                <div
+                  key={deg}
+                  className="absolute w-1.5 h-1.5 rounded-full"
+                  style={{
+                    backgroundColor: brandBlue,
+                    top: "50%",
+                    left: "50%",
+                    transform: `rotate(${deg}deg) translate(0, -${isRingHovered ? "110px" : "95px"
+                      })`,
+                    opacity: 0.7,
+                    transition: "transform 0.5s ease, opacity 0.3s ease",
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Center Circle with enhanced effects */}
+            <div
+              ref={arrowRef}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <div
+                className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-16 lg:h-16 bg-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-500"
+                style={{
+                  boxShadow: isRingHovered
+                    ? "0 0 40px rgba(151, 180, 248, 0.6), 0 0 80px rgba(151, 180, 248, 0.3)"
+                    : "0 10px 40px rgba(0,0,0,0.3)",
+                }}
+              >
+                {/* Inner glow ring */}
+                <div
+                  className="absolute inset-0 rounded-full border-2 transition-all duration-500"
+                  style={{
+                    borderColor: isRingHovered ? brandBlue : "transparent",
+                    transform: isRingHovered ? "scale(1.2)" : "scale(1)",
+                    opacity: isRingHovered ? 0.5 : 0,
+                  }}
+                />
+
+                <ArrowUpRight
+                  size={20}
+                  className="text-gray-900 transition-all duration-300"
+                  style={{
+                    color: isRingHovered ? brandBlue : "#1a1a1a",
+                    transform: isRingHovered
+                      ? "rotate(45deg) scale(1.2)"
+                      : "rotate(0deg) scale(1)",
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Hover glow effect */}
+            <div
+              className="absolute inset-0 rounded-full transition-all duration-500 pointer-events-none"
+              style={{
+                background: isRingHovered
+                  ? "radial-gradient(circle, rgba(151,180,248,0.15) 0%, transparent 70%)"
+                  : "transparent",
+              }}
+            />
+          </div>
         </Link>
         {/* ========== END ENLARGED BADGE ========== */}
       </div>
@@ -491,9 +489,8 @@ export default function HeroSection() {
                 <button
                   key={index}
                   onClick={() => goToImage(index)}
-                  className={`relative w-32 lg:w-40 h-20 cursor-pointer lg:h-24 rounded-xl overflow-hidden group transition-all duration-500 ${
-                    index === currentImageIndex ? "shadow-lg" : "hover:scale-105"
-                  }`}
+                  className={`relative w-32 lg:w-40 h-20 cursor-pointer lg:h-24 rounded-xl overflow-hidden group transition-all duration-500 ${index === currentImageIndex ? "shadow-lg" : "hover:scale-105"
+                    }`}
                   style={{
                     border:
                       index === currentImageIndex

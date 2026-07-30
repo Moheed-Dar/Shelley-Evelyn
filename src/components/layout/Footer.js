@@ -5,10 +5,14 @@ import Image from "next/image";
 import { Building2, Phone, Mail, Send, ArrowUpRight, ArrowUp } from "lucide-react";
 
 export default function Footer() {
-  const brandPurple = "#301143";
-  const darkBg = "#1a0b24"; 
-  const accentPurple = "#7c3aed"; 
-  
+  // ✅ New Color Palette
+  const mainTurquoise = "#20B2B8";
+  const lightAqua = "#BEEBF0";
+  const darkPink = "#D81B60";
+  const darkOrange = "#F2673A";
+  const peach = "#FFC8B5";
+  const darkBg = "#0D1F22";
+
   const [email, setEmail] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -78,22 +82,36 @@ export default function Footer() {
   ];
 
   const linkClass =
-    "group relative text-gray-400 hover:text-[#FAAE62] transition-colors duration-300 flex items-center gap-2 text-sm py-1 w-fit";
+    "group relative text-gray-400 hover:text-[#FFC8B5] transition-colors duration-300 flex items-center gap-2 text-sm py-1 w-fit";
 
   return (
     <footer
       className="relative overflow-hidden text-white"
       style={{ backgroundColor: darkBg }}
     >
-      {/* Decorative Top Border Gradient */}
-      <div className="h-0.5 w-full bg-linear-to-r from-transparent via-[#301143] to-transparent" />
+      {/* Decorative Top Border — Turquoise → Peach */}
+      <div
+        className="h-0.5 w-full"
+        style={{
+          background: `linear-gradient(to right, transparent, ${mainTurquoise}, ${peach}, transparent)`,
+        }}
+      />
 
-      {/* Subtle Background Glow */}
+      {/* Subtle Background Glow — Turquoise */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-100 rounded-full pointer-events-none"
         style={{
-          background: `radial-gradient(circle, ${brandPurple}25 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${mainTurquoise}15 0%, transparent 70%)`,
           filter: "blur(120px)",
+        }}
+      />
+
+      {/* Bottom-right Peach glow */}
+      <div
+        className="absolute bottom-0 right-0 w-125 h-75 rounded-full pointer-events-none"
+        style={{
+          background: `radial-gradient(circle, ${peach}08 0%, transparent 70%)`,
+          filter: "blur(100px)",
         }}
       />
 
@@ -104,10 +122,10 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-5">
               <Image
-                src="/images/logo3.png"
+                src="/images/solidlogo.png"
                 alt="Shelley Evelyn Logo"
-                width={120}
-                height={40}
+                width={160}
+                height={50}
                 className="object-contain"
                 style={{ width: "auto", height: "auto" }}
                 priority
@@ -119,7 +137,7 @@ export default function Footer() {
               and comfort.
             </p>
 
-            {/* Real Social Icons with actual links */}
+            {/* Social Icons */}
             <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -151,7 +169,10 @@ export default function Footer() {
           {/* Column 2: Quick Links */}
           <div>
             <h3 className="text-white font-bold text-lg mb-5 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[#FAAE62]" />
+              <div
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: peach }}
+              />
               Quick Links
             </h3>
             <ul className="space-y-2">
@@ -160,12 +181,12 @@ export default function Footer() {
                   <a href={link.href} className={linkClass}>
                     <ArrowUpRight
                       size={14}
-                      className="text-gray-600 group-hover:text-[#FAAE62] transition-all duration-300 -rotate-45 group-hover:rotate-0 group-hover:scale-110"
+                      className="text-gray-600 group-hover:text-[#FFC8B5] transition-all duration-300 -rotate-45 group-hover:rotate-0 group-hover:scale-110"
                     />
                     <span className="group-hover:translate-x-1 transition-transform duration-300">
                       {link.name}
                     </span>
-                    <span className="absolute bottom-0 left-3 w-0 h-px bg-[#FAAE62] group-hover:w-full transition-all duration-300"></span>
+                    <span className="absolute bottom-0 left-3 w-0 h-px bg-[#FFC8B5] group-hover:w-full transition-all duration-300" />
                   </a>
                 </li>
               ))}
@@ -175,19 +196,35 @@ export default function Footer() {
           {/* Column 3: Contact & Newsletter */}
           <div>
             <h3 className="text-white font-bold text-lg mb-5 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[#FAAE62]" />
+              <div
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: peach }}
+              />
               Contact Us
             </h3>
 
             <div className="space-y-4 mb-6">
               <a
                 href="#"
-                className="group flex items-start gap-3 text-gray-400 hover:text-[#FAAE62] transition-colors text-sm"
+                className="group flex items-start gap-3 text-gray-400 hover:text-[#FFC8B5] transition-colors text-sm"
               >
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#FAAE62] group-hover:border-transparent transition-all duration-300 shrink-0">
+                <span
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 transition-all duration-300 shrink-0"
+                  style={{
+                    backgroundColor: `${mainTurquoise}15`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = mainTurquoise;
+                    e.currentTarget.style.borderColor = "transparent";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = `${mainTurquoise}15`;
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  }}
+                >
                   <Building2
                     size={14}
-                    className="text-[#301143] group-hover:text-white transition-colors"
+                    className="text-[#20B2B8] group-hover:text-white transition-colors"
                   />
                 </span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300 mt-1.5">
@@ -197,12 +234,25 @@ export default function Footer() {
 
               <a
                 href="tel:+16132914323"
-                className="group flex items-center gap-3 text-gray-400 hover:text-[#FAAE62] transition-colors text-sm"
+                className="group flex items-center gap-3 text-gray-400 hover:text-[#FFC8B5] transition-colors text-sm"
               >
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#FAAE62] group-hover:border-transparent transition-all duration-300 shrink-0">
+                <span
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 transition-all duration-300 shrink-0"
+                  style={{
+                    backgroundColor: `${mainTurquoise}15`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = mainTurquoise;
+                    e.currentTarget.style.borderColor = "transparent";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = `${mainTurquoise}15`;
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  }}
+                >
                   <Phone
                     size={14}
-                    className="text-[#301143] group-hover:text-white transition-colors"
+                    className="text-[#20B2B8] group-hover:text-white transition-colors"
                   />
                 </span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
@@ -212,12 +262,25 @@ export default function Footer() {
 
               <a
                 href="mailto:shelley@shelleyevelyn.ca"
-                className="group flex items-center gap-3 text-gray-400 hover:text-[#FAAE62] transition-colors text-sm"
+                className="group flex items-center gap-3 text-gray-400 hover:text-[#FFC8B5] transition-colors text-sm"
               >
-                <span className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 border border-white/10 group-hover:bg-[#FAAE62] group-hover:border-transparent transition-all duration-300 shrink-0">
+                <span
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-white/10 transition-all duration-300 shrink-0"
+                  style={{
+                    backgroundColor: `${mainTurquoise}15`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = mainTurquoise;
+                    e.currentTarget.style.borderColor = "transparent";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = `${mainTurquoise}15`;
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  }}
+                >
                   <Mail
                     size={14}
-                    className="text-[#301143] group-hover:text-white transition-colors"
+                    className="text-[#20B2B8] group-hover:text-white transition-colors"
                   />
                 </span>
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
@@ -233,10 +296,14 @@ export default function Footer() {
                 placeholder="Your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-4 pr-12 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#301143]/80 focus:ring-1 focus:ring-[#301143]/50 transition-all duration-300"
+                className="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-4 pr-12 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#20B2B8]/80 focus:ring-1 focus:ring-[#20B2B8]/50 transition-all duration-300"
               />
               <button
-                className="absolute right-1 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#301143] flex items-center justify-center text-white hover:bg-white hover:text-[#301143] transition-all duration-300 shadow-lg shadow-[#301143]/30"
+                className="absolute right-1 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg"
+                style={{
+                  background: `linear-gradient(135deg, ${mainTurquoise}, ${darkOrange})`,
+                  boxShadow: `0 4px 12px ${mainTurquoise}40`,
+                }}
                 aria-label="Subscribe"
               >
                 <Send size={14} />
@@ -246,25 +313,39 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col items-center justify-center gap-4">
-          
+        <div
+          className="pt-8 flex flex-col items-center justify-center gap-4"
+          style={{ borderTop: `1px solid ${mainTurquoise}15` }}
+        >
           {/* Copyright with Tooltip */}
           <div className="group relative cursor-help text-center">
             <p className="text-gray-500 text-sm hover:text-gray-300 transition-colors">
               &copy; {currentYear} Shelley Evelyn. All rights reserved.
             </p>
-            
+
             {/* Custom Tooltip Box */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-[90vw] max-w-3xl p-5 bg-[#1a0b24] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none z-50">
+            <div
+              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-[90vw] max-w-3xl p-5 border rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none z-50"
+              style={{
+                backgroundColor: darkBg,
+                borderColor: `${mainTurquoise}20`,
+              }}
+            >
               {/* Tooltip Arrow */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rotate-45 bg-[#1a0b24] border-r border-b border-white/10"></div>
-              
-              <div className="text-[11px] text-[#FAAE62] leading-relaxed text-left space-y-3">
+              <div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 rotate-45 border-r border-b"
+                style={{
+                  backgroundColor: darkBg,
+                  borderColor: `${mainTurquoise}20`,
+                }}
+              />
+
+              <div className="text-[11px] leading-relaxed text-left space-y-3" style={{ color: lightAqua }}>
                 <p>
                   Copyright {currentYear} All rights reserved. Canadian Real Estate Association assumes no responsibility for the accuracy of any information shown. The information provided herein must only be used by consumers that have a bona fide interest in the purchase, sale or lease of real estate and may not be used for any commercial purpose or any other purpose.
                 </p>
                 <p>
-                  The trademark DDF® is owned by The Canadian Real Estate Association (CREA) and identifies CREA’s Data Distribution Facility (DDF®). The trademarks REALTOR®, REALTORS®, and the REALTOR® logo are controlled by The Canadian Real Estate Association (CREA) and identify real estate professionals who are members of CREA. The trademarks MLS®, Multiple Listing Service®, and the associated logos are owned by CREA and identify the quality of services provided by real estate professionals who are members of CREA.
+                  The trademark DDF® is owned by The Canadian Real Estate Association (CREA) and identifies CREA&apos;s Data Distribution Facility (DDF®). The trademarks REALTOR®, REALTORS®, and the REALTOR® logo are controlled by The Canadian Real Estate Association (CREA) and identify real estate professionals who are members of CREA. The trademarks MLS®, Multiple Listing Service®, and the associated logos are owned by CREA and identify the quality of services provided by real estate professionals who are members of CREA.
                 </p>
                 <p>
                   Copyright {currentYear} All rights reserved. PropTx MLS® assumes no responsibility for the accuracy of any information shown. The information provided herein must only be used by consumers that have a bona fide interest in the purchase, sale or lease of real estate and may not be used for any commercial purpose or any other purpose.
@@ -275,28 +356,27 @@ export default function Footer() {
 
           {/* Company Details & Policies */}
           <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-gray-500 text-xs text-center">
-            <span className="font-medium text-gray-400">SOLID ROCK REALTY INC.</span>
+            <span className="font-medium" style={{ color: lightAqua }}>
+              SOLID ROCK REALTY INC.
+            </span>
             <span className="hidden sm:inline text-white/20">|</span>
             <span>REALTOR®</span>
-            <span className="hidden sm:inline text-white/20">|</span>
-            {/* <a href="tel:+16132914323" className="hover:text-[#7c3aed] transition-colors">613-291-4323</a>
-            <span className="hidden sm:inline text-white/20">|</span>
-            <a href="/terms" className="hover:text-[#7c3aed] transition-colors">Terms of Use</a>
-            <span className="hidden sm:inline text-white/20">|</span>
-            <a href="/privacy" className="hover:text-[#7c3aed] transition-colors">Privacy Policy</a> */}
           </div>
-          
         </div>
       </div>
 
       {/* SCROLL TO TOP BUTTON */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-6 cursor-pointer right-6 z-50 w-11 h-11 rounded-full bg-[#7c3aed] text-white flex items-center justify-center shadow-lg shadow-[#7c3aed]/30 hover:bg-[#FAAE62] hover:scale-110 transition-all duration-300 ${
+        className={`fixed bottom-6 cursor-pointer right-6 z-50 w-11 h-11 rounded-full text-white flex items-center justify-center transition-all duration-300 hover:scale-110 ${
           isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
         }`}
+        style={{
+          background: `linear-gradient(135deg, ${mainTurquoise}, ${darkPink})`,
+          boxShadow: `0 4px 16px ${mainTurquoise}40`,
+        }}
         aria-label="Scroll to top"
       >
         <ArrowUp size={18} />

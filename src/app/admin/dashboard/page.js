@@ -7,6 +7,7 @@ import { getStoredUser, clearStoredUser } from "@/lib/auth";
 import { getAllProperties } from "@/lib/properties/api";
 import { getAllLeads } from "@/lib/leads/api";
 import { getAllContacts } from "@/lib/contact/api";
+import { getAllBlogs } from "@/lib/blogs/api";
 import {
   LogOut,
   Users,
@@ -18,10 +19,10 @@ import {
   X,
   LayoutDashboard,
   RefreshCw,
+  Newspaper,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Playfair_Display, Inter } from "next/font/google";
-import Image from "next/image";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ const PropertiesPage = lazy(
 );
 const LeadsPage = lazy(() => import("@/app/admin/dashboard/leads/page"));
 const ContactsPage = lazy(() => import("@/app/admin/dashboard/contacts/page"));
+const BlogsPage = lazy(() => import("@/app/admin/dashboard/blogs/page"));
 
 // ============================================
 // TAB CONFIG
@@ -62,6 +64,12 @@ const TABS = [
     icon: MessageSquare,
     component: ContactsPage,
   },
+  {
+    id: "blogs",
+    label: "Blogs",
+    icon: Newspaper,
+    component: BlogsPage,
+  },
 ];
 
 export default function AdminDashboardPage() {
@@ -77,6 +85,7 @@ export default function AdminDashboardPage() {
     properties: 0,
     leads: 0,
     contacts: 0,
+    blogs: 0,
   });
 
   // ---- Refresh State ----
@@ -96,16 +105,18 @@ export default function AdminDashboardPage() {
   // ---- Fetch Stats ----
   const fetchStats = useCallback(async () => {
     try {
-      const [propRes, leadRes, contactRes] = await Promise.all([
+      const [propRes, leadRes, contactRes, blogRes] = await Promise.all([
         getAllProperties(1, 1),
         getAllLeads(1, 1),
         getAllContacts(1, 1),
+        getAllBlogs({ page: 1, limit: 1 }), // ✅ Fixed: passing object as expected by API function
       ]);
 
       setStats({
         properties: propRes?.totalCount || propRes?.total || 0,
         leads: leadRes?.totalCount || leadRes?.total || 0,
         contacts: contactRes?.totalCount || contactRes?.total || 0,
+        blogs: blogRes?.totalBlogs || blogRes?.totalCount || blogRes?.total || 0, // ✅ Fixed: checking for 'totalBlogs'
       });
     } catch (error) {
       console.error("Failed to fetch stats", error);
@@ -166,6 +177,14 @@ export default function AdminDashboardPage() {
       color: "#8b5cf6",
       bg: "rgba(139,92,246,0.1)",
       border: "rgba(139,92,246,0.2)",
+    },
+    {
+      label: "Total Blogs",
+      value: stats.blogs,
+      icon: Newspaper,
+      color: "#f59e0b",
+      bg: "rgba(245,158,11,0.1)",
+      border: "rgba(245,158,11,0.2)",
     },
   ];
 
@@ -366,8 +385,8 @@ export default function AdminDashboardPage() {
                 </p>
               </div>
 
-              {/* ===== 3 STATS CARDS ===== */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {/* ===== 4 STATS CARDS ===== */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {DYNAMIC_STATS.map((stat, i) => {
                   const Icon = stat.icon;
                   return (
@@ -425,7 +444,7 @@ export default function AdminDashboardPage() {
               </div>
             </>
           ) : (
-            /* ---- OTHER TABS (Properties, Leads, Contacts) ---- */
+            /* ---- OTHER TABS (Properties, Leads, Contacts, Blogs) ---- */
             <div className="bg-[#1b3454]/90 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10 min-h-[calc(100vh-8rem)]">
               <Suspense
                 fallback={

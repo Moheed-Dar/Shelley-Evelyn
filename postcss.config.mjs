@@ -5,7 +5,7 @@ const config = {
     theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-poppins)', 'sans-serif'], // Yeh line add karein
+        sans: ['var(--font-montserrat)', 'sans-serif'], // Yeh line update ki hai
       },
     },
   },

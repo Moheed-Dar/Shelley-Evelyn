@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, useAnimationControls } from "framer-motion";
-import { Quote, Star, MessageCircle } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Quote, Star, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 
 const testimonials = [
   {
@@ -23,7 +23,7 @@ const testimonials = [
   {
     id: 4,
     name: "Josh & Meghan",
-    text: "When buying your first home Shelley is the realtor best suited for the job. Shelley gets to know her clients and is able to pick out homes that will suit you best. She really knows the areas of Ottawa well and is flexible with her time in order to book viewings when it suits you best. She is knowledgeable and we were able to understand the process of buying a home with her expertise. You’d be mistaken to not use Shelley for your future home buying needs!",
+    text: "When buying your first home Shelley is the realtor best suited for the job. Shelley gets to know her clients and is able to pick out homes that will suit you best. She really knows the areas of Ottawa well and is flexible with her time in order to book viewings when it suits you best. She is knowledgeable and we were able to understand the process of buying a home with her expertise. You'd be mistaken to not use Shelley for your future home buying needs!",
   },
   {
     id: 5,
@@ -63,7 +63,7 @@ const testimonials = [
   {
     id: 12,
     name: "Sandip",
-    text: "This real estate agent will be there for you when you need guidance and support. She is very prompt and responsive on email and text and will call or meet you in person if that’s needed. She is a very good listener and has empathy. She has lots of connections in the trades and financial industry. She really goes the extra mile and has passion for what she does. And we sold my house in a spring 2023 market for well above asking. We had a bidding war and a back up offer all which were managed with the above mentioned qualities. She cares and it shows. You need to connect with her if you are in the market.",
+    text: "This real estate agent will be there for you when you need guidance and support. She is very prompt and responsive on email and text and will call or meet you in person if that's needed. She is a very good listener and has empathy. She has lots of connections in the trades and financial industry. She really goes the extra mile and has passion for what she does. And we sold my house in a spring 2023 market for well above asking. We had a bidding war and a back up offer all which were managed with the above mentioned qualities. She cares and it shows. You need to connect with her if you are in the market.",
   },
   {
     id: 13,
@@ -129,34 +129,42 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   const sectionRef = useRef(null);
+  const intervalRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const controls = useAnimationControls();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const brandPurple = "#301143";
+  const cardsPerPage = 3;
+  const totalPages = Math.ceil(testimonials.length / cardsPerPage);
 
-  const startAnimation = () => {
-    controls.start({
-      x: "-50%",
-      transition: {
-        x: {
-          duration: 140,
-          ease: "linear",
-          repeat: Infinity,
-          repeatType: "loop",
-        },
-      },
-    });
-  };
+  const currentTestimonials = testimonials.slice(
+    currentPage * cardsPerPage,
+    currentPage * cardsPerPage + cardsPerPage
+  );
 
-  const stopAnimation = () => {
-    controls.stop();
-  };
-
-  useEffect(() => {
-    if (isVisible) {
-      startAnimation();
+  // ✅ FIX 2: Reset interval on manual navigation
+  const resetAutoRotate = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
-  }, [isVisible]);
+    intervalRef.current = setInterval(() => {
+      setCurrentPage((prev) => (prev + 1) % totalPages);
+    }, 6000);
+  }, [totalPages]);
+
+  // ✅ FIX 3: Block rapid clicks during animation
+  const goToPage = useCallback(
+    (page) => {
+      if (isAnimating) return;
+      setCurrentPage(page);
+      resetAutoRotate();
+    },
+    [isAnimating, resetAutoRotate]
+  );
+
+  const nextPage = () => goToPage((currentPage + 1) % totalPages);
+  const prevPage = () => goToPage((currentPage - 1 + totalPages) % totalPages);
+  const goToDot = (i) => goToPage(i);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -168,7 +176,7 @@ export default function TestimonialsSection() {
           }
         });
       },
-      { threshold: 0.05, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -186,143 +194,234 @@ export default function TestimonialsSection() {
     };
   }, []);
 
-  const renderCard = (t, index) => (
-    <div
-      key={`${t.id}-dup-${index}`}
-      className="shrink-0 w-[320px] sm:w-92.5 lg:w-105 group relative rounded-2xl overflow-hidden border border-white/[0.07] transition-all duration-300 hover:-translate-y-1 hover:border-white/15 will-change-transform"
-      style={{
-        background: "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)",
-      }}
-    >
-      <div className="relative p-6 sm:p-7 backdrop-blur-md h-full flex flex-col">
-        {/* Quote icon */}
-        <div className="mb-5">
-          <div
-            className="w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
-          >
-            <Quote size={16} className="text-purple-200/30" />
-          </div>
-        </div>
+  // Auto-rotate
+  useEffect(() => {
+    if (!isVisible) return;
+    resetAutoRotate();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isVisible, resetAutoRotate]);
 
-        {/* Stars */}
-        <div className="flex items-center gap-1 mb-4">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} size={13} className="fill-yellow-400/90 text-yellow-400/90" />
-          ))}
-        </div>
+  // Color palette for avatar initials
+  const avatarColors = [
+    "linear-gradient(135deg, #208288, #0D9488)",
+    "linear-gradient(135deg, #D81660, #E11D48)",
+    "linear-gradient(135deg, #7C3AED, #8B5CF6)",
+    "linear-gradient(135deg, #EA580C, #F97316)",
+    "linear-gradient(135deg, #2563EB, #3B82F6)",
+    "linear-gradient(135deg, #059669, #10B981)",
+    "linear-gradient(135deg, #DC2626, #EF4444)",
+    "linear-gradient(135deg, #0891B2, #06B6D4)",
+  ];
 
-        {/* Text */}flex-grow
-        <p
-          className="text-white/70 text-sm sm:text-[15px] leading-relaxed mb-6 "
-          style={{
-            display: "-webkit-box",
-            WebkitLineClamp: 6,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
-          &ldquo;{t.text}&rdquo;
-        </p>
-
-        {/* Divider */}
-        <div className="w-full h-px mb-5" style={{ backgroundColor: "rgba(255,255,255,0.06)" }} />
-
-        {/* Author */}
-        <div className="flex items-center gap-3">
-          <div
-            className="relative w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-bold text-white"
-            style={{
-              background: `linear-gradient(135deg, ${brandPurple}, #5e1a85)`,
-            }}
-          >
-            {t.name.charAt(0)}
-          </div>
-          <div className="min-w-0">
-            <h4 className="font-semibold text-white text-sm truncate">{t.name}</h4>
-            <p className="text-xs text-white/35 truncate">Verified Client</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const getAvatarColor = (id) => avatarColors[(id - 1) % avatarColors.length];
 
   return (
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden py-16 sm:py-20 lg:py-28"
     >
-      {/* Background */}
+      {/* ===== Background ===== */}
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(180deg, #1a0b24 0%, ${brandPurple} 50%, #1a0b24 100%)`,
+            background: "linear-gradient(180deg, #FAFAF7 0%, #F0F7F7 40%, #E8F4F4 100%)",
           }}
         />
+        {/* Decorative blob top-right */}
         <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.03) 0%, transparent 60%)",
-          }}
+          className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-20 blur-3xl"
+          style={{ background: "radial-gradient(circle, #FFC885 0%, transparent 70%)" }}
         />
+        {/* Decorative blob bottom-left */}
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full opacity-15 blur-3xl"
+          style={{ background: "radial-gradient(circle, #208288 0%, transparent 70%)" }}
+        />
+        {/* ✅ FIX 1: w-150 h-150 → w-[600px] h-[600px] */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full opacity-[0.06] blur-3xl"
+          style={{ background: "radial-gradient(circle, #D81660 0%, transparent 70%)" }}
+        />
+        {/* Dot pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-            backgroundSize: "32px 32px",
+            backgroundImage: "radial-gradient(circle at 1px 1px, #208288 1px, transparent 0)",
+            backgroundSize: "40px 40px",
           }}
         />
       </div>
 
-      <div className="relative z-10 mb-12 sm:mb-16">
-        {/* Heading */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* ===== Header ===== */}
         <div
-          className={`text-center px-4 transition-all duration-700 ease-out ${
+          className={`text-center mb-12 sm:mb-16 transition-all duration-700 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <MessageCircle size={16} className="text-purple-200/70" />
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium text-purple-200/60">
+            <MessageCircle size={18} className="text-[#208288]/60" />
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium text-[#208288]/60">
               Client Stories
             </span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-white leading-tight mb-3">
-            Real Experiences,
-            <br />
-            <span className="text-purple-200">Trusted by Clients</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1F2D3D] leading-tight mb-4">
+            What Our Clients Say
           </h2>
 
           <p
-            className={`text-white/50 text-sm sm:text-base md:text-lg max-w-lg mx-auto transition-all duration-700 delay-200 ease-out ${
+            className={`text-[#1F2D3D]/60 text-sm sm:text-base md:text-lg max-w-xl mx-auto transition-all duration-700 delay-200 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            Hear how Shelley has helped families find homes that truly match their lifestyle and expectations.
+            We take pride in delivering exceptional service. Hear how Shelley has helped families find homes that truly match their lifestyle and expectations.
           </p>
         </div>
-      </div>
 
-      {/* Single Row Infinite Carousel Container */}
-      <div className="relative z-10">
-        {/* Left Edge Fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, #1a0b24, transparent)" }} />
-        {/* Right Edge Fade */}
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-32 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, #1a0b24, transparent)" }} />
+        {/* ===== Cards Grid ===== */}
+        {/* ✅ FIX 1: min-h-95 → min-h-[380px], min-h-100 → min-h-[400px] */}
+        <div className="relative min-h-95 sm:min-h-100">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              onAnimationStart={() => setIsAnimating(true)}
+              onAnimationComplete={() => setIsAnimating(false)}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+            >
+              {currentTestimonials.map((t, index) => (
+                <motion.div
+                  key={t.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="group relative"
+                >
+                  <div
+                    className="relative rounded-2xl overflow-hidden border border-[#208288]/10 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#208288]/10 hover:border-[#208288]/20"
+                    style={{
+                      boxShadow: "0 4px 24px rgba(32,130,136,0.06), 0 1px 4px rgba(0,0,0,0.04)",
+                    }}
+                  >
+                    <div className="relative p-6 sm:p-8 flex flex-col h-full">
+                      {/* Large decorative quote icon */}
+                      <div className="absolute top-4 right-4 opacity-[0.06]">
+                        <Quote size={64} className="text-[#208288]" />
+                      </div>
 
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex gap-6 sm:gap-8 w-max py-2"
-            animate={controls}
-            onMouseEnter={stopAnimation}
-            onMouseLeave={startAnimation}
+                      {/* Stars */}
+                      <div className="flex items-center gap-1 mb-5">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            size={15}
+                            className="fill-[#FFC885] text-[#FFC885]"
+                          />
+                        ))}
+                      </div>
+
+                      {/* Quote Text */}
+                      <p
+                        className="text-[#1F2D3D]/70 text-sm sm:text-[15px] leading-relaxed mb-6 grow relative z-10"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 6,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        &ldquo;{t.text}&rdquo;
+                      </p>
+
+                      {/* Divider */}
+                      <div
+                        className="w-full h-px mb-5"
+                        style={{
+                          background: "linear-gradient(to right, transparent, rgba(32,130,136,0.15), transparent)",
+                        }}
+                      />
+
+                      {/* Author */}
+                      <div className="flex items-center gap-3">
+                        {/* Avatar — Initials circle */}
+                        <div
+                          className="relative w-11 h-11 rounded-full flex items-center justify-center shrink-0 text-sm font-bold text-white ring-2 ring-white shadow-sm"
+                          style={{
+                            background: getAvatarColor(t.id),
+                          }}
+                        >
+                          {t.name.charAt(0)}
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="font-semibold text-[#1F2D3D] text-[15px] truncate">
+                            {t.name}
+                          </h4>
+                          <p className="text-xs text-[#208288] font-medium truncate">
+                            Verified Client
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom accent line on hover */}
+                    <div
+                      className="h-1 w-0 group-hover:w-full transition-all duration-500"
+                      style={{
+                        background: "linear-gradient(to right, #208288, #D81660)",
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ===== Navigation ===== */}
+        <div className="flex items-center justify-center gap-4 mt-10 sm:mt-12">
+          {/* Prev Button */}
+          <button
+            onClick={prevPage}
+            disabled={isAnimating}
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#208288]/15 bg-white flex items-center justify-center text-[#208288] hover:bg-[#208288] hover:text-white hover:border-[#208288] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Previous testimonials"
           >
-            {/* Rendering 2 identical sets creates a seamless infinite loop when translating X by -50% */}
-            {testimonials.map((t, i) => renderCard(t, `set1-${i}`))}
-            {testimonials.map((t, i) => renderCard(t, `set2-${i}`))}
-          </motion.div>
+            <ChevronLeft size={18} />
+          </button>
+
+          {/* Dots */}
+          <div className="flex items-center gap-2">
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToDot(i)}
+                disabled={isAnimating}
+                className={`transition-all duration-300 rounded-full disabled:cursor-not-allowed ${
+                  i === currentPage
+                    ? "w-8 h-2.5 bg-[#208288]"
+                    : "w-2.5 h-2.5 bg-[#208288]/20 hover:bg-[#208288]/40"
+                }`}
+                aria-label={`Go to page ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Next Button */}
+          <button
+            onClick={nextPage}
+            disabled={isAnimating}
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#208288]/15 bg-white flex items-center justify-center text-[#208288] hover:bg-[#208288] hover:text-white hover:border-[#208288] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Next testimonials"
+          >
+            <ChevronRight size={18} />
+          </button>
         </div>
       </div>
     </section>

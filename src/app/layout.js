@@ -1,11 +1,11 @@
-import { Poppins } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 
-const poppins = Poppins({
+const montserrat = Montserrat({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-montserrat",
 });
 
 export const metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${poppins.variable} antialiased`}
+      className={`${montserrat.variable} antialiased`}
     >
       <body
         className="min-h-screen bg-[#0a1628] text-white font-sans antialiased"

@@ -38,8 +38,6 @@ export default function About() {
   const imagesRef = useRef(null);
   const bioRef = useRef(null);
 
-  const brandPurple = "#301143";
-
   const images = [
     { src: "/images/img1.png", alt: "Ottawa Real Estate 1" },
     { src: "/images/img2.png", alt: "Ottawa Real Estate 2" },
@@ -48,10 +46,10 @@ export default function About() {
   ];
 
   const socialLinks = [
-    { icon: FacebookIcon, href: "https://www.facebook.com/shelleyevelyn.homes", label: "Facebook", color: "#1877F2" },
-    { icon: InstagramIcon, href: "https://www.instagram.com/shelleyevelynhomes/", label: "Instagram", color: "#E4405F" },
-    { icon: YoutubeIcon, href: "https://www.youtube.com/@shelleyevelyn", label: "YouTube", color: "#FF0000" },
-    { icon: PinterestIcon, href: "https://www.pinterest.com/shelley_evelyn/", label: "Pinterest", color: "#E60023" },
+    { icon: FacebookIcon, href: "https://www.facebook.com/shelleyevelyn.homes", label: "Facebook", color: "#208288" },
+    { icon: InstagramIcon, href: "https://www.instagram.com/shelleyevelynhomes/", label: "Instagram", color: "#DB1860" },
+    { icon: YoutubeIcon, href: "https://www.youtube.com/@shelleyevelyn", label: "YouTube", color: "#F2673A" },
+    { icon: PinterestIcon, href: "https://www.pinterest.com/shelley_evelyn/", label: "Pinterest", color: "#9D2C77" },
   ];
 
   useEffect(() => {
@@ -119,23 +117,26 @@ export default function About() {
       ref={sectionRef}
       className="relative w-full overflow-hidden py-20 sm:py-28 lg:py-32"
     >
+      {/* ===== BACKGROUND: Navy → Turquoise → Aqua → Cream → Peach ===== */}
       <div className="absolute inset-0 z-0">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(180deg, #301143 0%, #4a1d60 20%, #6d3a87 40%, #9b6aad 60%, #c9a3d4 80%, #f3eaf8 100%)"
+            background:
+              "linear-gradient(180deg, #1F203D 0%, #208288 30%, #BEEBF0 55%, #FFF7F0 75%, #FCB855 100%)",
           }}
         />
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23BEEBF0' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
+        {/* "Who I Am" Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -143,42 +144,44 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-4"
         >
-          <span className="text-xs sm:text-sm text-white/70 uppercase tracking-[0.3em] font-medium">
+          <span className="text-xs sm:text-sm text-[#BEEBF0]/80 uppercase tracking-[0.3em] font-medium">
             Who I Am
           </span>
         </motion.div>
 
+        {/* Main Heading */}
         <div ref={headingRef} className="text-center mb-16 sm:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white/80 leading-tight max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#BEEBF0]/90 leading-tight max-w-4xl mx-auto">
             Helping you find a place to{" "}
-            <span className="text-white font-medium">Love Where You Live</span>,{" "}
+            <span className="text-[#FCB855] font-medium">Love Where You Live</span>,{" "}
             with a smart, fun & seamless{" "}
-            <span className="text-white font-medium">real estate experience.</span>
+            <span className="text-[#FCB855] font-medium">real estate experience.</span>
           </h2>
         </div>
 
+        {/* Image Grid */}
         <div ref={imagesRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-20 sm:mb-28">
           {images.map((img, index) => (
             <motion.div
               key={index}
               className="about-image relative group cursor-pointer"
               initial={{ opacity: 0, y: 50, rotate: frameVariants[index % 4].rotate }}
-              whileInView={{ 
-                opacity: 1, 
+              whileInView={{
+                opacity: 1,
                 y: frameVariants[index % 4].y,
-                rotate: frameVariants[index % 4].rotate 
+                rotate: frameVariants[index % 4].rotate,
               }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
-              whileHover={{ 
-                scale: 1.05, 
-                rotate: 0, 
+              whileHover={{
+                scale: 1.05,
+                rotate: 0,
                 y: -10,
                 zIndex: 10,
-                transition: { duration: 0.4, ease: "easeOut" }
+                transition: { duration: 0.4, ease: "easeOut" },
               }}
             >
-              <div className="bg-white p-3 sm:p-4 rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
+              <div className="bg-[#FFF7F0] p-3 sm:p-4 rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
                 <div className="relative aspect-4/3 rounded-xl overflow-hidden">
                   <Image
                     src={img.src}
@@ -187,15 +190,15 @@ export default function About() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-[#301143]/0 group-hover:bg-[#301143]/20 transition-all duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-[#208288]/0 group-hover:bg-[#208288]/20 transition-all duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-linear-to-t from-[#1F203D]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <div className="mt-3 text-center">
-                  <div className="w-8 h-1 bg-gray-200 rounded-full mx-auto group-hover:bg-[#301143]/30 transition-colors duration-500" />
+                  <div className="w-8 h-1 bg-[#BEEBF0] rounded-full mx-auto group-hover:bg-[#208288]/40 transition-colors duration-500" />
                 </div>
               </div>
-              <motion.div 
-                className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#301143]/30 group-hover:bg-[#301143]/50 transition-colors duration-300"
+              <motion.div
+                className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#F2673A]/30 group-hover:bg-[#F2673A]/60 transition-colors duration-300"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -205,6 +208,7 @@ export default function About() {
           ))}
         </div>
 
+        {/* Bio Section */}
         <div ref={bioRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
             variants={containerVariants}
@@ -213,52 +217,52 @@ export default function About() {
             viewport={{ once: true }}
           >
             <motion.div variants={itemVariants} className="mb-6">
-              <span className="text-xs text-white/70 uppercase tracking-[0.3em] font-medium">
+              <span className="text-xs text-[#BEEBF0]/80 uppercase tracking-[0.3em] font-medium">
                 About Me
               </span>
             </motion.div>
 
-            <motion.h3 
+            <motion.h3
               variants={itemVariants}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FAAE62] mb-8 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F2673A] mb-8 leading-tight"
             >
               Hey, Ottawa! I&apos;m{" "}
               <span className="relative">
                 Shelley
                 <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8" fill="none">
-                  <path d="M2 6C50 2 150 2 198 6" stroke="#301143" strokeWidth="3" strokeLinecap="round" opacity="0.3"/>
+                  <path d="M2 6C50 2 150 2 198 6" stroke="#FCB855" strokeWidth="3" strokeLinecap="round" opacity="0.5"/>
                 </svg>
               </span>
             </motion.h3>
 
-            <motion.div variants={itemVariants} className="space-y-5 text-gray-100 text-base sm:text-lg leading-relaxed">
+            <motion.div variants={itemVariants} className="space-y-5 font-montserrat text-[#1F203D]/80 text-base sm:text-lg leading-relaxed">
               <p>
                 I work with buyers, sellers & investors in the Ottawa area who want a smart, fun & seamless method for dealing with real estate. I have been a REALTOR® since 2015 and I&apos;ve helped lots of families find their dream home! Helping people makes me so proud and drives everything I do!
               </p>
-              
-              <blockquote className="border-l-4 border-[#301143]/50 pl-4 py-2 bg-white/60 rounded-r-lg italic text-[#301143]/90">
+
+              <blockquote className="border-l-4 border-[#208288]/50 pl-4 py-2 bg-[#BEEBF0]/20 rounded-r-lg italic text-[#1F203D]/90">
                 &ldquo;Amazing experience! She was easily able to understand my needs. She is one of the most reliable people I have met! She was my rock. Very accommodating! I always look for an agent that is on the ball so I can get the best deal and Shelley definitely exceeded my expectations. Highly, highly recommend!&rdquo;
               </blockquote>
 
               <p>
-                I was a social worker for over 20 years. I have also completed the following certifications as a real estate agent: Accredited Buyer’s Representatives (ABR®), Seller Representative Specialist designation (SRS), and Lifestyle55+ Affiliate (former ASA™).
+                I was a social worker for over 20 years. I have also completed the following certifications as a real estate agent: Accredited Buyer&apos;s Representatives (ABR®), Seller Representative Specialist designation (SRS), and Lifestyle55+ Affiliate (former ASA™).
               </p>
               <p>
-                When I am not helping people Love Where They Live, I can be found playing with my fur babies, hanging with my young adult children or hiking around the Ottawa area. I’m also passionate about serving the Ottawa community, and look forward to connecting with you!
+                When I am not helping people Love Where They Live, I can be found playing with my fur babies, hanging with my young adult children or hiking around the Ottawa area. I&apos;m also passionate about serving the Ottawa community, and look forward to connecting with you!
               </p>
-              
-              <p className="font-semibold text-[#301143]">
+
+              <p className="font-semibold text-[#208288]">
                 See you around town! <br /> Shelley Evelyn
               </p>
             </motion.div>
 
             <motion.div variants={itemVariants} className="mt-8 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-gray-700 font-medium">
-                <a href="mailto:Shelley@ShelleyEvelyn.ca" className="hover:text-[#301143] transition-colors flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-[#1F203D]/70 font-medium">
+                <a href="mailto:Shelley@ShelleyEvelyn.ca" className="hover:text-[#208288] transition-colors flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                   Shelley@ShelleyEvelyn.ca
                 </a>
-                <a href="tel:16132914323" className="hover:text-[#301143] transition-colors flex items-center gap-2">
+                <a href="tel:16132914323" className="hover:text-[#208288] transition-colors flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                   613-291-4323
                 </a>
@@ -266,7 +270,7 @@ export default function About() {
             </motion.div>
 
             <motion.div variants={itemVariants} className="mt-8">
-              <p className="text-xs text-gray-500 uppercase tracking-[0.2em] font-medium mb-4">
+              <p className="text-xs text-[#9D2C77]/60 uppercase tracking-[0.2em] font-medium mb-4">
                 Connect With Me
               </p>
               <div className="flex items-center gap-3">
@@ -276,13 +280,13 @@ export default function About() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-xl border border-gray-300/50 bg-white/50 backdrop-blur-sm flex items-center justify-center text-gray-600 transition-all duration-300"
-                    whileHover={{ 
-                      scale: 1.1, 
+                    className="w-11 h-11 rounded-xl border border-[#BEEBF0]/50 bg-[#BEEBF0]/20 backdrop-blur-sm flex items-center justify-center text-[#1F203D]/70 transition-all duration-300"
+                    whileHover={{
+                      scale: 1.1,
                       y: -3,
                       backgroundColor: social.color,
                       borderColor: social.color,
-                      color: "#ffffff",
+                      color: "#FFF7F0",
                     }}
                     transition={{ duration: 0.2 }}
                     aria-label={social.label}
@@ -294,6 +298,7 @@ export default function About() {
             </motion.div>
           </motion.div>
 
+          {/* Portrait Image */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -309,20 +314,22 @@ export default function About() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#301143]/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#1F203D]/30 via-transparent to-transparent" />
             </div>
+
             <motion.div
-              className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 bg-white rounded-2xl shadow-xl p-4 sm:p-6"
+              className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 bg-[#FFF7F0] rounded-2xl shadow-xl p-4 sm:p-6"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <p className="text-3xl sm:text-4xl font-bold text-[#301143]">2015</p>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">Realtor Since</p>
+              <p className="text-3xl sm:text-4xl font-bold text-[#208288]">2015</p>
+              <p className="text-xs sm:text-sm text-[#9D2C77]/60 mt-1">Realtor Since</p>
             </motion.div>
-            <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full border-2 border-[#301143]/10" />
-            <div className="absolute -top-2 -right-2 w-16 h-16 rounded-full bg-[#301143]/5" />
+
+            <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full border-2 border-[#FCB855]/20" />
+            <div className="absolute -top-2 -right-2 w-16 h-16 rounded-full bg-[#F2673A]/5" />
           </motion.div>
         </div>
 

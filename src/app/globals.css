@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --font-poppins: "Poppins", system-ui, sans-serif;
+  --font-montserrat: "Montserrat", system-ui, sans-serif;
 
   /* ============================================
    * CUSTOM SCROLLBAR COLORS — GOLDEN ACCENT THEME (#FAAE62)
@@ -20,7 +20,7 @@
 }
 
 body {
-  font-family: var(--font-poppins);
+  font-family: var(--font-montserrat);
   overflow-x: hidden;
 }
 

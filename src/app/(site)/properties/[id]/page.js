@@ -227,7 +227,7 @@
 //         <div className="absolute inset-0 flex items-center justify-center opacity-[0.04]">
 //           {/* <div className="relative w-75 h-75 sm:w-100 sm:h-100">
 //             <Image
-//               src="/images/logo1.png"
+//               src="/images/logo.png"
 //               alt="Watermark"
 //               fill
 //               className="object-contain"
@@ -2900,7 +2900,6 @@
 
 
 
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -2937,6 +2936,31 @@ import {
 } from "lucide-react";
 import { getPropertyById } from "@/lib/api";
 import LeadForm from "@/components/forms/LeadForm";
+
+// ==========================================
+// ✅ COLOR PALETTE
+// ==========================================
+const TURQUOISE = "#20B2B8";
+const LIGHT_AQUA = "#BEEBF0";
+const DARK_PINK = "#D81B60";
+const DARK_ORANGE = "#F2673A";
+const PEACH = "#FFC8B5";
+const WARM_CREAM = "#FFF7F0";
+const WARM_TAUPE = "#D9D2C7";
+const NAVY = "#1F2D3D";
+
+const NAVY_LIGHT = "#263848";
+const NAVY_DARK = "#172636";
+const NAVY_CARD = "#1E3040";
+
+const CREAM_30 = "#FFF7F04D";
+const CREAM_40 = "#FFF7F066";
+const CREAM_50 = "#FFF7F080";
+const CREAM_60 = "#FFF7F099";
+const CREAM_70 = "#FFF7F0B3";
+const CREAM_75 = "#FFF7F0BF";
+const CREAM_80 = "#FFF7F0CC";
+const CREAM_90 = "#FFF7F0E6";
 
 // ============================================
 // SAFE IMAGE HELPER
@@ -2987,13 +3011,11 @@ export default function PropertyDetailPage() {
   }, [id]);
 
   // ============================================
-  // TRIGGER CSS ANIMATIONS ON MOUNT
+  // TRIGGER CSS ANIMATIONS
   // ============================================
   useEffect(() => {
     if (!property || loading) return;
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 80);
+    const timer = setTimeout(() => setIsVisible(true), 80);
     return () => clearTimeout(timer);
   }, [property, loading]);
 
@@ -3002,8 +3024,7 @@ export default function PropertyDetailPage() {
   // ============================================
   const rawImages = property?.images || [];
   const images = rawImages.map((img) => getSafeImage(img)).filter(Boolean);
-  const mainImage =
-    getSafeImage(property?.thumbnail) || images[0] || PLACEHOLDER_IMG;
+  const mainImage = getSafeImage(property?.thumbnail) || images[0] || PLACEHOLDER_IMG;
 
   // ============================================
   // IMAGE NAVIGATION
@@ -3049,16 +3070,20 @@ export default function PropertyDetailPage() {
   // ============================================
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#301143] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: NAVY }}>
         <div className="flex flex-col items-center gap-5">
           <div className="relative">
-            <div className="w-14 h-14 border-2 border-[#FAAE62]/20 border-t-[#FAAE62] rounded-full animate-spin" />
+            <div
+              className="w-14 h-14 border-2 rounded-full animate-spin"
+              style={{ borderColor: `${TURQUOISE}20`, borderTopColor: TURQUOISE }}
+            />
             <Gem
               size={16}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#FAAE62]/60"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{ color: `${TURQUOISE}60` }}
             />
           </div>
-          <p className="text-white/40 text-sm tracking-[0.2em] uppercase">
+          <p className="text-sm tracking-[0.2em] uppercase" style={{ color: CREAM_40 }}>
             Loading property...
           </p>
         </div>
@@ -3071,15 +3096,24 @@ export default function PropertyDetailPage() {
   // ============================================
   if (error || !property) {
     return (
-      <div className="min-h-screen bg-[#301143] flex flex-col items-center justify-center gap-4 px-4">
-        <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-          <X size={32} className="text-white/40" />
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4" style={{ backgroundColor: NAVY }}>
+        <div
+          className="w-20 h-20 rounded-full flex items-center justify-center border"
+          style={{ backgroundColor: `${WARM_CREAM}05`, borderColor: `${WARM_CREAM}10` }}
+        >
+          <X size={32} style={{ color: CREAM_40 }} />
         </div>
         <h2 className="text-xl font-bold text-white">Property Not Found</h2>
-        <p className="text-white/50 text-sm text-center max-w-sm">{error}</p>
+        <p className="text-sm text-center max-w-sm" style={{ color: CREAM_50 }}>{error}</p>
         <Link
           href="/properties"
-          className="mt-2 flex items-center gap-2 px-5 py-2.5 bg-[#FAAE62]/10 backdrop-blur-md border border-[#FAAE62]/20 text-[#FAAE62] text-sm font-semibold rounded-xl hover:bg-[#FAAE62]/20 transition-colors"
+          className="mt-2 flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-colors"
+          style={{
+            backgroundColor: `${TURQUOISE}15`,
+            backdropFilter: "blur(8px)",
+            border: `1px solid ${TURQUOISE}30`,
+            color: TURQUOISE,
+          }}
         >
           <ArrowLeft size={16} /> Browse Properties
         </Link>
@@ -3087,30 +3121,32 @@ export default function PropertyDetailPage() {
     );
   }
 
-  const currentDisplayImage =
-    images.length > 0 ? images[activeImage] || mainImage : mainImage;
+  const currentDisplayImage = images.length > 0 ? images[activeImage] || mainImage : mainImage;
   const hasSingleImage = images.length <= 1;
 
   // ============================================
   // RENDER
   // ============================================
   return (
-    <div className="min-h-screen bg-[#301143] relative">
-      {/*
-        ===== BACKGROUND EFFECTS + WATERMARK =====
-      */}
+    <div className="min-h-screen relative" style={{ backgroundColor: NAVY }}>
+      {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+            backgroundImage: `radial-gradient(circle at 1px 1px, ${TURQUOISE} 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
         />
         <div className="absolute inset-0 flex items-center justify-center opacity-[0.04]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(250,174,98,0.12)_0%,transparent_40%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(250,174,98,0.08)_0%,transparent_50%)]" />
+        <div
+          className="absolute inset-0"
+          style={{ background: `radial-gradient(ellipse at top left, ${TURQUOISE}10 0%, transparent 40%)` }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: `radial-gradient(ellipse at bottom right, ${PEACH}08 0%, transparent 50%)` }}
+        />
       </div>
 
       {/* ===== HERO GALLERY ===== */}
@@ -3118,22 +3154,32 @@ export default function PropertyDetailPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           {/* Breadcrumb + Badges */}
           <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <div className="flex items-center gap-2 text-sm text-white/60 min-w-0">
+            <div className="flex items-center gap-2 text-sm min-w-0">
               <Link
                 href="/properties"
-                className="hover:text-white transition-colors text-white/60 shrink-0"
+                className="transition-colors shrink-0"
+                style={{ color: CREAM_60 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = TURQUOISE)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = CREAM_60)}
               >
                 Properties
               </Link>
-              <ChevronRight size={14} className="text-white/30 shrink-0" />
-              <span className="text-white/90 font-medium truncate">
+              <ChevronRight size={14} style={{ color: CREAM_30 }} className="shrink-0" />
+              <span className="font-medium truncate" style={{ color: CREAM_90 }}>
                 {property.title}
               </span>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {property.isFeatured && (
-                <span className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-[#FAAE62]/20 text-[#FCD9A2] text-[10px] sm:text-[11px] font-bold rounded-full border border-[#FAAE62]/30 backdrop-blur-sm">
-                  <Crown size={10} className="fill-[#FAAE62] text-[#FAAE62]" />
+                <span
+                  className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 text-[10px] sm:text-[11px] font-bold rounded-full backdrop-blur-sm"
+                  style={{
+                    backgroundColor: `${TURQUOISE}20`,
+                    color: LIGHT_AQUA,
+                    border: `1px solid ${TURQUOISE}30`,
+                  }}
+                >
+                  <Crown size={10} style={{ fill: TURQUOISE, color: TURQUOISE }} />
                   Featured
                 </span>
               )}
@@ -3143,7 +3189,14 @@ export default function PropertyDetailPage() {
                 <ShieldCheck size={10} />
                 {property.status}
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-white/10 text-white/80 text-[10px] sm:text-[11px] font-bold rounded-full border border-white/15 backdrop-blur-sm">
+              <span
+                className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 text-[10px] sm:text-[11px] font-bold rounded-full backdrop-blur-sm"
+                style={{
+                  backgroundColor: `${WARM_CREAM}0A`,
+                  color: CREAM_80,
+                  border: `1px solid ${WARM_CREAM}15`,
+                }}
+              >
                 <Tag size={10} />
                 {property.priceType}
               </span>
@@ -3153,8 +3206,11 @@ export default function PropertyDetailPage() {
           {/* Title & Price */}
           <div className="mb-6 sm:mb-7">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-px bg-linear-to-r from-[#FAAE62] to-transparent" />
-              <span className="text-[10px] font-bold text-[#FAAE62] uppercase tracking-[0.25em]">
+              <div
+                className="w-8 h-px"
+                style={{ background: `linear-gradient(to right, ${TURQUOISE}, transparent)` }}
+              />
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ color: TURQUOISE }}>
                 Exclusive Listing
               </span>
             </div>
@@ -3163,33 +3219,33 @@ export default function PropertyDetailPage() {
             </h1>
             <div className="flex flex-wrap items-center gap-4 sm:gap-8">
               <div>
-                <p className="text-2xl sm:text-4xl lg:text-[2.75rem] text-transparent bg-clip-text bg-linear-to-r from-[#FCD9A2] via-[#FAAE62] to-[#D98A3B] leading-none">
-                  {property.currency === "PKR" ? "Rs" : "$"}{" "}
-                  {Number(property.price)?.toLocaleString()}
+                <p
+                  className="text-2xl sm:text-4xl lg:text-[2.75rem] leading-none"
+                  style={{
+                    background: `linear-gradient(to right, ${LIGHT_AQUA}, ${TURQUOISE}, ${PEACH})`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {property.currency === "PKR" ? "Rs" : "$"} {Number(property.price)?.toLocaleString()}
                 </p>
                 {property.priceType === "rent" && (
-                  <p className="text-white/50 text-xs mt-1">per month</p>
+                  <p className="text-xs mt-1" style={{ color: CREAM_50 }}>per month</p>
                 )}
               </div>
-              <div className="h-10 w-px bg-white/15 hidden sm:block" />
-              <div className="flex items-center gap-2 text-white/70 min-w-0">
-                <MapPin size={15} className="text-[#FAAE62]/80 shrink-0" />
-                <span className="text-sm font-medium text-white/90 truncate">
+              <div className="h-10 w-px hidden sm:block" style={{ backgroundColor: `${WARM_CREAM}15` }} />
+              <div className="flex items-center gap-2 min-w-0">
+                <MapPin size={15} style={{ color: `${TURQUOISE}80` }} className="shrink-0" />
+                <span className="text-sm font-medium truncate" style={{ color: CREAM_90 }}>
                   {property.location || property.city}
                 </span>
               </div>
             </div>
           </div>
 
-          {/*
-            ===== IMAGE GALLERY =====
-          */}
+          {/* ===== IMAGE GALLERY ===== */}
           <div
-            className={`transition-opacity duration-700 ease-out ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
-            }`}
+            className={`transition-opacity duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             style={{ transitionProperty: "opacity, transform" }}
           >
             {hasSingleImage ? (
@@ -3197,7 +3253,11 @@ export default function PropertyDetailPage() {
                 <div className="relative group">
                   <div
                     ref={heroRef}
-                    className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#2C1240] shadow-2xl shadow-black/50 cursor-zoom-in ring-1 ring-white/15"
+                    className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-black/50 cursor-zoom-in"
+                    style={{
+                      backgroundColor: NAVY_DARK,
+                      boxShadow: `inset 0 0 0 1px ${WARM_CREAM}15`,
+                    }}
                     onClick={() => setShowLightbox(true)}
                   >
                     <Image
@@ -3211,14 +3271,16 @@ export default function PropertyDetailPage() {
                       priority
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ring-1 ring-white/20 transform-[translateZ(0)]">
+                    <div
+                      className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ring-1 ring-white/20 transform-[translateZ(0)]"
+                    >
                       <ZoomIn size={16} className="text-white" />
                     </div>
-                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-2.5 py-1.5 sm:px-3 bg-black/70 rounded-full flex items-center gap-1.5 ring-1 ring-white/10 transform-[translateZ(0)]">
-                      <ImageIcon size={11} className="text-white/80" />
-                      <span className="text-white text-[11px] sm:text-xs font-semibold">
-                        1 Photo
-                      </span>
+                    <div
+                      className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-2.5 py-1.5 sm:px-3 bg-black/70 rounded-full flex items-center gap-1.5 ring-1 ring-white/10 transform-[translateZ(0)]"
+                    >
+                      <ImageIcon size={11} style={{ color: CREAM_80 }} />
+                      <span className="text-white text-[11px] sm:text-xs font-semibold">1 Photo</span>
                     </div>
                   </div>
                 </div>
@@ -3229,13 +3291,14 @@ export default function PropertyDetailPage() {
                 <div className="lg:col-span-8 relative group">
                   <div
                     ref={heroRef}
-                    className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#2C1240] shadow-2xl shadow-black/50 cursor-zoom-in ring-1 ring-[#FAAE62]/15"
+                    className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-black/50 cursor-zoom-in"
+                    style={{
+                      backgroundColor: NAVY_DARK,
+                      boxShadow: `inset 0 0 0 1px ${TURQUOISE}15`,
+                    }}
                     onClick={() => setShowLightbox(true)}
                   >
-                    <div
-                      key={activeImage}
-                      className="absolute inset-0 transition-opacity duration-300 ease-in-out"
-                    >
+                    <div key={activeImage} className="absolute inset-0 transition-opacity duration-300 ease-in-out">
                       <Image
                         src={currentDisplayImage}
                         alt={property.title || "Property"}
@@ -3250,27 +3313,24 @@ export default function PropertyDetailPage() {
                     <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ring-1 ring-white/20 transform-[translateZ(0)]">
                       <ZoomIn size={16} className="text-white" />
                     </div>
-                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-2.5 py-1.5 sm:px-3 bg-black/70 rounded-full flex items-center gap-1.5 ring-1 ring-[#FAAE62]/20 transform-[translateZ(0)]">
-                      <Grid3x3 size={11} className="text-[#FAAE62]/80" />
+                    <div
+                      className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-2.5 py-1.5 sm:px-3 bg-black/70 rounded-full flex items-center gap-1.5 ring-1 transform-[translateZ(0)]"
+                      style={{ borderColor: `${TURQUOISE}20` }}
+                    >
+                      <Grid3x3 size={11} style={{ color: `${TURQUOISE}80` }} />
                       <span className="text-white text-[11px] sm:text-xs font-semibold">
                         {activeImage + 1} / {images.length}
                       </span>
                     </div>
                     {/* Nav arrows */}
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        prevImage();
-                      }}
+                      onClick={(e) => { e.stopPropagation(); prevImage(); }}
                       className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:left-3 sm:w-11 sm:h-11 flex items-center justify-center rounded-full bg-black/70 text-white hover:bg-black/80 hover:scale-105 transition-all shadow-lg ring-1 ring-white/20 transform-[translateZ(0)]"
                     >
                       <ChevronLeft size={18} />
                     </button>
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        nextImage();
-                      }}
+                      onClick={(e) => { e.stopPropagation(); nextImage(); }}
                       className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:right-3 sm:w-11 sm:h-11 flex items-center justify-center rounded-full bg-black/70 text-white hover:bg-black/80 hover:scale-105 transition-all shadow-lg ring-1 ring-white/20 transform-[translateZ(0)]"
                     >
                       <ChevronRight size={18} />
@@ -3289,18 +3349,20 @@ export default function PropertyDetailPage() {
                       <button
                         key={index}
                         onClick={() => {
-                          if (isSeeMore) {
-                            setActiveImage(3);
-                            setShowLightbox(true);
-                          } else {
-                            setActiveImage(index);
-                          }
+                          if (isSeeMore) { setActiveImage(3); setShowLightbox(true); }
+                          else setActiveImage(index);
                         }}
-                        className={`relative rounded-lg sm:rounded-xl overflow-hidden transition-all duration-300 ring-1 ring-white/15 hover:ring-white/30 aspect-square ${
+                        className={`relative rounded-lg sm:rounded-xl overflow-hidden transition-all duration-300 aspect-square ${
                           isActive && !isSeeMore
-                            ? "ring-2 ring-[#FAAE62] shadow-lg shadow-[#FAAE62]/30"
+                            ? "ring-2 shadow-lg"
                             : "opacity-70 hover:opacity-100"
                         }`}
+                        style={{
+                          boxShadow: `inset 0 0 0 1px ${WARM_CREAM}15`,
+                          ...(isActive && !isSeeMore
+                            ? { ringColor: TURQUOISE, boxShadow: `0 4px 12px ${TURQUOISE}30, inset 0 0 0 1px ${TURQUOISE}` }
+                            : {}),
+                        }}
                       >
                         <Image
                           src={safeImg}
@@ -3311,12 +3373,11 @@ export default function PropertyDetailPage() {
                           sizes="(max-width: 768px) 25vw, (max-width: 1024px) 20vw, 15vw"
                         />
                         {isActive && !isSeeMore && (
-                          <div className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#FAAE62] flex items-center justify-center shadow-lg shadow-[#FAAE62]/50 z-10 border border-white">
-                            <Check
-                              size={10}
-                              strokeWidth={3}
-                              className="text-white"
-                            />
+                          <div
+                            className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shadow-lg z-10 border border-white"
+                            style={{ backgroundColor: TURQUOISE, boxShadow: `0 2px 8px ${TURQUOISE}50` }}
+                          >
+                            <Check size={10} strokeWidth={3} className="text-white" />
                           </div>
                         )}
                         {isSeeMore && (
@@ -3345,37 +3406,30 @@ export default function PropertyDetailPage() {
             {/* Meta */}
             {property.propertyCode && (
               <div
-                className={`transition-opacity duration-500 ease-out ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: "50ms",
-                  transitionProperty: "opacity, transform",
-                }}
+                className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: "50ms", transitionProperty: "opacity, transform" }}
               >
-                <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[11px] sm:text-xs text-white/60">
-                  <span className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-[#FAAE62]/15 rounded-full text-[#FCD9A2] font-semibold border border-[#FAAE62]/25">
+                <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[11px] sm:text-xs" style={{ color: CREAM_60 }}>
+                  <span
+                    className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full font-semibold"
+                    style={{
+                      backgroundColor: `${TURQUOISE}15`,
+                      color: LIGHT_AQUA,
+                      border: `1px solid ${TURQUOISE}25`,
+                    }}
+                  >
                     <Building2 size={11} />
                     {property.propertyCode}
                   </span>
                   {property.viewsCount > 0 && (
-                    <span className="flex items-center gap-1 text-white/60">
+                    <span className="flex items-center gap-1" style={{ color: CREAM_60 }}>
                       <Eye size={11} /> {property.viewsCount} views
                     </span>
                   )}
                   {property.createdAt && (
-                    <span className="flex items-center gap-1 text-white/60">
+                    <span className="flex items-center gap-1" style={{ color: CREAM_60 }}>
                       <CalendarDays size={11} />
-                      {new Date(property.createdAt).toLocaleDateString(
-                        "en-US",
-                        {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        },
-                      )}
+                      {new Date(property.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                     </span>
                   )}
                 </div>
@@ -3384,58 +3438,89 @@ export default function PropertyDetailPage() {
 
             {/* Quick Stats */}
             <div
-              className={`grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 transition-opacity duration-500 ease-out ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
-              }`}
-              style={{
-                transitionDelay: "100ms",
-                transitionProperty: "opacity, transform",
-              }}
+              className={`grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+              style={{ transitionDelay: "100ms", transitionProperty: "opacity, transform" }}
             >
               {property.bedrooms > 0 && (
-                <div className="flex items-center gap-2.5 sm:gap-3 bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/10 hover:border-[#FAAE62]/30 transition-all group">
-                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-[#FAAE62]/15 group-hover:bg-[#FAAE62]/25 flex items-center justify-center shrink-0 transition-colors border border-[#FAAE62]/15">
-                    <Bed size={16} className="text-[#FAAE62]/80" />
+                <div
+                  className="flex items-center gap-2.5 sm:gap-3 rounded-xl sm:rounded-2xl p-3 sm:p-4 transition-all group"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${TURQUOISE}30`)}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = `${WARM_CREAM}10`)}
+                >
+                  <div
+                    className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 transition-colors"
+                    style={{
+                      backgroundColor: `${TURQUOISE}15`,
+                      border: `1px solid ${TURQUOISE}15`,
+                    }}
+                  >
+                    <Bed size={16} style={{ color: `${TURQUOISE}80` }} />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-[8px] sm:text-[9px] text-white/50 uppercase tracking-[0.2em] font-bold">
+                    <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ color: CREAM_50 }}>
                       Beds
                     </p>
-                    <p className="text-lg sm:text-xl font-bold text-white leading-tight">
-                      {property.bedrooms}
-                    </p>
+                    <p className="text-lg sm:text-xl font-bold text-white leading-tight">{property.bedrooms}</p>
                   </div>
                 </div>
               )}
               {property.bathrooms > 0 && (
-                <div className="flex items-center gap-2.5 sm:gap-3 bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/10 hover:border-[#FAAE62]/30 transition-all group">
-                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-[#FAAE62]/15 group-hover:bg-[#FAAE62]/25 flex items-center justify-center shrink-0 transition-colors border border-[#FAAE62]/15">
-                    <Bath size={16} className="text-[#FAAE62]/80" />
+                <div
+                  className="flex items-center gap-2.5 sm:gap-3 rounded-xl sm:rounded-2xl p-3 sm:p-4 transition-all group"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${TURQUOISE}30`)}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = `${WARM_CREAM}10`)}
+                >
+                  <div
+                    className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 transition-colors"
+                    style={{
+                      backgroundColor: `${TURQUOISE}15`,
+                      border: `1px solid ${TURQUOISE}15`,
+                    }}
+                  >
+                    <Bath size={16} style={{ color: `${TURQUOISE}80` }} />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-[8px] sm:text-[9px] text-white/50 uppercase tracking-[0.2em] font-bold">
+                    <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ color: CREAM_50 }}>
                       Baths
                     </p>
-                    <p className="text-lg sm:text-xl font-bold text-white leading-tight">
-                      {property.bathrooms}
-                    </p>
+                    <p className="text-lg sm:text-xl font-bold text-white leading-tight">{property.bathrooms}</p>
                   </div>
                 </div>
               )}
               {(property.areaSize || property.area) > 0 && (
-                <div className="flex items-center gap-2.5 sm:gap-3 bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/10 hover:border-[#FAAE62]/30 transition-all group">
-                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-[#FAAE62]/15 group-hover:bg-[#FAAE62]/25 flex items-center justify-center shrink-0 transition-colors border border-[#FAAE62]/15">
-                    <Ruler size={16} className="text-[#FAAE62]/80" />
+                <div
+                  className="flex items-center gap-2.5 sm:gap-3 rounded-xl sm:rounded-2xl p-3 sm:p-4 transition-all group"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${TURQUOISE}30`)}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = `${WARM_CREAM}10`)}
+                >
+                  <div
+                    className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 transition-colors"
+                    style={{
+                      backgroundColor: `${TURQUOISE}15`,
+                      border: `1px solid ${TURQUOISE}15`,
+                    }}
+                  >
+                    <Ruler size={16} style={{ color: `${TURQUOISE}80` }} />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-[8px] sm:text-[9px] text-white/50 uppercase tracking-[0.2em] font-bold">
+                    <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ color: CREAM_50 }}>
                       Area
                     </p>
                     <p className="text-base sm:text-lg font-bold text-white leading-tight">
                       {property.areaSize || property.area}
-                      <span className="text-[9px] sm:text-[10px] font-normal text-white/40 ml-0.5">
+                      <span className="text-[9px] sm:text-[10px] font-normal ml-0.5" style={{ color: CREAM_40 }}>
                         {property.areaUnit || "sqft"}
                       </span>
                     </p>
@@ -3443,12 +3528,26 @@ export default function PropertyDetailPage() {
                 </div>
               )}
               {property.propertyType && (
-                <div className="flex items-center gap-2.5 sm:gap-3 bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/10 hover:border-[#FAAE62]/30 transition-all group">
-                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-[#FAAE62]/15 group-hover:bg-[#FAAE62]/25 flex items-center justify-center shrink-0 transition-colors border border-[#FAAE62]/15">
-                    <Home size={16} className="text-[#FAAE62]/80" />
+                <div
+                  className="flex items-center gap-2.5 sm:gap-3 rounded-xl sm:rounded-2xl p-3 sm:p-4 transition-all group"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${TURQUOISE}30`)}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = `${WARM_CREAM}10`)}
+                >
+                  <div
+                    className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 transition-colors"
+                    style={{
+                      backgroundColor: `${TURQUOISE}15`,
+                      border: `1px solid ${TURQUOISE}15`,
+                    }}
+                  >
+                    <Home size={16} style={{ color: `${TURQUOISE}80` }} />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-[8px] sm:text-[9px] text-white/50 uppercase tracking-[0.2em] font-bold">
+                    <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-bold" style={{ color: CREAM_50 }}>
                       Type
                     </p>
                     <p className="text-xs sm:text-sm font-bold text-white leading-tight capitalize truncate">
@@ -3462,26 +3561,27 @@ export default function PropertyDetailPage() {
             {/* Description */}
             {property.description && (
               <div
-                className={`transition-opacity duration-500 ease-out ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: "150ms",
-                  transitionProperty: "opacity, transform",
-                }}
+                className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: "150ms", transitionProperty: "opacity, transform" }}
               >
-                <div className="bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-7 border border-white/10">
-                  <h3 className="text-lg sm:text-xl text-white mb-1">
-                    Description
-                  </h3>
-                  <div className="w-12 h-0.5 bg-linear-to-r from-[#FAAE62] to-transparent rounded-full mb-4 sm:mb-5" />
+                <div
+                  className="rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-7"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                >
+                  <h3 className="text-lg sm:text-xl text-white mb-1">Description</h3>
                   <div
-                    className="text-white/70 text-sm sm:text-[15px] leading-[1.9] whitespace-pre-line max-h-72 sm:max-h-80 overflow-y-auto pr-2"
+                    className="w-12 h-0.5 rounded-full mb-4 sm:mb-5"
+                    style={{ background: `linear-gradient(to right, ${TURQUOISE}, transparent)` }}
+                  />
+                  <div
+                    className="text-sm sm:text-[15px] leading-[1.9] whitespace-pre-line max-h-72 sm:max-h-80 overflow-y-auto pr-2"
                     style={{
+                      color: CREAM_70,
                       scrollbarWidth: "thin",
-                      scrollbarColor: "rgba(250,174,98,0.3) transparent",
+                      scrollbarColor: `${TURQUOISE}30 transparent`,
                     }}
                   >
                     {property.description}
@@ -3491,38 +3591,47 @@ export default function PropertyDetailPage() {
             )}
 
             {/* Features */}
-            {(property.features?.length > 0 ||
-              property.amenities?.length > 0) && (
+            {(property.features?.length > 0 || property.amenities?.length > 0) && (
               <div
-                className={`transition-opacity duration-500 ease-out ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: "200ms",
-                  transitionProperty: "opacity, transform",
-                }}
+                className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: "200ms", transitionProperty: "opacity, transform" }}
               >
-                <div className="bg-[#3A1A4E] md:block hidden rounded-2xl p-5 sm:p-7 border border-white/10">
-                  <h3 className="text-lg sm:text-xl text-white mb-1">
-                    Features & Amenities
-                  </h3>
-                  <div className="w-12 h-0.5 bg-linear-to-r from-[#FAAE62] to-transparent rounded-full mb-4 sm:mb-5" />
+                <div
+                  className="md:block hidden rounded-2xl p-5 sm:p-7"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                >
+                  <h3 className="text-lg sm:text-xl text-white mb-1">Features & Amenities</h3>
+                  <div
+                    className="w-12 h-0.5 rounded-full mb-4 sm:mb-5"
+                    style={{ background: `linear-gradient(to right, ${TURQUOISE}, transparent)` }}
+                  />
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
-                    {[
-                      ...(property.features || []),
-                      ...(property.amenities || []),
-                    ].map((item, i) => (
+                    {[...(property.features || []), ...(property.amenities || [])].map((item, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-sm text-white/70 bg-white/5 rounded-lg sm:rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 border border-white/10 hover:bg-[#FAAE62]/10 hover:border-[#FAAE62]/20 transition-colors group"
+                        className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-sm rounded-lg sm:rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 transition-colors group"
+                        style={{
+                          color: CREAM_70,
+                          backgroundColor: `${WARM_CREAM}05`,
+                          border: `1px solid ${WARM_CREAM}10`,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = `${TURQUOISE}10`;
+                          e.currentTarget.style.borderColor = `${TURQUOISE}20`;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = `${WARM_CREAM}05`;
+                          e.currentTarget.style.borderColor = `${WARM_CREAM}10`;
+                        }}
                       >
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#FAAE62]/15 flex items-center justify-center shrink-0 group-hover:bg-[#FAAE62]/25 transition-colors">
-                          <CheckCircle2
-                            size={10}
-                            className="text-[#FAAE62]/80"
-                          />
+                        <div
+                          className="w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shrink-0 transition-colors"
+                          style={{ backgroundColor: `${TURQUOISE}15` }}
+                        >
+                          <CheckCircle2 size={10} style={{ color: `${TURQUOISE}80` }} />
                         </div>
                         <span className="capitalize truncate">{item}</span>
                       </div>
@@ -3535,26 +3644,35 @@ export default function PropertyDetailPage() {
             {/* Address */}
             {property.address && (
               <div
-                className={`transition-opacity duration-500 ease-out ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: "250ms",
-                  transitionProperty: "opacity, transform",
-                }}
+                className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: "250ms", transitionProperty: "opacity, transform" }}
               >
-                <div className="bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-7 border border-white/10">
-                  <h3 className="text-lg sm:text-xl text-white mb-1">
-                    Address
-                  </h3>
-                  <div className="w-12 h-0.5 bg-linear-to-r from-[#FAAE62] to-transparent rounded-full mb-4 sm:mb-5" />
-                  <div className="flex items-start gap-2.5 sm:gap-3 bg-[rgba(250,174,98,0.1)] rounded-lg sm:rounded-xl p-3 sm:p-4 border border-[rgba(250,174,98,0.15)]">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-[rgba(250,174,98,0.15)] flex items-center justify-center shrink-0 mt-0.5">
-                      <MapPin size={13} className="text-[#FAAE62]/80" />
+                <div
+                  className="rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-7"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                >
+                  <h3 className="text-lg sm:text-xl text-white mb-1">Address</h3>
+                  <div
+                    className="w-12 h-0.5 rounded-full mb-4 sm:mb-5"
+                    style={{ background: `linear-gradient(to right, ${TURQUOISE}, transparent)` }}
+                  />
+                  <div
+                    className="flex items-start gap-2.5 sm:gap-3 rounded-lg sm:rounded-xl p-3 sm:p-4"
+                    style={{
+                      backgroundColor: `${TURQUOISE}08`,
+                      border: `1px solid ${TURQUOISE}15`,
+                    }}
+                  >
+                    <div
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-md sm:rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ backgroundColor: `${TURQUOISE}15` }}
+                    >
+                      <MapPin size={13} style={{ color: `${TURQUOISE}80` }} />
                     </div>
-                    <p className="text-white/70 text-xs sm:text-sm leading-relaxed wrap-break-word">
+                    <p className="text-xs sm:text-sm leading-relaxed wrap-break-word" style={{ color: CREAM_70 }}>
                       {property.address}
                     </p>
                   </div>
@@ -3568,36 +3686,51 @@ export default function PropertyDetailPage() {
             <div className="lg:sticky lg:top-24 space-y-3 sm:space-y-4">
               {/* Price + CTA Card */}
               <div
-                className={`transition-opacity duration-500 ease-out ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: "300ms",
-                  transitionProperty: "opacity, transform",
-                }}
+                className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: "300ms", transitionProperty: "opacity, transform" }}
               >
-                <div className="bg-[#3A1A4E] rounded-xl sm:rounded-2xl border border-white/10 overflow-hidden">
+                <div
+                  className="rounded-xl sm:rounded-2xl overflow-hidden"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                >
                   {/* Price Header */}
-                  <div className="bg-linear-to-r from-[#FAAE62]/15 via-[#FAAE62]/8 to-transparent px-4 sm:px-5 lg:px-6 py-4 sm:py-5 border-b border-white/10">
-                    <p className="text-[9px] sm:text-[10px] text-[#FAAE62]/70 uppercase tracking-[0.2em] font-bold mb-1">
+                  <div
+                    className="px-4 sm:px-5 lg:px-6 py-4 sm:py-5"
+                    style={{
+                      background: `linear-gradient(to right, ${TURQUOISE}12, ${TURQUOISE}06, transparent)`,
+                      borderBottom: `1px solid ${WARM_CREAM}10`,
+                    }}
+                  >
+                    <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-bold mb-1" style={{ color: `${TURQUOISE}70` }}>
                       Asking Price
                     </p>
-                    <p className="text-xl sm:text-2xl lg:text-3xl text-transparent bg-clip-text bg-linear-to-r from-[#FCD9A2] via-[#FAAE62] to-[#D98A3B] leading-none">
-                      {property.currency === "PKR" ? "Rs" : "$"}{" "}
-                      {Number(property.price)?.toLocaleString()}
+                    <p
+                      className="text-xl sm:text-2xl lg:text-3xl leading-none"
+                      style={{
+                        background: `linear-gradient(to right, ${LIGHT_AQUA}, ${TURQUOISE}, ${PEACH})`,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      {property.currency === "PKR" ? "Rs" : "$"} {Number(property.price)?.toLocaleString()}
                     </p>
-                    <p className="text-white/50 text-[11px] sm:text-xs mt-1.5 capitalize tracking-wide">
+                    <p className="text-[11px] sm:text-xs mt-1.5 capitalize tracking-wide" style={{ color: CREAM_50 }}>
                       {property.priceType} &bull; {property.propertyType}
                     </p>
                   </div>
 
-                  {/* Trigger Button + Call/Email */}
+                  {/* CTA Buttons */}
                   <div className="p-4 sm:p-5 space-y-2.5 sm:space-y-3">
                     <button
                       onClick={() => setShowLeadForm(true)}
-                      className="w-full flex items-center justify-center gap-2.5 px-5 py-3 sm:py-3.5 bg-[#FAAE62] text-white text-sm cursor-pointer font-bold rounded-xl hover:bg-[#FBBF77] active:scale-[0.98] transition-all shadow-lg shadow-[#FAAE62]/25"
+                      className="w-full flex items-center justify-center gap-2.5 px-5 py-3 sm:py-3.5 text-sm cursor-pointer font-bold rounded-xl active:scale-[0.98] transition-all text-white"
+                      style={{
+                        background: `linear-gradient(135deg, ${TURQUOISE}, ${DARK_ORANGE})`,
+                        boxShadow: `0 4px 16px ${TURQUOISE}25`,
+                      }}
                     >
                       <Heart size={16} /> I&apos;m Interested
                     </button>
@@ -3605,13 +3738,41 @@ export default function PropertyDetailPage() {
                     <div className="grid grid-cols-2 gap-2">
                       <a
                         href={`tel:${property.contact?.phone || ""}`}
-                        className="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-2.5 border border-white/15 text-white/70 text-[11px] sm:text-xs font-semibold rounded-lg sm:rounded-xl hover:bg-white/10 hover:border-white/25 transition-colors hover:text-white"
+                        className="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-2.5 text-[11px] sm:text-xs font-semibold rounded-lg sm:rounded-xl transition-colors"
+                        style={{
+                          border: `1px solid ${WARM_CREAM}15`,
+                          color: CREAM_70,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = `${WARM_CREAM}0A`;
+                          e.currentTarget.style.borderColor = `${WARM_CREAM}25`;
+                          e.currentTarget.style.color = WARM_CREAM;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "transparent";
+                          e.currentTarget.style.borderColor = `${WARM_CREAM}15`;
+                          e.currentTarget.style.color = CREAM_70;
+                        }}
                       >
                         <Phone size={12} /> Call
                       </a>
                       <a
                         href={`mailto:${property.contact?.email || ""}`}
-                        className="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-2.5 border border-white/15 text-white/70 text-[11px] sm:text-xs font-semibold rounded-lg sm:rounded-xl hover:bg-white/10 hover:border-white/25 transition-colors hover:text-white"
+                        className="flex items-center justify-center gap-1.5 px-3 py-2 sm:py-2.5 text-[11px] sm:text-xs font-semibold rounded-lg sm:rounded-xl transition-colors"
+                        style={{
+                          border: `1px solid ${WARM_CREAM}15`,
+                          color: CREAM_70,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = `${WARM_CREAM}0A`;
+                          e.currentTarget.style.borderColor = `${WARM_CREAM}25`;
+                          e.currentTarget.style.color = WARM_CREAM;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "transparent";
+                          e.currentTarget.style.borderColor = `${WARM_CREAM}15`;
+                          e.currentTarget.style.color = CREAM_70;
+                        }}
                       >
                         <Mail size={12} /> Email
                       </a>
@@ -3623,37 +3784,39 @@ export default function PropertyDetailPage() {
               {/* Agent */}
               {property.addedBy && (
                 <div
-                  className={`transition-opacity duration-500 ease-out ${
-                    isVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-6"
-                  }`}
-                  style={{
-                    transitionDelay: "350ms",
-                    transitionProperty: "opacity, transform",
-                  }}
+                  className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                  style={{ transitionDelay: "350ms", transitionProperty: "opacity, transform" }}
                 >
-                  <div className="bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-white/10">
-                    <h4 className="text-[8px] sm:text-[9px] font-bold text-white/50 uppercase tracking-[0.25em] mb-2.5 sm:mb-3">
+                  <div
+                    className="rounded-xl sm:rounded-2xl p-4 sm:p-5"
+                    style={{
+                      backgroundColor: NAVY_CARD,
+                      border: `1px solid ${WARM_CREAM}10`,
+                    }}
+                  >
+                    <h4 className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.25em] mb-2.5 sm:mb-3" style={{ color: CREAM_50 }}>
                       Listed By
                     </h4>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#FAAE62]/15 flex items-center justify-center shrink-0 overflow-hidden border-2 border-[#FAAE62]/20 shadow-lg">
+                      <div
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0 overflow-hidden"
+                        style={{
+                          backgroundColor: `${TURQUOISE}15`,
+                          border: `2px solid ${TURQUOISE}25`,
+                          boxShadow: `0 4px 12px ${TURQUOISE}20`,
+                        }}
+                      >
                         {property.addedBy?.avatar ? (
-                          <img
-                            src={property.addedBy.avatar}
-                            alt=""
-                            className="w-full h-full rounded-full object-cover"
-                          />
+                          <img src={property.addedBy.avatar} alt="" className="w-full h-full rounded-full object-cover" />
                         ) : (
-                          <User size={18} className="text-[#FAAE62]/80" />
+                          <User size={18} style={{ color: `${TURQUOISE}80` }} />
                         )}
                       </div>
                       <div className="min-w-0">
                         <p className="text-xs sm:text-sm font-bold text-white truncate">
                           {property.addedBy?.name || "Agent"}
                         </p>
-                        <p className="text-[11px] sm:text-xs text-white/50">
+                        <p className="text-[11px] sm:text-xs" style={{ color: CREAM_50 }}>
                           Property Agent
                         </p>
                       </div>
@@ -3664,53 +3827,44 @@ export default function PropertyDetailPage() {
 
               {/* Details */}
               <div
-                className={`transition-opacity duration-500 ease-out ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: "400ms",
-                  transitionProperty: "opacity, transform",
-                }}
+                className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: "400ms", transitionProperty: "opacity, transform" }}
               >
-                <div className="bg-[#3A1A4E] rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-white/10">
-                  <h4 className="text-[8px] sm:text-[9px] font-bold text-white/50 uppercase tracking-[0.25em] mb-2.5 sm:mb-3">
+                <div
+                  className="rounded-xl sm:rounded-2xl p-4 sm:p-5"
+                  style={{
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
+                  }}
+                >
+                  <h4 className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.25em] mb-2.5 sm:mb-3" style={{ color: CREAM_50 }}>
                     Property Details
                   </h4>
                   <div className="space-y-0">
                     {property.floors && (
-                      <div className="flex items-center justify-between text-xs sm:text-sm py-2 sm:py-2.5 border-b border-white/10">
-                        <span className="text-white/60 flex items-center gap-1.5 sm:gap-2">
+                      <div className="flex items-center justify-between text-xs sm:text-sm py-2 sm:py-2.5" style={{ borderBottom: `1px solid ${WARM_CREAM}10` }}>
+                        <span className="flex items-center gap-1.5 sm:gap-2" style={{ color: CREAM_60 }}>
                           <Layers size={11} /> Floors
                         </span>
-                        <span className="font-semibold text-white">
-                          {property.floors}
-                        </span>
+                        <span className="font-semibold text-white">{property.floors}</span>
                       </div>
                     )}
                     {property.kitchens && (
-                      <div className="flex items-center justify-between text-xs sm:text-sm py-2 sm:py-2.5 border-b border-white/10">
-                        <span className="text-white/60">Kitchens</span>
-                        <span className="font-semibold text-white">
-                          {property.kitchens}
-                        </span>
+                      <div className="flex items-center justify-between text-xs sm:text-sm py-2 sm:py-2.5" style={{ borderBottom: `1px solid ${WARM_CREAM}10` }}>
+                        <span style={{ color: CREAM_60 }}>Kitchens</span>
+                        <span className="font-semibold text-white">{property.kitchens}</span>
                       </div>
                     )}
                     {property.yearBuilt && (
-                      <div className="flex items-center justify-between text-xs sm:text-sm py-2 sm:py-2.5 border-b border-white/10">
-                        <span className="text-white/60">Year Built</span>
-                        <span className="font-semibold text-white">
-                          {property.yearBuilt}
-                        </span>
+                      <div className="flex items-center justify-between text-xs sm:text-sm py-2 sm:py-2.5" style={{ borderBottom: `1px solid ${WARM_CREAM}10` }}>
+                        <span style={{ color: CREAM_60 }}>Year Built</span>
+                        <span className="font-semibold text-white">{property.yearBuilt}</span>
                       </div>
                     )}
                     {property.leadsCount > 0 && (
                       <div className="flex items-center justify-between text-xs sm:text-sm py-2 sm:py-2.5">
-                        <span className="text-white/60">Interested Buyers</span>
-                        <span className="font-semibold text-[#FAAE62]">
-                          {property.leadsCount}
-                        </span>
+                        <span style={{ color: CREAM_60 }}>Interested Buyers</span>
+                        <span className="font-semibold" style={{ color: TURQUOISE }}>{property.leadsCount}</span>
                       </div>
                     )}
                   </div>
@@ -3719,26 +3873,31 @@ export default function PropertyDetailPage() {
 
               {/* Verified */}
               <div
-                className={`transition-opacity duration-500 ease-out ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-6"
-                }`}
-                style={{
-                  transitionDelay: "450ms",
-                  transitionProperty: "opacity, transform",
-                }}
+                className={`transition-opacity duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: "450ms", transitionProperty: "opacity, transform" }}
               >
-                <div className="bg-[rgba(250,174,98,0.1)] rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-[rgba(250,174,98,0.2)]">
+                <div
+                  className="rounded-xl sm:rounded-2xl p-3.5 sm:p-4"
+                  style={{
+                    backgroundColor: `${PEACH}10`,
+                    border: `1px solid ${PEACH}20`,
+                  }}
+                >
                   <div className="flex items-center gap-2.5 sm:gap-3">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[rgba(250,174,98,0.2)] flex items-center justify-center shrink-0 border border-[rgba(250,174,98,0.25)]">
-                      <ShieldCheck size={13} className="text-[#FAAE62]" />
+                    <div
+                      className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0"
+                      style={{
+                        backgroundColor: `${PEACH}20`,
+                        border: `1px solid ${PEACH}30`,
+                      }}
+                    >
+                      <ShieldCheck size={13} style={{ color: PEACH }} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[11px] sm:text-xs font-bold text-[#FAAE62]">
+                      <p className="text-[11px] sm:text-xs font-bold" style={{ color: PEACH }}>
                         Verified Listing
                       </p>
-                      <p className="text-[10px] sm:text-[11px] text-white/50">
+                      <p className="text-[10px] sm:text-[11px]" style={{ color: CREAM_50 }}>
                         Verified by our team
                       </p>
                     </div>
@@ -3760,9 +3919,7 @@ export default function PropertyDetailPage() {
         open={showLeadForm}
         onOpenChange={setShowLeadForm}
         trigger={null}
-        onSuccess={(data) => {
-          console.log("Lead created:", data);
-        }}
+        onSuccess={(data) => console.log("Lead created:", data)}
       />
 
       {/* ===== LIGHTBOX ===== */}
@@ -3781,10 +3938,7 @@ export default function PropertyDetailPage() {
             className="relative w-full h-full flex items-center justify-center px-3 sm:px-16"
             onClick={(e) => e.stopPropagation()}
           >
-            <div
-              key={activeImage}
-              className="relative max-w-5xl max-h-[75vh] sm:max-h-[80vh] w-full aspect-video transition-opacity duration-300"
-            >
+            <div key={activeImage} className="relative max-w-5xl max-h-[75vh] sm:max-h-[80vh] w-full aspect-video transition-opacity duration-300">
               <Image
                 src={currentDisplayImage}
                 alt={property.title || "Property"}
@@ -3797,19 +3951,13 @@ export default function PropertyDetailPage() {
             {!hasSingleImage && (
               <>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    prevImage();
-                  }}
+                  onClick={(e) => { e.stopPropagation(); prevImage(); }}
                   className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/15 flex items-center justify-center text-white hover:bg-white/25 transition-colors ring-1 ring-white/20"
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    nextImage();
-                  }}
+                  onClick={(e) => { e.stopPropagation(); nextImage(); }}
                   className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/15 flex items-center justify-center text-white hover:bg-white/25 transition-colors ring-1 ring-white/20"
                 >
                   <ChevronRight size={18} />
@@ -3828,24 +3976,13 @@ export default function PropertyDetailPage() {
                 return (
                   <button
                     key={index}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveImage(index);
-                    }}
+                    onClick={(e) => { e.stopPropagation(); setActiveImage(index); }}
                     className={`relative w-12 h-9 sm:w-16 sm:h-12 rounded-md sm:rounded-lg overflow-hidden shrink-0 transition-all duration-300 ring-1 ring-white/20 ${
-                      activeImage === index
-                        ? "ring-2 ring-[#FAAE62] scale-105"
-                        : "opacity-50 hover:opacity-80"
+                      activeImage === index ? "scale-105" : "opacity-50 hover:opacity-80"
                     }`}
+                    style={activeImage === index ? { ringColor: TURQUOISE, boxShadow: `0 0 0 2px ${TURQUOISE}` } : {}}
                   >
-                    <Image
-                      src={safeImg}
-                      alt=""
-                      fill
-                      unoptimized
-                      className="object-cover"
-                      sizes="64px"
-                    />
+                    <Image src={safeImg} alt="" fill unoptimized className="object-cover" sizes="64px" />
                   </button>
                 );
               })}
