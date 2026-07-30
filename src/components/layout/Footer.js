@@ -36,6 +36,7 @@ export default function Footer() {
     { name: "Properties", href: "/properties" },
     { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" },
+    { name: "Blogs", href: "/blogs" },
   ];
 
   const socialLinks = [

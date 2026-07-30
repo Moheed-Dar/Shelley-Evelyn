@@ -102,7 +102,7 @@ const BlogCard = ({ blog }) => {
 
           {blog.category && (
             <span
-              className="absolute top-3 left-3 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide"
+              className="absolute top-3 left-3 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide z-10"
               style={{
                 background: `linear-gradient(135deg, ${TURQUOISE}, ${DARK_ORANGE})`,
               }}
@@ -466,13 +466,14 @@ export default function BlogsPage() {
 
             {/* Search */}
             <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              {/* ✅ FIX: Added z-10 and pointer-events-none to make icon visible above input */}
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 z-10 pointer-events-none" />
               <input
                 type="text"
                 value={search}
                 onChange={handleSearchChange}
                 placeholder="Search blogs by title, content, or tags..."
-                className="w-full pl-12 pr-10 py-4 border rounded-xl text-white placeholder-slate-400 focus:outline-none transition-all"
+                className="relative w-full pl-12 pr-10 py-4 border rounded-xl text-white placeholder-slate-400 focus:outline-none transition-all"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.08)",
                   backdropFilter: "blur(8px)",
@@ -490,7 +491,7 @@ export default function BlogsPage() {
               {search && (
                 <button
                   onClick={clearSearch}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-white transition-colors z-10"
                 >
                   <X className="w-4 h-4" />
                 </button>

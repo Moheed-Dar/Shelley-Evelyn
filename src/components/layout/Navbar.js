@@ -44,7 +44,7 @@ export default function Navbar() {
             {/* Mobile Logo (below md) */}
             <div className="relative w-35 h-12 md:hidden">
               <Image
-                src="/images/logo.png"
+                src="/images/navbarlogo.png"
                 alt="Shelley Properties"
                 fill
                 className="object-contain brightness-125 contrast-150 drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"

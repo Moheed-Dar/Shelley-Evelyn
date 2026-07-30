@@ -299,7 +299,7 @@ export default function HeroSection() {
 
             <h1
               ref={titleRef}
-              className="text-6xl sm:text-7xl md:text-8xl py-5 lg:text-9xl xl:text-[10rem] font-black tracking-tighter leading-none select-none text-center relative z-10 bg-linear-to-r from-[#faae62d5] via-purple-300 to-[#faae62ee] bg-clip-text text-transparent"
+              className="text-6xl sm:text-7xl md:text-8xl md:py-5  py-2 lg:text-9xl xl:text-[10rem] font-black tracking-tighter leading-none select-none text-center relative z-10 bg-linear-to-r from-[#faae62d5] via-purple-300 to-[#faae62ee] bg-clip-text text-transparent"
               style={{
                 // textShadow gradient text par kaam nahi karta, isliye drop-shadow use kiya hai
                 filter: "drop-shadow(0 8px 40px rgba(0,0,0,0.5)) drop-shadow(0 2px 10px rgba(0,0,0,0.3))",
