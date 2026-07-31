@@ -846,36 +846,36 @@ const services = [
     icon: ShieldCheck,
     title: "Buyer & Seller Representation",
     description:
-      "Expert legal and strategic representation through every stage of your property transaction. We protect your interests from first offer to final closing.",
+      "Expert guidance and personalized representation through every stage of your real estate journey. Whether you're buying, selling, or both, we help you make informed decisions with confidence and peace of mind.",
     features: [
       "Skilled negotiation on your behalf",
-      "Legal documentation & compliance",
-      "Market-driven pricing strategy",
-      "End-to-end closing support",
+      "Strategic pricing & market analysis",
+      "Professional marketing & exposure",
+      "Support from consultation to closing",
     ],
   },
   {
     icon: BarChart3,
     title: "Home Valuations",
     description:
-      "Accurate, data-driven property valuations backed by comprehensive market analysis. Know the true worth of your asset before making any decision.",
+      "Know what your home is worth with a comprehensive market evaluation. We provide honest advice and local market expertise so you can plan your next move with confidence.",
     features: [
-      "Comparative market analysis (CMA)",
-      "Current market trend evaluation",
-      "Detailed valuation report",
-      "Fair & transparent pricing",
+      "Accurate comparative market analysis",
+      "Current Ottawa market insights",
+      "Pricing strategies for today's market",
+      "No-obligation consultation",
     ],
   },
   {
     icon: Target,
-    title: "Investment Advisory",
+    title: "Downsizing Services",
     description:
-      "Strategic real estate investment guidance to help you identify high-return opportunities and build a profitable property portfolio with managed risk.",
+      "Moving to a home that better fits your lifestyle is about more than buying and selling. We provide personalized guidance to help make your transition as smooth and stress-free as possible.",
     features: [
-      "Portfolio diversification strategy",
-      "ROI projection & analysis",
-      "Emerging market identification",
-      "Risk assessment & mitigation",
+      "Customized downsizing plan",
+      "Neighbourhood & lifestyle guidance",
+      "Trusted local professional referrals",
+      "Step-by-step support from start to finish",
     ],
   },
 ];

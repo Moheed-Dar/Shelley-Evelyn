@@ -278,7 +278,7 @@ export default function TestimonialsSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            We take pride in delivering exceptional service. Hear how Shelley has helped families find homes that truly match their lifestyle and expectations.
+            Nothing means more to me than helping my clients feel supported, informed, and confident throughout their move. I'm grateful for the trust they've placed in me, and I'm proud to share a few of their experiences below.
           </p>
         </div>
 

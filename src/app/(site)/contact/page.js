@@ -455,22 +455,22 @@ const SERVICES = [
   {
     icon: Home,
     title: "Buy Property",
-    desc: "Find your dream home from our verified listings across premium locations.",
+    desc: "Find your dream home with expert guidance & local market knowledge.",
   },
   {
     icon: Building2,
     title: "Sell Property",
-    desc: "List your property and reach thousands of potential buyers instantly.",
+    desc: "Maximize your home's value with a proven marketing strategy.",
   },
   {
     icon: Briefcase,
-    title: "Property Management",
-    desc: "Complete property management and tenant handling services.",
+    title: "Downsize with Confidence",
+    desc: "Simplify your move with personalized planning & support.",
   },
   {
     icon: MessageSquare,
-    title: "Legal Assistance",
-    desc: "Expert legal guidance for property documentation and transfers.",
+    title: "Relocate to Ottawa",
+    desc: "Discover the right neighbourhood to match your lifestyle & goals.",
   },
 ];
 
@@ -574,16 +574,16 @@ export default function ContactPage() {
                         desc: "Personalized recommendations based on your budget & preferences.",
                       },
                       {
-                        title: "Verified Listings",
-                        desc: "All properties verified by our team for your peace of mind.",
+                        title: "A Clear Plan",
+                        desc: "Tailored to your goals & timelines",
                       },
                       {
-                        title: "Best Deals",
-                        desc: "Exclusive off-market properties & early bird offers.",
+                        title: "Honest Advice",
+                        desc: "Straightforward insights to help you make confident decisions.",
                       },
                       {
-                        title: "Free Consultation",
-                        desc: "No hidden fees, completely free to start.",
+                        title: "Dedicated Support",
+                        desc: "Guidance every step of the way, from start to finish."
                       },
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-2.5">

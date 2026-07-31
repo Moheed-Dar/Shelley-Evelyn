@@ -311,7 +311,7 @@ export default function HeroSection() {
         </div>
 
         {/* ========== ENLARGED ROTATING BADGE WITH ANIMATIONS ========== */}
-        <Link href="/properties" passHref>
+        <Link href="/services" passHref>
           <div
             ref={rotatingBadgeRef}
             onMouseEnter={() => setIsRingHovered(true)}
@@ -451,7 +451,11 @@ export default function HeroSection() {
       >
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-end justify-between gap-6">
-            <div className="flex items-center gap-3 bg-black/30 backdrop-blur-md rounded-2xl px-4 py-3">
+            <Link
+              href="/testimonials"
+              className="flex items-center gap-3 bg-black/30 backdrop-blur-md rounded-2xl px-4 py-3 cursor-pointer transition-colors hover:bg-black/40"
+            >
+              {/* Images Section - Inner Link removed */}
               <div className="flex -space-x-3">
                 {clientImages.map((src, index) => (
                   <div
@@ -468,11 +472,13 @@ export default function HeroSection() {
                   </div>
                 ))}
               </div>
+
+              {/* Text Section */}
               <div className="flex items-baseline gap-1.5">
                 {/* <span className="text-white font-bold text-lg">1.2k+</span> */}
                 <span className="text-gray-300 text-xs">Trusted Clients</span>
               </div>
-            </div>
+            </Link>
 
             {/* Scroll Indicator - Centered */}
             <div className="hidden lg:flex flex-col items-center gap-2 pb-2 opacity-50 absolute left-1/2 -translate-x-1/2 bottom-6 md:bottom-8">

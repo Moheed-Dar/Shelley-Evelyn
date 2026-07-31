@@ -10,25 +10,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const InstagramIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
   </svg>
 );
 
 const FacebookIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
   </svg>
 );
 
 const YoutubeIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
   </svg>
 );
 
 const PinterestIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+    <path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
   </svg>
 );
 
@@ -39,17 +39,37 @@ export default function About() {
   const bioRef = useRef(null);
 
   const images = [
-    { src: "/images/img1.png", alt: "Ottawa Real Estate 1" },
-    { src: "/images/img2.png", alt: "Ottawa Real Estate 2" },
-    { src: "/images/img3.png", alt: "Ottawa Real Estate 3" },
-    { src: "/images/img5.png", alt: "Ottawa Real Estate 4" },
+    { src: "/images/about4up.png", alt: "Ottawa Real Estate 1" },
+    { src: "/images/about1up.jpg", alt: "Ottawa Real Estate 2" },
+    { src: "/images/about3up.jpg", alt: "Ottawa Real Estate 3" },
+    { src: "/images/about2up.jpg", alt: "Ottawa Real Estate 4" },
   ];
 
   const socialLinks = [
-    { icon: FacebookIcon, href: "https://www.facebook.com/shelleyevelyn.homes", label: "Facebook", color: "#208288" },
-    { icon: InstagramIcon, href: "https://www.instagram.com/shelleyevelynhomes/", label: "Instagram", color: "#DB1860" },
-    { icon: YoutubeIcon, href: "https://www.youtube.com/@shelleyevelyn", label: "YouTube", color: "#F2673A" },
-    { icon: PinterestIcon, href: "https://www.pinterest.com/shelley_evelyn/", label: "Pinterest", color: "#9D2C77" },
+    {
+      icon: FacebookIcon,
+      href: "https://www.facebook.com/shelleyevelyn.homes",
+      label: "Facebook",
+      color: "#208288",
+    },
+    {
+      icon: InstagramIcon,
+      href: "https://www.instagram.com/shelleyevelynhomes/",
+      label: "Instagram",
+      color: "#DB1860",
+    },
+    {
+      icon: YoutubeIcon,
+      href: "https://www.youtube.com/@shelleyevelyn",
+      label: "YouTube",
+      color: "#F2673A",
+    },
+    {
+      icon: PinterestIcon,
+      href: "https://www.pinterest.com/shelley_evelyn/",
+      label: "Pinterest",
+      color: "#9D2C77",
+    },
   ];
 
   useEffect(() => {
@@ -135,7 +155,6 @@ export default function About() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* "Who I Am" Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -152,27 +171,37 @@ export default function About() {
         {/* Main Heading */}
         <div ref={headingRef} className="text-center mb-16 sm:mb-20">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#BEEBF0]/90 leading-tight max-w-4xl mx-auto">
-            Helping you find a place to{" "}
-            <span className="text-[#FCB855] font-medium">Love Where You Live</span>,{" "}
-            with a smart, fun & seamless{" "}
-            <span className="text-[#FCB855] font-medium">real estate experience.</span>
+            Helping you embrace your next chapter with honest advice, local
+            expertise, and a real estate experience that's thoughtful,
+            personalized, and stress-free.
           </h2>
         </div>
 
         {/* Image Grid */}
-        <div ref={imagesRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-20 sm:mb-28">
+        <div
+          ref={imagesRef}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-20 sm:mb-28"
+        >
           {images.map((img, index) => (
             <motion.div
               key={index}
               className="about-image relative group cursor-pointer"
-              initial={{ opacity: 0, y: 50, rotate: frameVariants[index % 4].rotate }}
+              initial={{
+                opacity: 0,
+                y: 50,
+                rotate: frameVariants[index % 4].rotate,
+              }}
               whileInView={{
                 opacity: 1,
                 y: frameVariants[index % 4].y,
                 rotate: frameVariants[index % 4].rotate,
               }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.1, ease: "easeOut" }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
               whileHover={{
                 scale: 1.05,
                 rotate: 0,
@@ -202,14 +231,21 @@ export default function About() {
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 + index * 0.1, type: "spring", stiffness: 200 }}
+                transition={{
+                  delay: 0.5 + index * 0.1,
+                  type: "spring",
+                  stiffness: 200,
+                }}
               />
             </motion.div>
           ))}
         </div>
 
         {/* Bio Section */}
-        <div ref={bioRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div
+          ref={bioRef}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+        >
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -229,26 +265,43 @@ export default function About() {
               Hey, Ottawa! I&apos;m{" "}
               <span className="relative">
                 Shelley
-                <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8" fill="none">
-                  <path d="M2 6C50 2 150 2 198 6" stroke="#FCB855" strokeWidth="3" strokeLinecap="round" opacity="0.5"/>
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  height="8"
+                  viewBox="0 0 200 8"
+                  fill="none"
+                >
+                  <path
+                    d="M2 6C50 2 150 2 198 6"
+                    stroke="#FCB855"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    opacity="0.5"
+                  />
                 </svg>
               </span>
             </motion.h3>
 
-            <motion.div variants={itemVariants} className="space-y-5 font-montserrat text-[#1F203D]/80 text-base sm:text-lg leading-relaxed">
+            <motion.div
+              variants={itemVariants}
+              className="space-y-5 font-montserrat text-[#1F203D]/80 text-base sm:text-lg leading-relaxed"
+            >
               <p>
-                I work with buyers, sellers & investors in the Ottawa area who want a smart, fun & seamless method for dealing with real estate. I have been a REALTOR® since 2015 and I&apos;ve helped lots of families find their dream home! Helping people makes me so proud and drives everything I do!
+                I'm a REALTOR® who believes real estate is about so much more than buying and selling homes—it's about helping people embrace their next chapter with confidence. Whether you're downsizing, buying your first home, or simply exploring your options, I'm here to provide honest advice, local expertise, and personalized guidance every step of the way. My goal is to make your experience feel less overwhelming and a whole lot more exciting.
               </p>
 
               <blockquote className="border-l-4 border-[#208288]/50 pl-4 py-2 bg-[#BEEBF0]/20 rounded-r-lg italic text-[#1F203D]/90">
-                &ldquo;Amazing experience! She was easily able to understand my needs. She is one of the most reliable people I have met! She was my rock. Very accommodating! I always look for an agent that is on the ball so I can get the best deal and Shelley definitely exceeded my expectations. Highly, highly recommend!&rdquo;
+                &ldquo;I spent much of my life starting over—moving eight times before finishing high school, born in Germany, started my early life on Prince Edward Island, and living in several small towns along the way. Those experiences taught me that home isn't just a place; it's a feeling.&rdquo;
               </blockquote>
 
               <p>
-                I was a social worker for over 20 years. I have also completed the following certifications as a real estate agent: Accredited Buyer&apos;s Representatives (ABR®), Seller Representative Specialist designation (SRS), and Lifestyle55+ Affiliate (former ASA™).
+               For over 20 years, I worked in social/health services, helping women and families through some of the most difficult transitions of their lives. That experience taught me the importance of listening, staying calm, and helping people find hope during uncertain times.
               </p>
               <p>
-                When I am not helping people Love Where They Live, I can be found playing with my fur babies, hanging with my young adult children or hiking around the Ottawa area. I&apos;m also passionate about serving the Ottawa community, and look forward to connecting with you!
+                When I discovered real estate, I realized that buying and selling homes isn't really about real estate—it's about helping people navigate change, saying goodbye to one chapter while looking forward to the next.
+              </p>
+              <p>
+                Today I specialize in helping Ottawa-area downsizers and have created the Smooth Transition Method to make the downsizing process feel clear, organized, and far less overwhelming.
               </p>
 
               <p className="font-semibold text-[#208288]">
@@ -258,12 +311,42 @@ export default function About() {
 
             <motion.div variants={itemVariants} className="mt-8 space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-[#1F203D]/70 font-medium">
-                <a href="mailto:Shelley@ShelleyEvelyn.ca" className="hover:text-[#208288] transition-colors flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <a
+                  href="mailto:Shelley@ShelleyEvelyn.ca"
+                  className="hover:text-[#208288] transition-colors flex items-center gap-2"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
+                  </svg>
                   Shelley@ShelleyEvelyn.ca
                 </a>
-                <a href="tel:16132914323" className="hover:text-[#208288] transition-colors flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                <a
+                  href="tel:16132914323"
+                  className="hover:text-[#208288] transition-colors flex items-center gap-2"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    ></path>
+                  </svg>
                   613-291-4323
                 </a>
               </div>
@@ -308,7 +391,7 @@ export default function About() {
           >
             <div className="relative aspect-3/4 rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/images/img1.png"
+                src="/images/shellyaboutimg.jpg"
                 alt="Shelley Evelyn"
                 fill
                 className="object-cover"
@@ -324,15 +407,18 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <p className="text-3xl sm:text-4xl font-bold text-[#208288]">2015</p>
-              <p className="text-xs sm:text-sm text-[#9D2C77]/60 mt-1">Realtor Since</p>
+              <p className="text-3xl sm:text-4xl font-bold text-[#208288]">
+                2015
+              </p>
+              <p className="text-xs sm:text-sm text-[#9D2C77]/60 mt-1">
+                Realtor Since
+              </p>
             </motion.div>
 
             <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full border-2 border-[#FCB855]/20" />
             <div className="absolute -top-2 -right-2 w-16 h-16 rounded-full bg-[#F2673A]/5" />
           </motion.div>
         </div>
-
       </div>
     </section>
   );
