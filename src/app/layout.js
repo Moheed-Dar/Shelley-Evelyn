@@ -9,8 +9,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "Solid Rock Realty",
-  description: "Solid Rock Realty - Find your dream home",
+  title: "Shelley Evelyn Real Estate - Your Trusted Real Estate Partner",
+  description: "Shelley Evelyn Real Estate - Find your dream home",
 };
 
 export default function RootLayout({ children }) {
