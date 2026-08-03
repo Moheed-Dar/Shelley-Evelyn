@@ -48,13 +48,13 @@ export default function About() {
   const socialLinks = [
     {
       icon: FacebookIcon,
-      href: "https://www.facebook.com/shelleyevelyn.homes",
+      href: " https://www.facebook.com/shelleyevelynrealtor/",
       label: "Facebook",
       color: "#208288",
     },
     {
       icon: InstagramIcon,
-      href: "https://www.instagram.com/shelleyevelynhomes/",
+      href: " https://www.instagram.com/shelleyevelynrealtor/",
       label: "Instagram",
       color: "#DB1860",
     },
@@ -291,7 +291,7 @@ export default function About() {
               </p>
 
               <blockquote className="border-l-4 border-[#208288]/50 pl-4 py-2 bg-[#BEEBF0]/20 rounded-r-lg italic text-[#1F203D]/90">
-                &ldquo;I spent much of my life starting over—moving eight times before finishing high school, born in Germany, started my early life on Prince Edward Island, and living in several small towns along the way. Those experiences taught me that home isn't just a place; it's a feeling.&rdquo;
+                I spent much of my life starting over—moving eight times before finishing high school, born in Germany, started my early life on Prince Edward Island, and living in several small towns along the way. Those experiences taught me that home isn't just a place; it's a feeling.
               </blockquote>
 
               <p>

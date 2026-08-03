@@ -142,7 +142,6 @@ export default function TestimonialsSection() {
     currentPage * cardsPerPage + cardsPerPage
   );
 
-  // ✅ FIX 2: Reset interval on manual navigation
   const resetAutoRotate = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -152,7 +151,6 @@ export default function TestimonialsSection() {
     }, 6000);
   }, [totalPages]);
 
-  // ✅ FIX 3: Block rapid clicks during animation
   const goToPage = useCallback(
     (page) => {
       if (isAnimating) return;
@@ -194,7 +192,6 @@ export default function TestimonialsSection() {
     };
   }, []);
 
-  // Auto-rotate
   useEffect(() => {
     if (!isVisible) return;
     resetAutoRotate();
@@ -203,7 +200,6 @@ export default function TestimonialsSection() {
     };
   }, [isVisible, resetAutoRotate]);
 
-  // Color palette for avatar initials
   const avatarColors = [
     "linear-gradient(135deg, #208288, #0D9488)",
     "linear-gradient(135deg, #D81660, #E11D48)",
@@ -224,28 +220,25 @@ export default function TestimonialsSection() {
     >
       {/* ===== Background ===== */}
       <div className="absolute inset-0 z-0">
+        {/* Top Gradient added here */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(180deg, #FAFAF7 0%, #F0F7F7 40%, #E8F4F4 100%)",
+            background: "linear-gradient(180deg, #0D9488 0%, #208288 25%, #F0F7F7 60%, #FAFAF7 100%)",
           }}
         />
-        {/* Decorative blob top-right */}
         <div
           className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-20 blur-3xl"
           style={{ background: "radial-gradient(circle, #FFC885 0%, transparent 70%)" }}
         />
-        {/* Decorative blob bottom-left */}
         <div
-          className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full opacity-15 blur-3xl"
+          className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full opacity-[0.15] blur-3xl"
           style={{ background: "radial-gradient(circle, #208288 0%, transparent 70%)" }}
         />
-        {/* ✅ FIX 1: w-150 h-150 → w-[600px] h-[600px] */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full opacity-[0.06] blur-3xl"
           style={{ background: "radial-gradient(circle, #D81660 0%, transparent 70%)" }}
         />
-        {/* Dot pattern */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -263,18 +256,19 @@ export default function TestimonialsSection() {
           }`}
         >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <MessageCircle size={18} className="text-[#208288]/60" />
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium text-[#208288]/60">
+            <MessageCircle size={18} className="text-white/80" />
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium text-white/80">
               Client Stories
             </span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#1F2D3D] leading-tight mb-4">
+          {/* Text color changed to white for top gradient contrast */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-white leading-tight mb-4">
             What Our Clients Say
           </h2>
 
           <p
-            className={`text-[#1F2D3D]/60 text-sm sm:text-base md:text-lg max-w-xl mx-auto transition-all duration-700 delay-200 ease-out ${
+            className={`text-white/80 text-sm sm:text-base md:text-lg max-w-xl mx-auto transition-all duration-700 delay-200 ease-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -283,8 +277,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* ===== Cards Grid ===== */}
-        {/* ✅ FIX 1: min-h-95 → min-h-[380px], min-h-100 → min-h-[400px] */}
-        <div className="relative min-h-95 sm:min-h-100">
+        <div className="relative min-h-95 sm:min-h-105">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPage}
@@ -302,15 +295,15 @@ export default function TestimonialsSection() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="group relative"
+                  className="group relative flex flex-col" // Added flex flex-col
                 >
                   <div
-                    className="relative rounded-2xl overflow-hidden border border-[#208288]/10 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#208288]/10 hover:border-[#208288]/20"
+                    className="relative rounded-2xl overflow-hidden border border-[#208288]/10 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#208288]/10 hover:border-[#208288]/20 flex flex-col flex-1" // Added flex flex-col flex-1 for equal height
                     style={{
                       boxShadow: "0 4px 24px rgba(32,130,136,0.06), 0 1px 4px rgba(0,0,0,0.04)",
                     }}
                   >
-                    <div className="relative p-6 sm:p-8 flex flex-col h-full">
+                    <div className="relative p-6 sm:p-8 flex flex-col flex-1"> // Added flex-1
                       {/* Large decorative quote icon */}
                       <div className="absolute top-4 right-4 opacity-[0.06]">
                         <Quote size={64} className="text-[#208288]" />
@@ -329,7 +322,7 @@ export default function TestimonialsSection() {
 
                       {/* Quote Text */}
                       <p
-                        className="text-[#1F2D3D]/70 text-sm sm:text-[15px] leading-relaxed mb-6 grow relative z-10"
+                        className="text-[#1F2D3D]/70 text-sm sm:text-[15px] leading-relaxed mb-6 relative z-10"
                         style={{
                           display: "-webkit-box",
                           WebkitLineClamp: 6,
@@ -340,9 +333,9 @@ export default function TestimonialsSection() {
                         &ldquo;{t.text}&rdquo;
                       </p>
 
-                      {/* Divider */}
+                      {/* Divider - mt-auto pushes it to the bottom */}
                       <div
-                        className="w-full h-px mb-5"
+                        className="w-full h-px mb-5 mt-auto"
                         style={{
                           background: "linear-gradient(to right, transparent, rgba(32,130,136,0.15), transparent)",
                         }}

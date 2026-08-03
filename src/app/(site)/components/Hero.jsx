@@ -367,7 +367,7 @@ export default function HeroSection() {
                   style={{ fontSize: "7.5px" }}
                 >
                   <textPath href="#circlePath">
-                    New Concepts • Explore • New Concepts • Explore •
+                   • Our Services • Our Services • Our Services  •
                   </textPath>
                 </text>
               </svg>
