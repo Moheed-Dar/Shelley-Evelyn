@@ -5,6 +5,17 @@ import { X, Loader2, Edit, Trash2, ExternalLink, Calendar, Tag, Clock } from "lu
 import { motion } from "framer-motion";
 import { getBlogById } from "@/lib/blogs/api";
 
+// ==========================================
+// ✅ HTML DECODE HELPER (Fixes raw tags issue)
+// ==========================================
+const decodeHtml = (html) => {
+  if (!html) return "";
+  if (typeof window === "undefined") return html;
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
 export default function BlogDetailView({ blogId, onClose, onEdit, onDeleted }) {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +24,7 @@ export default function BlogDetailView({ blogId, onClose, onEdit, onDeleted }) {
     const fetchBlog = async () => {
       try {
         const res = await getBlogById(blogId);
-        setBlog(res.data);
+        setBlog(res.data || res);
       } catch (error) {
         console.error("Failed to fetch blog:", error);
       } finally {
@@ -44,17 +55,23 @@ export default function BlogDetailView({ blogId, onClose, onEdit, onDeleted }) {
           </div>
         ) : blog ? (
           <>
-            <div className="shrink-0 flex items-center justify-between p-5 border-b border-[#FFF7F0]/10">
-              <h2 className="text-lg font-bold text-[#FFF7F0] pr-4">{blog.title}</h2>
-              <button onClick={onClose} className="p-2 rounded-lg hover:bg-[#FFF7F0]/5">
+            <div className="shrink-0 flex items-center justify-between p-5 border-b border-[#FFF7F0]/10 gap-4">
+              {/* ✅ Added truncate so long titles don't break layout */}
+              <h2 className="text-lg font-bold text-[#FFF7F0] truncate flex-1">{blog.title}</h2>
+              <button onClick={onClose} className="p-2 rounded-lg hover:bg-[#FFF7F0]/5 shrink-0">
                 <X size={18} className="text-[#FFF7F0]/50" />
               </button>
             </div>
 
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
-              {blog.featuredImage?.url && (
+              {/* ✅ Check both featuredImage and image for fallback */}
+              {(blog.featuredImage?.url || blog.image) && (
                 <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-[#FFF7F0]/10">
-                  <img src={blog.featuredImage.url} alt={blog.title} className="w-full h-full object-cover" />
+                  <img 
+                    src={blog.featuredImage?.url || blog.image} 
+                    alt={blog.title} 
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
               )}
 
@@ -63,7 +80,7 @@ export default function BlogDetailView({ blogId, onClose, onEdit, onDeleted }) {
                   <Tag size={12} className="text-[#20B2B8]" /> {blog.category}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Clock size={12} className="text-[#20B2B8]" /> {blog.readTime} min read
+                  <Clock size={12} className="text-[#20B2B8]" /> {blog.readTime || "1"} min read
                 </span>
                 {blog.publishedAt && (
                   <span className="flex items-center gap-1.5">
@@ -82,9 +99,18 @@ export default function BlogDetailView({ blogId, onClose, onEdit, onDeleted }) {
 
               <div>
                 <h3 className="text-sm font-bold text-[#FFF7F0] uppercase tracking-wider mb-2">Content</h3>
-                <div className="text-sm text-[#FFF7F0]/70 leading-relaxed whitespace-pre-line bg-[#1F2D3D] p-4 rounded-xl border border-[#FFF7F0]/5">
-                  {blog.content}
-                </div>
+                {/* ✅ FIXED: Replaced plain text with dangerouslySetInnerHTML and added break-words & overflow-hidden */}
+                <div 
+                  className="text-sm text-[#FFF7F0]/70 leading-relaxed bg-[#1F2D3D] p-4 rounded-xl border border-[#FFF7F0]/5 overflow-hidden break-words
+                             [&_p]:my-2 [&_div]:my-2 
+                             [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2 
+                             [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-2 
+                             [&_li]:ml-2 [&_li]:my-1 
+                             [&_h1]:text-base [&_h1]:font-bold [&_h1]:my-2 [&_h1]:text-[#FFF7F0]
+                             [&_h2]:text-sm [&_h2]:font-bold [&_h2]:my-2 [&_h2]:text-[#FFF7F0]
+                             [&_blockquote]:border-l-4 [&_blockquote]:border-[#20B2B8] [&_blockquote]:pl-4 [&_blockquote]:italic"
+                  dangerouslySetInnerHTML={{ __html: decodeHtml(blog.content) || "No content available." }}
+                />
               </div>
 
               {blog.tags?.length > 0 && (
@@ -98,7 +124,7 @@ export default function BlogDetailView({ blogId, onClose, onEdit, onDeleted }) {
               )}
             </div>
 
-            <div className="shrink-0 flex items-center justify-end gap-2 p-4 border-t border-[#FFF7F0]/10">
+            <div className="shrink-0 flex items-center justify-end gap-2 p-4 border-t border-[#FFF7F0]/10 bg-[#1E3040] rounded-b-2xl">
               <button
                 onClick={() => onEdit(blog)}
                 className="flex items-center gap-2 px-4 py-2 bg-[#20B2B8]/10 text-[#20B2B8] border border-[#20B2B8]/20 rounded-lg text-sm font-medium hover:bg-[#20B2B8]/20 transition-colors"

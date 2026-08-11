@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
   X,
@@ -19,6 +19,18 @@ import {
   Mail,
   User,
   Image as ImageIcon,
+  Bold,
+  Italic,
+  Underline,
+  Strikethrough,
+  List,
+  ListOrdered,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  Highlighter,
+  Palette,
+  Eraser,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { updateProperty } from "@/lib/properties/api";
@@ -50,6 +62,191 @@ const SUGGESTED_AMENITIES = [
   "Community Center", "Playground", "Jogging Track",
   "BBQ Area", "Sauna", "Spa", "Steam Room",
 ];
+
+// ==========================================
+// ✅ HTML DECODE HELPER
+// ==========================================
+const decodeHtml = (html) => {
+  if (!html) return "";
+  if (typeof window === "undefined") return html;
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
+// ==========================================
+// ✅ CUSTOM RICH TEXT EDITOR COMPONENT
+// ==========================================
+function CustomRichTextEditor({ value, onChange }) {
+  const editorRef = useRef(null);
+  const savedRange = useRef(null);
+  const lastEmittedValue = useRef(null);
+
+  useEffect(() => {
+    if (editorRef.current && value !== undefined) {
+      if (value === lastEmittedValue.current) return;
+      const decodedValue = decodeHtml(value);
+      if (editorRef.current.innerHTML !== decodedValue) {
+        editorRef.current.innerHTML = decodedValue || "";
+        lastEmittedValue.current = decodedValue;
+      }
+    }
+  }, [value]);
+
+  useEffect(() => {
+    try {
+      document.execCommand('defaultParagraphSeparator', false, 'div');
+    } catch (e) {}
+  }, []);
+
+  const saveSelection = () => {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+      savedRange.current = selection.getRangeAt(0);
+    }
+  };
+
+  const restoreSelection = () => {
+    if (savedRange.current) {
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(savedRange.current);
+    }
+  };
+
+  const handleInput = () => {
+    if (editorRef.current) {
+      const html = editorRef.current.innerHTML;
+      lastEmittedValue.current = html;
+      onChange(html);
+    }
+  };
+
+  const applyFormat = (command, val = null) => {
+    restoreSelection();
+    document.execCommand(command, false, val);
+    handleInput();
+    saveSelection();
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0 && selection.isCollapsed) {
+        const currentBlock = selection.anchorNode;
+        const blockElement = currentBlock.nodeType === 3 ? currentBlock.parentElement : currentBlock;
+        if (blockElement && blockElement.textContent.trim() === '') {
+          setTimeout(() => {
+            document.execCommand('removeFormat', false);
+            handleInput();
+          }, 0);
+        }
+      }
+    }
+  };
+
+  const ToolButton = ({ icon: Icon, command, title }) => (
+    <button
+      type="button"
+      onMouseDown={(e) => e.preventDefault()}
+      onClick={() => applyFormat(command)}
+      className="w-8 h-8 rounded-md flex items-center justify-center text-white/70 hover:bg-[#2B7FFF]/15 hover:text-[#2B7FFF] transition-colors"
+      title={title}
+    >
+      <Icon size={15} />
+    </button>
+  );
+
+  return (
+    <div className="bg-[#0f2240] border border-white/[0.08] rounded-xl overflow-hidden focus-within:border-[#2B7FFF]/40 focus-within:ring-2 focus-within:ring-[#2B7FFF]/10 transition-all">
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center gap-1 p-2 border-b border-white/[0.08] bg-[#081730]">
+        <select
+          onMouseDown={saveSelection}
+          onChange={(e) => {
+            applyFormat('fontSize', e.target.value);
+            e.target.value = "";
+          }}
+          className="bg-[#0f2240] border border-white/[0.08] rounded-md px-2 py-1 text-xs text-white/70 outline-none mr-1 cursor-pointer hover:border-[#2B7FFF]/40"
+          defaultValue=""
+          title="Font Size"
+        >
+          <option value="" disabled style={{ backgroundColor: "#0f2240" }}>Font Size</option>
+          <option value="1" style={{ backgroundColor: "#0f2240" }}>Small</option>
+          <option value="3" style={{ backgroundColor: "#0f2240" }}>Normal</option>
+          <option value="5" style={{ backgroundColor: "#0f2240" }}>Large</option>
+          <option value="6" style={{ backgroundColor: "#0f2240" }}>Huge</option>
+        </select>
+
+        <ToolButton icon={Bold} command="bold" title="Bold" />
+        <ToolButton icon={Italic} command="italic" title="Italic" />
+        <ToolButton icon={Underline} command="underline" title="Underline" />
+        <ToolButton icon={Strikethrough} command="strikeThrough" title="Strikethrough" />
+        <ToolButton icon={Eraser} command="removeFormat" title="Clear Formatting" />
+
+        <div className="w-px h-6 bg-white/10 mx-1"></div>
+
+        <ToolButton icon={List} command="insertUnorderedList" title="Bullet List" />
+        <ToolButton icon={ListOrdered} command="insertOrderedList" title="Numbered List" />
+
+        <div className="w-px h-6 bg-white/10 mx-1"></div>
+
+        <ToolButton icon={AlignLeft} command="justifyLeft" title="Align Left" />
+        <ToolButton icon={AlignCenter} command="justifyCenter" title="Align Center" />
+        <ToolButton icon={AlignRight} command="justifyRight" title="Align Right" />
+
+        <div className="w-px h-6 bg-white/10 mx-1"></div>
+
+        <label 
+          className="w-8 h-8 rounded-md flex items-center justify-center text-white/70 hover:bg-[#2B7FFF]/15 hover:text-[#2B7FFF] transition-colors cursor-pointer relative" 
+          title="Text Color"
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          <Palette size={15} />
+          <input
+            type="color"
+            onChange={(e) => applyFormat('foreColor', e.target.value)}
+            className="absolute inset-0 opacity-0 cursor-pointer"
+          />
+        </label>
+
+        <label 
+          className="w-8 h-8 rounded-md flex items-center justify-center text-white/70 hover:bg-[#2B7FFF]/15 hover:text-[#2B7FFF] transition-colors cursor-pointer relative" 
+          title="Highlight Color"
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          <Highlighter size={15} />
+          <input
+            type="color"
+            onChange={(e) => applyFormat('hiliteColor', e.target.value)}
+            className="absolute inset-0 opacity-0 cursor-pointer"
+          />
+        </label>
+      </div>
+
+      {/* Editable Area */}
+      <div
+        ref={editorRef}
+        contentEditable
+        onInput={handleInput}
+        onKeyDown={handleKeyDown}
+        onMouseUp={saveSelection}
+        onKeyUp={saveSelection}
+        suppressContentEditableWarning={true}
+        className="p-4 text-sm text-white outline-none min-h-[150px] 
+                   [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2 
+                   [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-2 
+                   [&_li]:ml-2 [&_li]:my-1
+                   [&_p]:my-2 
+                   [&_div]:my-2
+                   [&_h1]:text-xl [&_h1]:font-bold [&_h1]:my-3 [&_h1]:text-white
+                   [&_h2]:text-lg [&_h2]:font-bold [&_h2]:my-3 [&_h2]:text-white
+                   [&_h3]:text-base [&_h3]:font-bold [&_h3]:my-2 [&_h3]:text-white
+                   [&_blockquote]:border-l-4 [&_blockquote]:border-[#2B7FFF] [&_blockquote]:pl-4 [&_blockquote]:text-white/60 [&_blockquote]:italic"
+      ></div>
+    </div>
+  );
+}
 
 // ============================================
 // SECTION WRAPPER
@@ -142,6 +339,9 @@ export default function PropertyUpdateForm({ property, onClose, onSuccess }) {
     features: [],
     amenities: [],
   });
+
+  // Calculate description length safely (stripping HTML)
+  const descriptionTextLength = form.description ? form.description.replace(/<[^>]*>/g, ' ').trim().length : 0;
 
   // ============================================
   // POPULATE FORM FROM PROPERTY
@@ -278,7 +478,9 @@ export default function PropertyUpdateForm({ property, onClose, onSuccess }) {
       return;
     }
 
-    if (form.description.trim().length < 20) {
+    // Check plain text length for description
+    const plainTextDescription = form.description.replace(/<[^>]*>/g, ' ').trim();
+    if (plainTextDescription.length < 20) {
       setError("Description must be at least 20 characters");
       return;
     }
@@ -290,7 +492,7 @@ export default function PropertyUpdateForm({ property, onClose, onSuccess }) {
 
       // All text fields
       fd.append("title", form.title.trim());
-      fd.append("description", form.description.trim());
+      fd.append("description", form.description.trim()); // Sends formatted HTML
       fd.append("price", String(form.price));
       fd.append("priceType", form.priceType);
       fd.append("currency", form.currency);
@@ -506,16 +708,17 @@ export default function PropertyUpdateForm({ property, onClose, onSuccess }) {
                 />
               </Field>
 
-              <Field label="Description" required>
-                <textarea
+              {/* ✅ RICH TEXT EDITOR FOR DESCRIPTION */}
+              <Field label="Description" required hint="Use the toolbar to format text (Minimum 20 characters)">
+                <CustomRichTextEditor
                   value={form.description}
-                  onChange={(e) => handleChange("description", e.target.value)}
-                  rows={4}
-                  className={`${inputClass} resize-none`}
+                  onChange={(val) => handleChange("description", val)}
                 />
                 <div className="flex justify-between mt-1">
                   <p className="text-white/15 text-[10px]">Minimum 20 characters</p>
-                  <p className="text-white/15 text-[10px]">{form.description.length}/5000</p>
+                  <p className={`text-[10px] ${descriptionTextLength < 20 ? 'text-red-400/80' : 'text-emerald-300/80'}`}>
+                    {descriptionTextLength}/5000
+                  </p>
                 </div>
               </Field>
             </Section>

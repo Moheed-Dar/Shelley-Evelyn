@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   X,
   Loader2,
@@ -11,6 +11,18 @@ import {
   Hash,
   Plus,
   ListChecks,
+  Bold,
+  Italic,
+  Underline,
+  Strikethrough,
+  List,
+  ListOrdered,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  Highlighter,
+  Palette,
+  Eraser, // ✅ Added Eraser Icon
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { createBlog } from "@/lib/blogs/api";
@@ -22,6 +34,178 @@ const CATEGORIES = [
 ];
 
 const STATUSES = ["draft", "published", "archived"];
+
+// ==========================================
+// ✅ CUSTOM RICH TEXT EDITOR COMPONENT
+// ==========================================
+function CustomRichTextEditor({ value, onChange }) {
+  const editorRef = useRef(null);
+  const savedRange = useRef(null);
+
+  // Initialize content on mount
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.innerHTML = value || "";
+      // Set default paragraph separator to div for cleaner HTML
+      try {
+        document.execCommand('defaultParagraphSeparator', false, 'div');
+      } catch (e) {}
+    }
+  }, []);
+
+  const saveSelection = () => {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+      savedRange.current = selection.getRangeAt(0);
+    }
+  };
+
+  const restoreSelection = () => {
+    if (savedRange.current) {
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(savedRange.current);
+    }
+  };
+
+  const handleInput = () => {
+    if (editorRef.current) {
+      onChange(editorRef.current.innerHTML);
+    }
+  };
+
+  const applyFormat = (command, val = null) => {
+    restoreSelection();
+    document.execCommand(command, false, val);
+    handleInput();
+    saveSelection();
+  };
+
+  // Smart Enter: If pressed on an empty line, clear formatting to prevent carry-over
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      const selection = window.getSelection();
+      if (selection.rangeCount > 0 && selection.isCollapsed) {
+        const currentBlock = selection.anchorNode;
+        if (currentBlock && currentBlock.textContent.trim() === '') {
+          setTimeout(() => {
+            document.execCommand('removeFormat', false);
+            handleInput();
+          }, 0);
+        }
+      }
+    }
+  };
+
+  const ToolButton = ({ icon: Icon, command, title }) => (
+    <button
+      type="button"
+      onMouseDown={(e) => e.preventDefault()}
+      onClick={() => applyFormat(command)}
+      className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFF7F0]/70 hover:bg-[#20B2B8]/15 hover:text-[#20B2B8] transition-colors"
+      title={title}
+    >
+      <Icon size={15} />
+    </button>
+  );
+
+  return (
+    <div className="bg-[#1F2D3D] border border-[#FFF7F0]/[0.08] rounded-xl overflow-hidden focus-within:border-[#20B2B8]/40 focus-within:ring-2 focus-within:ring-[#20B2B8]/10 transition-all">
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center gap-1 p-2 border-b border-[#FFF7F0]/[0.08] bg-[#172636]">
+        
+        {/* Font Size Dropdown */}
+        <select
+          onMouseDown={saveSelection}
+          onChange={(e) => {
+            applyFormat('fontSize', e.target.value);
+            e.target.value = "";
+          }}
+          className="bg-[#1F2D3D] border border-[#FFF7F0]/[0.08] rounded-md px-2 py-1 text-xs text-[#FFF7F0]/70 outline-none mr-1 cursor-pointer hover:border-[#20B2B8]/40"
+          defaultValue=""
+          title="Font Size"
+        >
+          <option value="" disabled style={{ backgroundColor: "#1F2D3D" }}>Font Size</option>
+          <option value="1" style={{ backgroundColor: "#1F2D3D" }}>Small</option>
+          <option value="3" style={{ backgroundColor: "#1F2D3D" }}>Normal</option>
+          <option value="5" style={{ backgroundColor: "#1F2D3D" }}>Large</option>
+          <option value="6" style={{ backgroundColor: "#1F2D3D" }}>Huge</option>
+        </select>
+
+        <ToolButton icon={Bold} command="bold" title="Bold" />
+        <ToolButton icon={Italic} command="italic" title="Italic" />
+        <ToolButton icon={Underline} command="underline" title="Underline" />
+        <ToolButton icon={Strikethrough} command="strikeThrough" title="Strikethrough" />
+        
+        {/* Clear Formatting Button */}
+        <ToolButton icon={Eraser} command="removeFormat" title="Clear Formatting" />
+
+        <div className="w-px h-6 bg-[#FFF7F0]/10 mx-1"></div>
+
+        <ToolButton icon={List} command="insertUnorderedList" title="Bullet List" />
+        <ToolButton icon={ListOrdered} command="insertOrderedList" title="Numbered List" />
+
+        <div className="w-px h-6 bg-[#FFF7F0]/10 mx-1"></div>
+
+        <ToolButton icon={AlignLeft} command="justifyLeft" title="Align Left" />
+        <ToolButton icon={AlignCenter} command="justifyCenter" title="Align Center" />
+        <ToolButton icon={AlignRight} command="justifyRight" title="Align Right" />
+
+        <div className="w-px h-6 bg-[#FFF7F0]/10 mx-1"></div>
+
+        {/* Text Color Picker */}
+        <label 
+          className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFF7F0]/70 hover:bg-[#20B2B8]/15 hover:text-[#20B2B8] transition-colors cursor-pointer relative" 
+          title="Text Color"
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          <Palette size={15} />
+          <input
+            type="color"
+            onChange={(e) => applyFormat('foreColor', e.target.value)}
+            className="absolute inset-0 opacity-0 cursor-pointer"
+          />
+        </label>
+
+        {/* Highlight Color Picker */}
+        <label 
+          className="w-8 h-8 rounded-md flex items-center justify-center text-[#FFF7F0]/70 hover:bg-[#20B2B8]/15 hover:text-[#20B2B8] transition-colors cursor-pointer relative" 
+          title="Highlight Color"
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          <Highlighter size={15} />
+          <input
+            type="color"
+            onChange={(e) => applyFormat('hiliteColor', e.target.value)}
+            className="absolute inset-0 opacity-0 cursor-pointer"
+          />
+        </label>
+      </div>
+
+      {/* Editable Area */}
+      <div
+        ref={editorRef}
+        contentEditable
+        onInput={handleInput}
+        onKeyDown={handleKeyDown}
+        onMouseUp={saveSelection}
+        onKeyUp={saveSelection}
+        suppressContentEditableWarning={true}
+        // ✅ FIXED: Removed 'prose' and used descendant selectors [&_] for proper lists/alignment
+        className="p-4 text-sm text-[#FFF7F0] outline-none min-h-[200px] 
+                   [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2 
+                   [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-2 
+                   [&_li]:ml-2 [&_li]:my-1
+                   [&_p]:my-2 
+                   [&_div]:my-2
+                   [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:my-3 [&_h1]:text-white
+                   [&_h2]:text-xl [&_h2]:font-bold [&_h2]:my-3 [&_h2]:text-white
+                   [&_h3]:text-lg [&_h3]:font-bold [&_h3]:my-2 [&_h3]:text-white
+                   [&_blockquote]:border-l-4 [&_blockquote]:border-[#20B2B8] [&_blockquote]:pl-4 [&_blockquote]:text-[#FFF7F0]/60 [&_blockquote]:italic"
+      ></div>
+    </div>
+  );
+}
 
 function Section({ icon: Icon, title, children, optional }) {
   return (
@@ -57,7 +241,6 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
   const [error, setError] = useState("");
   const [tagInput, setTagInput] = useState("");
   
-  // State for Points
   const [pointInput, setPointInput] = useState({ title: "", description: "" });
 
   const [featuredImage, setFeaturedImage] = useState(null);
@@ -70,16 +253,14 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
     category: "",
     status: "draft",
     tags: [],
-    points: [], // Added points array to form state
+    points: [], 
   });
 
   const handleChange = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  // ==========================================
   // TAGS HANDLERS
-  // ==========================================
   const handleAddTag = () => {
     const tag = tagInput.trim();
     if (tag && !form.tags.includes(tag)) {
@@ -89,15 +270,10 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
   };
 
   const handleRemoveTag = (tagToRemove) => {
-    setForm((prev) => ({
-      ...prev,
-      tags: prev.tags.filter((t) => t !== tagToRemove),
-    }));
+    setForm((prev) => ({ ...prev, tags: prev.tags.filter((t) => t !== tagToRemove) }));
   };
 
-  // ==========================================
   // POINTS HANDLERS
-  // ==========================================
   const handlePointChange = (field, value) => {
     setPointInput((prev) => ({ ...prev, [field]: value }));
   };
@@ -111,7 +287,7 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
       ...prev,
       points: [...prev.points, { title: pointInput.title.trim(), description: pointInput.description.trim() }],
     }));
-    setPointInput({ title: "", description: "" }); // Clear inputs
+    setPointInput({ title: "", description: "" }); 
     setError("");
   };
 
@@ -122,9 +298,7 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
     }));
   };
 
-  // ==========================================
   // IMAGE HANDLER
-  // ==========================================
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -134,14 +308,14 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
     reader.readAsDataURL(file);
   };
 
-  // ==========================================
   // SUBMIT HANDLER
-  // ==========================================
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (!form.title.trim() || !form.content.trim() || !form.category) {
+    const plainTextContent = form.content.replace(/<[^>]*>/g, ' ').trim();
+
+    if (!form.title.trim() || !plainTextContent || !form.category) {
       setError("Title, Content, and Category are required");
       return;
     }
@@ -156,8 +330,6 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
       fd.append("category", form.category);
       fd.append("status", form.status);
       fd.append("tags", JSON.stringify(form.tags));
-      
-      // Append points as JSON string
       fd.append("points", JSON.stringify(form.points));
 
       if (featuredImage) {
@@ -182,6 +354,8 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
   const inputClass = "w-full bg-[#1F2D3D] border border-[#FFF7F0]/[0.08] rounded-xl px-4 py-2.5 text-sm text-[#FFF7F0] placeholder:text-[#FFF7F0]/20 outline-none focus:border-[#20B2B8]/40 focus:ring-2 focus:ring-[#20B2B8]/10 transition-all";
   const selectClass = `${inputClass} appearance-none`;
   const optionStyle = { backgroundColor: "#1F2D3D" };
+
+  const contentTextLength = form.content ? form.content.replace(/<[^>]*>/g, ' ').trim().length : 0;
 
   return (
     <motion.div
@@ -250,18 +424,16 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                 />
               </Field>
 
-              <Field label="Content" required hint="Minimum 100 characters">
-                <textarea
+              {/* RICH TEXT EDITOR AREA */}
+              <Field label="Content" required hint="Use the toolbar to format text (Minimum 100 characters)">
+                <CustomRichTextEditor
                   value={form.content}
-                  onChange={(e) => handleChange("content", e.target.value)}
-                  placeholder="Write your blog content here..."
-                  rows={8}
-                  className={`${inputClass} resize-none`}
+                  onChange={(val) => handleChange("content", val)}
                 />
                 <div className="flex justify-between mt-1">
                   <span className="text-[#FFF7F0]/15 text-[10px]"></span>
-                  <span className={`text-[10px] ${form.content.length < 100 ? 'text-[#D81B60]/70' : 'text-emerald-400/70'}`}>
-                    {form.content.length} / 100 characters
+                  <span className={`text-[10px] ${contentTextLength < 100 ? 'text-[#D81B60]/70' : 'text-emerald-400/70'}`}>
+                    {contentTextLength} / 100 characters
                   </span>
                 </div>
               </Field>
@@ -340,12 +512,8 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
               </Field>
             </Section>
 
-            {/* ========================================== */}
-            {/* KEY POINTS SECTION                         */}
-            {/* ========================================== */}
+            {/* KEY POINTS SECTION */}
             <Section icon={ListChecks} title="Key Points" optional>
-              
-              {/* Inputs to add a new point */}
               <div className="space-y-3 p-4 bg-[#FFF7F0]/3 rounded-xl border border-[#FFF7F0]/5">
                 <Field label="Point Title" required>
                   <input
@@ -374,7 +542,6 @@ export default function BlogsCreateForm({ onClose, onSuccess }) {
                 </button>
               </div>
 
-              {/* List of Added Points */}
               {form.points.length > 0 && (
                 <div className="space-y-2 mt-4">
                   <p className="text-xs font-semibold text-[#FFF7F0]/40 uppercase tracking-wider mb-2">

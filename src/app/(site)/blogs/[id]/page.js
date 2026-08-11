@@ -62,6 +62,17 @@ const getSafeImage = (img) => {
 };
 
 // ==========================================
+// ✅ HTML DECODE HELPER (Fixes raw tags issue)
+// ==========================================
+const decodeHtml = (html) => {
+  if (!html) return "";
+  if (typeof window === "undefined") return html;
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+};
+
+// ==========================================
 // ✅ CUSTOM SOCIAL SVG ICONS
 // ==========================================
 const FacebookIcon = ({ className = "w-4 h-4" }) => (
@@ -228,6 +239,9 @@ export default function BlogDetailPage() {
   };
 
   const blogImageUrl = blog ? getSafeImage(blog.featuredImage) || blog.image || null : null;
+  
+  // Decode content to render actual HTML instead of string tags
+  const decodedContent = blog ? decodeHtml(blog.content) : "";
 
   // ==========================================
   // ✅ LOADING STATE
@@ -593,8 +607,10 @@ export default function BlogDetailPage() {
                       )}
                       {header.description && (
                         <div
-                          className="text-sm sm:text-[15px] leading-[1.9] prose prose-invert max-w-none prose-p:text-[#FFF7F0BF] prose-p:text-sm prose-p:sm:text-[15px] prose-p:leading-[1.9] prose-a:text-[#20B2B8]"
-                          dangerouslySetInnerHTML={{ __html: header.description }}
+                          className="text-sm sm:text-[15px] leading-[1.9] text-[#FFF7F0BF]
+                                     [&_p]:my-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 
+                                     [&_a]:text-[#20B2B8] [&_b]:text-white [&_strong]:text-white"
+                          dangerouslySetInnerHTML={{ __html: decodeHtml(header.description) }}
                         />
                       )}
                     </div>
@@ -631,9 +647,26 @@ export default function BlogDetailPage() {
                     Article
                   </span>
                 </div>
+                
+                {/* ✅ FIXED DECODED HTML & CUSTOM STYLES FOR EDITOR OUTPUT */}
                 <div
-                  className="prose prose-lg prose-invert max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-white prose-h1:text-2xl prose-h1:sm:text-3xl prose-h2:text-xl prose-h2:sm:text-2xl prose-h3:text-lg prose-h3:sm:text-xl prose-p:text-[#FFF7F0BF] prose-p:leading-[1.9] prose-p:text-sm prose-p:sm:text-[15px] prose-a:text-[#20B2B8] prose-a:underline prose-a:decoration-[#20B2B8]/30 prose-a:hover:text-[#BEEBF0] prose-strong:text-white prose-em:text-[#FFF7F0B3] prose-blockquote:text-[#FFF7F099] prose-blockquote:bg-[#FFF7F0]/5 prose-blockquote:rounded-r-lg prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:border prose-blockquote:border-l-4 prose-blockquote:border-[#FFF7F0]/10 prose-blockquote:border-l-[#20B2B8]/50 prose-ul:text-[#FFF7F0BF] prose-ol:text-[#FFF7F0BF] prose-li:text-[#FFF7F0BF] prose-li:marker:text-[#20B2B8]/60 prose-code:text-[#20B2B8] prose-code:bg-[#FFF7F0]/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#172636] prose-pre:border prose-pre:border-[#FFF7F0]/10 prose-pre:rounded-xl prose-img:rounded-xl prose-img:shadow-lg prose-img:ring-1 prose-img:ring-[#FFF7F0]/10 prose-hr:border-[#FFF7F0]/10"
-                  dangerouslySetInnerHTML={{ __html: blog.content || "<p>No content available.</p>" }}
+                  className="max-w-none max-h-[70vh] overflow-y-auto pr-2 text-[#FFF7F0BF] text-sm sm:text-[15px] leading-[1.9]
+                             [&_p]:my-3 
+                             [&_div]:my-3 
+                             [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:my-4 [&_h1]:text-white
+                             [&_h2]:text-xl [&_h2]:font-bold [&_h2]:my-3 [&_h2]:text-white
+                             [&_h3]:text-lg [&_h3]:font-bold [&_h3]:my-2 [&_h3]:text-white
+                             [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-3
+                             [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-3
+                             [&_li]:ml-2 [&_li]:my-1
+                             [&_blockquote]:border-l-4 [&_blockquote]:border-[#20B2B8]/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-[#FFF7F099]
+                             [&_a]:text-[#20B2B8] [&_a]:underline
+                             [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-xl [&_img]:my-4"
+                  style={{
+                    scrollbarWidth: "thin", 
+                    scrollbarColor: `${TURQUOISE}50 transparent`,
+                  }}
+                  dangerouslySetInnerHTML={{ __html: decodedContent || "<p>No content available.</p>" }}
                 />
               </div>
             </div>
@@ -1136,45 +1169,31 @@ export default function BlogDetailPage() {
                 style={{ transitionDelay: "500ms", transitionProperty: "opacity, transform" }}
               >
                 <div
-                  className="rounded-xl sm:rounded-2xl p-3.5 sm:p-4"
+                  className="rounded-xl sm:rounded-2xl p-4 sm:p-5 flex items-center gap-3"
                   style={{
-                    backgroundColor: `${PEACH}10`,
-                    border: `1px solid ${PEACH}20`,
+                    backgroundColor: NAVY_CARD,
+                    border: `1px solid ${WARM_CREAM}10`,
                   }}
                 >
-                  <div className="flex items-center gap-2.5 sm:gap-3">
-                    <div
-                      className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0"
-                      style={{
-                        backgroundColor: `${PEACH}20`,
-                        border: `1px solid ${PEACH}30`,
-                      }}
-                    >
-                      <CheckCircle2 size={13} style={{ color: PEACH }} />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[11px] sm:text-xs font-bold" style={{ color: PEACH }}>
-                        Verified Article
-                      </p>
-                      <p className="text-[10px] sm:text-[11px]" style={{ color: CREAM_50 }}>
-                        Reviewed by our editorial team
-                      </p>
-                    </div>
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                    style={{
+                      backgroundColor: `${TURQUOISE}15`,
+                      border: `1px solid ${TURQUOISE}30`,
+                    }}
+                  >
+                    <CheckCircle2 size={18} style={{ color: TURQUOISE }} />
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm font-bold text-white">
+                      Verified Content
+                    </p>
+                    <p className="text-[11px] sm:text-xs" style={{ color: CREAM_50 }}>
+                      This article is fact-checked and reviewed.
+                    </p>
                   </div>
                 </div>
               </div>
-
-              {/* Back */}
-              <Link
-                href="/blogs"
-                className="flex items-center justify-center gap-2 w-full px-5 py-3 sm:py-3.5 text-sm font-bold rounded-xl text-white active:scale-[0.98] transition-all"
-                style={{
-                  background: `linear-gradient(135deg, ${TURQUOISE}, ${DARK_ORANGE})`,
-                  boxShadow: `0 4px 16px ${TURQUOISE}30`,
-                }}
-              >
-                <ArrowLeft size={16} /> All Blogs
-              </Link>
             </div>
           </div>
         </div>
