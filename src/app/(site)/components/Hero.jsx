@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
-import { ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function HeroSection() {
@@ -11,7 +11,6 @@ export default function HeroSection() {
   const titleRef = useRef(null);
   const titleContainerRef = useRef(null);
   const cursorGlowRef = useRef(null);
-  // Removed: const letsTalkRef = useRef(null);
   const rotatingBadgeRef = useRef(null);
   const arrowRef = useRef(null);
   const bottomOverlayRef = useRef(null);
@@ -77,7 +76,6 @@ export default function HeroSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Removed letsTalkRef from gsap.set
       gsap.set(titleRef.current, {
         opacity: 0,
         y: 40,
@@ -95,7 +93,6 @@ export default function HeroSection() {
 
       const tl = gsap.timeline({ delay: 0.5 });
 
-      // Removed the letsTalkRef tween from the timeline
       tl.to(titleRef.current, {
         opacity: 1,
         y: 0,
@@ -301,7 +298,6 @@ export default function HeroSection() {
               ref={titleRef}
               className="text-6xl sm:text-7xl md:text-8xl md:py-5  py-2 lg:text-9xl xl:text-[10rem] font-black tracking-tighter leading-none select-none text-center relative z-10 bg-linear-to-r from-[#faae62d5] via-purple-300 to-[#faae62ee] bg-clip-text text-transparent"
               style={{
-                // textShadow gradient text par kaam nahi karta, isliye drop-shadow use kiya hai
                 filter: "drop-shadow(0 8px 40px rgba(0,0,0,0.5)) drop-shadow(0 2px 10px rgba(0,0,0,0.3))",
               }}
             >
@@ -451,11 +447,11 @@ export default function HeroSection() {
       >
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-end justify-between gap-6">
+            {/* Trusted Clients Section */}
             <Link
               href="/testimonials"
               className="flex items-center gap-3 bg-black/30 backdrop-blur-md rounded-2xl px-4 py-3 cursor-pointer transition-colors hover:bg-black/40"
             >
-              {/* Images Section - Inner Link removed */}
               <div className="flex -space-x-3">
                 {clientImages.map((src, index) => (
                   <div
@@ -473,9 +469,7 @@ export default function HeroSection() {
                 ))}
               </div>
 
-              {/* Text Section */}
               <div className="flex items-baseline gap-1.5">
-                {/* <span className="text-white font-bold text-lg">1.2k+</span> */}
                 <span className="text-gray-300 text-xs">Trusted Clients</span>
               </div>
             </Link>
@@ -488,99 +482,6 @@ export default function HeroSection() {
               <div className="w-5 h-9 border-2 border-white/40 rounded-full flex justify-center pt-2">
                 <div className="w-0.5 h-2 bg-white rounded-full animate-bounce" />
               </div>
-            </div>
-
-            <div className="hidden md:flex flex-row gap-3">
-              {heroImages.map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToImage(index)}
-                  className={`relative w-32 lg:w-40 h-20 cursor-pointer lg:h-24 rounded-xl overflow-hidden group transition-all duration-500 ${index === currentImageIndex ? "shadow-lg" : "hover:scale-105"
-                    }`}
-                  style={{
-                    border:
-                      index === currentImageIndex
-                        ? `2px solid ${brandBlue}`
-                        : "2px solid transparent",
-                    boxShadow:
-                      index === currentImageIndex
-                        ? `0 0 20px ${brandBlue}40`
-                        : "none",
-                  }}
-                >
-                  <Image
-                    src={img.url}
-                    alt={img.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="160px"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
-                  <div className="absolute inset-0 p-2 flex flex-col justify-end">
-                    <div className="flex items-center justify-between mb-0.5">
-                      <h3 className="text-white text-[11px] font-bold">
-                        {img.title}
-                      </h3>
-                      <span
-                        className="text-[10px] font-bold"
-                        style={{ color: brandBlue }}
-                      >
-                        {img.price}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-300 text-[10px]">
-                      <MapPin
-                        size={8}
-                        style={{ color: brandBlue }}
-                        className="shrink-0"
-                      />
-                      <span className="truncate">{img.location}</span>
-                    </div>
-                  </div>
-                  {index === currentImageIndex && (
-                    <div
-                      className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full animate-pulse"
-                      style={{ backgroundColor: brandBlue }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex md:hidden flex-row gap-3 w-full">
-              {heroImages.map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToImage(index)}
-                  className="relative flex-1 h-24 rounded-xl overflow-hidden group transition-all duration-500 hover:scale-105"
-                  style={{
-                    border:
-                      index === currentImageIndex
-                        ? `2px solid ${brandBlue}`
-                        : "2px solid transparent",
-                  }}
-                >
-                  <Image
-                    src={img.url}
-                    alt={img.title}
-                    fill
-                    className="object-cover"
-                    sizes="120px"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
-                  <div className="absolute inset-0 p-2 flex flex-col justify-end">
-                    <h3 className="text-white text-[10px] font-bold">
-                      {img.title}
-                    </h3>
-                    <span
-                      className="text-[9px] font-bold"
-                      style={{ color: brandBlue }}
-                    >
-                      {img.price}
-                    </span>
-                  </div>
-                </button>
-              ))}
             </div>
           </div>
         </div>
