@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link"; // ✅ Added Link import
 import {
   Building2,
   Phone,
@@ -44,6 +45,7 @@ export default function Footer() {
     { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" },
     { name: "Blogs", href: "/blogs" },
+    { name: "Privacy Policy", href: "/privacy-policy" }, // ✅ Added Privacy Policy Link here
   ];
 
   const socialLinks = [
@@ -210,7 +212,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className={linkClass}>
+                  <Link href={link.href} className={linkClass}>
                     <ArrowUpRight
                       size={14}
                       className="text-gray-600 group-hover:text-[#FFC8B5] transition-all duration-300 -rotate-45 group-hover:rotate-0 group-hover:scale-110"
@@ -219,7 +221,7 @@ export default function Footer() {
                       {link.name}
                     </span>
                     <span className="absolute bottom-0 left-3 w-0 h-px bg-[#FFC8B5] group-hover:w-full transition-all duration-300" />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -414,6 +416,14 @@ export default function Footer() {
             </span>
             <span className="hidden sm:inline text-white/20">|</span>
             <span>REALTOR®</span>
+            {/* ✅ Added Privacy Policy Link Here */}
+            <span className="hidden sm:inline text-white/20">|</span>
+            <Link 
+              href="/privacy-policy" 
+              className="hover:text-[#FFC8B5] transition-colors duration-300"
+            >
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>
