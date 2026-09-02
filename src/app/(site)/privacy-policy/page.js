@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ShieldCheck,
   Mail,
@@ -14,6 +15,7 @@ import {
   RefreshCw,
   Cookie,
   Trash2,
+  Smartphone,
 } from "lucide-react";
 
 // ============================================
@@ -98,6 +100,25 @@ const privacySections = [
     content: [
       "We will accommodate the deletion of any personal information as soon as reasonably possible. Should you wish to request erasure of the personal data, please submit a written request to AgentLocator, addressed to the address listed below.",
       "Each request will be validated and you will be required to provide some personal information for security reasons. Please note that AgentLocator has the right to deny and provide explanation as to why for each denied request.",
+    ],
+  },
+  {
+    icon: Smartphone,
+    title: "Terms and Conditions",
+    content: [
+      "1. We use SMS to confirm appointments, send reminders, and notify clients of schedule updates or important changes.",
+      "2. You can cancel the SMS service at any time. Just text \"STOP\". After you send the SMS message \"STOP\" to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time, and we will start sending SMS messages to you again.",
+      "3. If you are experiencing issues with the messaging program, you can reply with the keyword “HELP” for more assistance, or you can get help directly at shelley@shelleyevelyn.ca.",
+      "4. Carriers are not liable for delayed or undelivered messages.",
+      "5. As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency may vary. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.",
+      (
+        <span key="terms-6">
+          6. If you have any questions regarding privacy, please read our privacy policy:{" "}
+          <Link href="/privacy-policy" className="text-[#20B2B8] underline underline-offset-2 hover:text-[#F2673A] transition-colors">
+            Privacy Policy
+          </Link>
+        </span>
+      ),
     ],
   },
 ];

@@ -791,7 +791,6 @@
 // }
 
 
-
 "use client";
 
 import { useState } from "react";
@@ -839,16 +838,13 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // ✅ Only Name & Message are required now (Email & Phone optional)
+    // ✅ Only Name & Message are required now (Email, Phone & Consent optional)
     if (!form.name.trim() || !form.message.trim()) {
       setError("Please fill in all required fields");
       return;
     }
 
-    if (!consent) {
-      setError("Please check the consent box to agree to our communication policy.");
-      return;
-    }
+    // ✅ Consent is now OPTIONAL — removed the consent validation check
 
     try {
       setSubmitting(true);
@@ -859,7 +855,7 @@ export default function ContactForm() {
         email: form.email.trim() || undefined,
         phone: form.phone.trim() || undefined,
         message: form.message.trim(),
-        consent: true,
+        consent: consent, // ✅ Send actual consent value (true/false)
       });
       if (result.success) {
         setSubmitted(true);
@@ -1005,15 +1001,9 @@ export default function ContactForm() {
             </div>
 
             {/* ========================================== */}
-            {/* ✅ CONSENT CHECKBOX (Themed)              */}
+            {/* ✅ CONSENT CHECKBOX (Optional / Themed)   */}
             {/* ========================================== */}
-            <div
-              className={`relative p-4 rounded-xl border transition-all ${
-                !consent && error
-                  ? "border-red-500/40 bg-red-500/5"
-                  : "border-[#FFF7F0]/10 bg-[#FFF7F0]/5"
-              }`}
-            >
+            <div className="relative p-4 rounded-xl border border-[#FFF7F0]/10 bg-[#FFF7F0]/5 transition-all">
               <label className="flex items-start gap-3 cursor-pointer group">
                 <div className="relative flex items-center justify-center mt-0.5">
                   <input
@@ -1025,7 +1015,7 @@ export default function ContactForm() {
                   />
                   <span
                     className="w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all peer-checked:bg-[#20B2B8] peer-checked:border-[#20B2B8]"
-                    style={{ borderColor: !consent && error ? "#ef4444" : "#FFF7F040" }}
+                    style={{ borderColor: "#FFF7F040" }}
                   >
                     {consent && (
                       <svg
@@ -1048,15 +1038,15 @@ export default function ContactForm() {
                   <div className="flex items-center gap-1.5 mb-1">
                     <ShieldCheck size={11} className="text-[#20B2B8]" />
                     <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#FFF7F0]/70">
-                      Consent to Contact <span className="text-[#20B2B8]">*</span>
+                      Consent to Contact 
                     </span>
                   </div>
                   <p className="text-[11px] leading-relaxed text-[#FFF7F0]/45">
                     I agree to be contacted by{" "}
                     <span className="font-semibold text-[#FFF7F0]/80">
-                      SOLID ROCK REALTY INC.
+                      Shelley Evelyn
                     </span>{" "}
-                    via call, email, and text for real estate services. To opt-out,
+                    via call, email, and text for real estate services. To opt out,
                     you can reply &apos;stop&apos; at any time or reply &apos;help&apos;
                     for assistance. You can also click the unsubscribe link in the
                     emails. Message and data rates may apply. Message frequency may
