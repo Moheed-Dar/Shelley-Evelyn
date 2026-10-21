@@ -351,10 +351,22 @@ export default function Footer() {
           className="pt-8 flex flex-col items-center justify-center gap-4"
           style={{ borderTop: `1px solid ${mainTurquoise}15` }}
         >
-          {/* Copyright with Tooltip — ✅ UPDATED to "Leatonic" */}
+          {/* Copyright with Tooltip — "Leatonic" is now a clickable link */}
           <div className="group relative cursor-help text-center">
             <p className="text-gray-500 text-sm hover:text-gray-300 transition-colors">
-              &copy; {currentYear} Leatonic. All rights reserved.
+              &copy; {currentYear}{" "}
+              <a
+                href="https://leatonic.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium transition-colors duration-300 hover:underline"
+                style={{ color: lightAqua }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = peach)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = lightAqua)}
+              >
+                Leatonic
+              </a>
+              . All rights reserved.
             </p>
 
             {/* Custom Tooltip Box */}
