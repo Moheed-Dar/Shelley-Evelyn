@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link"; // ✅ Added Link import
+import Link from "next/link";
 import {
   Building2,
   Phone,
@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 export default function Footer() {
-  // ✅ New Color Palette
+  // ✅ Color Palette
   const mainTurquoise = "#20B2B8";
   const lightAqua = "#BEEBF0";
   const darkPink = "#D81B60";
@@ -45,7 +45,7 @@ export default function Footer() {
     { name: "Services", href: "/services" },
     { name: "Contact", href: "/contact" },
     { name: "Blogs", href: "/blogs" },
-    { name: "Privacy Policy", href: "/privacy-policy" }, // ✅ Added Privacy Policy Link here
+    { name: "Privacy Policy", href: "/privacy-policy" },
   ];
 
   const socialLinks = [
@@ -351,10 +351,10 @@ export default function Footer() {
           className="pt-8 flex flex-col items-center justify-center gap-4"
           style={{ borderTop: `1px solid ${mainTurquoise}15` }}
         >
-          {/* Copyright with Tooltip */}
+          {/* Copyright with Tooltip — ✅ UPDATED to "Leatonic" */}
           <div className="group relative cursor-help text-center">
             <p className="text-gray-500 text-sm hover:text-gray-300 transition-colors">
-              &copy; {currentYear} Shelley Evelyn. All rights reserved.
+              &copy; {currentYear} Leatonic. All rights reserved.
             </p>
 
             {/* Custom Tooltip Box */}
@@ -416,7 +416,6 @@ export default function Footer() {
             </span>
             <span className="hidden sm:inline text-white/20">|</span>
             <span>REALTOR®</span>
-            {/* ✅ Added Privacy Policy Link Here */}
             <span className="hidden sm:inline text-white/20">|</span>
             <Link 
               href="/privacy-policy" 
